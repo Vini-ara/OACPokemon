@@ -74,6 +74,16 @@ int main(int argc, char **argv) {
   FILE *image = fopen(name, "rb");
   FILE *output = fopen("matrix.s", "w");
 
+  if(image == NULL) {
+    printf("Erro ao abrir o arquivo de entrada\n");
+    exit(1);
+  }
+
+  if(output == NULL) {
+    printf("Erro ao criar o arquivo de saida\n");
+    exit(1);
+  }
+
   BMPHEADER header;
 
   int32 height, width;
