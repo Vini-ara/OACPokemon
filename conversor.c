@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 typedef unsigned char byte;
 typedef unsigned short int16;
@@ -11,33 +12,21 @@ typedef struct typeBMPHEADER {
   int32 offset;
 } BMPHEADER;
 
-typedef struct typeBMPV5DIBHEADER {
-  int32 dibSize;
-  int32 width;
-  int32 height;
-} BMPV5HEADER;
-
-typedef struct typeBMPDIBHEADER {
-  int32 dibSize;
-  int16 width;
-  int16 height;
-} BMPDIBHEADER;
-
 void readBmpHeader(BMPHEADER *header, FILE *image) {
   fseek(image, 0, SEEK_SET);
   fread(&(*header).type, 2, 1, image);
-  printf("%X\n", (*header).type);
+  // printf("%X\n", (*header).type);
 
   fseek(image, 0x2, SEEK_SET);
   fread(&(*header).size, 4, 1, image);
-  printf("%d\n", (*header).size);
+  // printf("%d\n", (*header).size);
 
   fseek(image, 0x6, SEEK_SET);
   fread(&(*header).reserved, 4, 1, image);
 
   fseek(image, 0xA, SEEK_SET);
   fread(&(*header).offset, 4, 1, image);
-  printf("%d\n", (*header).offset);
+  // printf("%d\n", (*header).offset);
 }
 
 void getBMPDimensions(int32 *width, int32 *height, FILE *image) {
@@ -45,14 +34,12 @@ void getBMPDimensions(int32 *width, int32 *height, FILE *image) {
   fseek(image, 0x0E, SEEK_SET);
   fread(&dibSize, 4, 1, image);
 
-  if (dibSize == 12 || dibSize == 64 || dibSize == 16) {
+  if (dibSize == 12) {
     fseek(image, 0x12, SEEK_SET);
     fread(width, 2, 1, image);
     fseek(image, 0x14, SEEK_SET);
     fread(height, 2, 1, image);
-  }
-
-  if (dibSize == 124 || dibSize == 40) {
+  } else {
     fseek(image, 0x12, SEEK_SET);
     fread(width, 4, 1, image);
     fseek(image, 0x16, SEEK_SET);
@@ -60,7 +47,8 @@ void getBMPDimensions(int32 *width, int32 *height, FILE *image) {
   }
 }
 
-void readBmpImage(FILE* image, int32 height, int32 width, byte pixelGrid[height][width][3]) {
+void readBmpImage(FILE *image, int32 height, int32 width,
+                  byte pixelGrid[height][width][3]) {
   int padding = width % 4;
 
   for (int i = height - 1; i >= 0; i--) {
@@ -72,12 +60,19 @@ void readBmpImage(FILE* image, int32 height, int32 width, byte pixelGrid[height]
     for (int p = 0; p < padding; p++)
       getc(image);
   }
-
 }
 
-int main() {
-  FILE *image = fopen("test.bmp", "rb");
-  FILE *output = fopen("out", "w");
+int main(int argc, char **argv) {
+  if (argc != 2) {
+    printf("You should pass the bmp file name\n");
+    exit(1);
+  }
+
+  char name[30];
+  sprintf(name, "%s.bmp", argv[1]);
+
+  FILE *image = fopen(name, "rb");
+  FILE *output = fopen("matrix.s", "w");
 
   BMPHEADER header;
 
@@ -102,7 +97,13 @@ int main() {
               ((int32)pixelGrid[i][j][1] << 8) + (int32)pixelGrid[i][j][0];
       fprintf(output, "0x%08X, ", pixel);
     }
+    fprintf(output, "\n              ");
   }
+
+  fclose(image);
+  fclose(output);
+
+  printf("image size: %d X %d\n", width, height);
 
   return 0;
 }
