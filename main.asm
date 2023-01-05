@@ -1,4 +1,4 @@
-.eqv T_OBJ 8
+.eqv T_OBJ 8 #tamanho de cada objeto
 .data
 .include "mapa.data"
 .include "imagens/house0.data"
@@ -102,7 +102,7 @@ LOOP_CARREGA_MAPA:
 	sw a2,4(sp)
 	sw a3,0(sp)
 	
-	la a0,house0
+	la a0,house0 #suposto personagem
 	li a1,160
 	li a2,112
 	li a3,0
@@ -124,7 +124,13 @@ KEY2:	li t1,0xFF200000		# carrega o endereço de controle do KDMMIO
   	lw a0,4(t1)  			# le o valor da tecla tecla
 	#sw t2,12(t1)  			# escreve a tecla pressionada no display
 FIM:	ret				# retorna
+
 	
+#Movimenta o persogem pelo mapa
+#argumentos:
+# a0 = linha atual
+# a1 = coluna atual
+# a3 = tecla pressionada
 MOVE:
 	li t0,'w'
 	beq a3,t0,MOVE_CIMA
@@ -190,7 +196,8 @@ MOVE_DIR:
 	
 
 #recebe a0 = linha, a1 = coluna
-#caso não seja andavel retona 0 em a0	
+#caso não seja andavel retona 0 em a0
+#se for andavel retorna 1 em a0
 TILE_ANDAVEL:
 	mv t0,a0
 	mv t1,a1
