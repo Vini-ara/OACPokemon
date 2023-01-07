@@ -15,18 +15,15 @@ typedef struct typeBMPHEADER {
 void readBmpHeader(BMPHEADER *header, FILE *image) {
   fseek(image, 0, SEEK_SET);
   fread(&(*header).type, 2, 1, image);
-  // printf("%X\n", (*header).type);
 
   fseek(image, 0x2, SEEK_SET);
   fread(&(*header).size, 4, 1, image);
-  // printf("%d\n", (*header).size);
 
   fseek(image, 0x6, SEEK_SET);
   fread(&(*header).reserved, 4, 1, image);
 
   fseek(image, 0xA, SEEK_SET);
   fread(&(*header).offset, 4, 1, image);
-  // printf("%d\n", (*header).offset);
 }
 
 void getBMPDimensions(int32 *width, int32 *height, FILE *image) {

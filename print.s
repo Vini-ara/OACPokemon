@@ -17,6 +17,7 @@
 #       > t5 = Comprimento da imagem
 
 DRAW_IMAGE:
+    
     # Calculando endereço do Frame
     li t0, 0xFF0                    # Inicializando t0 = 0xFF0
     add t0, t0, a3                  # t0 = t0 + a3
@@ -52,5 +53,8 @@ DRAW_IMAGE:
         mv t3, zero                 # t3 = 0 (Resetar o contador t3)
         addi t2, t2, 1              # t2 = t2 + 1 
         bgt t5, t2, Print_Line      # Se t5 > t2, ir para Print_Line
+	
+	lw t0, 0(sp)
+	
         ret
 
