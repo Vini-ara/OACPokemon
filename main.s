@@ -7,14 +7,20 @@
 .text
 #iniciando mapa
 SETUP:	
-  jal ra, inicia_objetos
+  	jal inicia_objetos
 
 	li s0,30 #linha
 	li s1,30 #coluna
 
 	mv a0,s0
 	mv a1,s1
-	jal ra, CARREGA_MAPA
+	jal CARREGA_MAPA
+
+	la a0,house0 #suposto personagem
+	li a1,160
+	li a2,112 ### (TO DO) Desse jeito ele comeca a ser printado pela cabeca nessa posicao, mas essa eh a posicao do pe dele
+	li a3,0
+	jal DRAW_IMAGE
 	
 GAME_LOOP:
 	li a0,0
@@ -25,10 +31,10 @@ GAME_LOOP:
 	mv a3,a0 #a3 = tecla
 	mv a0,s0 #linha
 	mv a1,s1 #coluna
-	jal ra,MOVE
+	jal MOVE
 
 
-	jal zero,GAME_LOOP
+	jal GAME_LOOP
 
 # -CARREGA_MAPA
 #   Apenas printa o mapa
@@ -52,7 +58,7 @@ CARREGA_MAPA:
 	la a0,mapa2 # endereco da matriz do mapa
 	li a3,1 # .data do mapa em byte
 
-	call AJUSTA_XY # retorna o endereco do mapa para printar somente a parte em que o jogador esta
+	jal AJUSTA_XY # retorna o endereco do mapa para printar somente a parte em que o jogador esta
 
 	li t0,0 #a0 = contador coluna
 	li t1,0 #a1 = contador linha
@@ -72,7 +78,7 @@ LOOP_CARREGA_MAPA:
 	mul a1,t5,t0 #a1 = coluna
 	mul a2,t5,t1 #a2 = linha
 	li a3,0
-	jal ra, DRAW_IMAGE
+	jal DRAW_IMAGE
 	
 	li t5,20     # tamanho da tela 
 	addi t2,t2,1 # incrementa endereco do mapa

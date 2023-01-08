@@ -27,6 +27,8 @@ MOVE:
 	ret
 	
 VOLTA_MOVE:	
+  mv a0, t0
+  mv a1, t1
 	jal ra, TILE_ANDAVEL
 
 	beqz a0,FIM_MOVE
