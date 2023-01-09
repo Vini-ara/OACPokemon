@@ -1,524 +1,228 @@
 .data
-OBJETOS: .space 584
-
 .include "dataIncludes.s"
 
-.text
-
-inicia_objetos:
-	la t0,OBJETOS
-#GRASS0
-	la t1,grass0
-	sw t1,0(t0) #endereco da imagem
-	li t1,1
-	sw t1,4(t0) #andavel
-	
-#PROXIMO OBJETO
-	addi t0,t0,8
-#TREE0
-	la t1,tree0
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-	
-	addi t0,t0,8
-#TREE1
-	la t1, tree1
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#TREE2
-	la t1,tree2
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#TREE3
-	la t1,tree3
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#TREE4
-	la t1,tree4
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#TREE5
-	la t1,tree5
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#TREE6
-	la t1,tree6
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#TREE7
-	la t1,tree7
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#TREE8
-	la t1,tree8
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#TREE9
-	la t1,tree9
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#TREE10
-	la t1,tree10
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#TREE11
-	la t1,tree11
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-#indice 13
-	addi t0,t0,8
-#HOUSE0
-	la t1,house0
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#HOUSE1
-	la t1,house1
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#HOUSE2
-	la t1,house2
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#HOUSE3
-	la t1,house3
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#HOUSE4
-	la t1,house4
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#HOUSE5
-	la t1,house5
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#HOUSE6
-	la t1,house6
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#HOUSE7
-	la t1,house7
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#HOUSE8
-	la t1,house8
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#HOUSE9
-	la t1,house9
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#HOUSE10
-	la t1,house10
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#HOUSE11
-	la t1,house11
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#HOUSE12
-	la t1,house12
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#HOUSE13
-	la t1,house13
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#HOUSE14
-	la t1,house14
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#HOUSE15
-	la t1,house15
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#HOUSE16
-	la t1,house16
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#HOUSE17
-	la t1,house17
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#HOUSE18
-	la t1,house18
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#HOUSE19
-	la t1,house19
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#HOUSE20
-	la t1,house20
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#HOUSE21
-	la t1,house21
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#HOUSE22
-	la t1,house22
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#HOUSE23
-	la t1,house23
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#HOUSE24
-	la t1,house24
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-# 38
-	addi t0,t0,8
-#LAB0
-	la t1,lab0
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#LAB1
-	la t1,lab1
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#LAB2
-	la t1,lab2
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#LAB3
-	la t1,lab3
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#LAB4
-	la t1,lab4
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#LAB5
-	la t1,lab5
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#LAB6
-	la t1,lab6
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#LAB7
-	la t1,lab7
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#LAB8
-	la t1,lab8
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#LAB9
-	la t1,lab9
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#LAB10
-	la t1,lab10
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#LAB11
-	la t1,lab11
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#LAB12
-	la t1,lab12
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#LAB13
-	la t1,lab13
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#LAB14
-	la t1,lab14
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#LAB15
-	la t1,lab15
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#LAB16
-	la t1,lab16
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#LAB17
-	la t1,lab17
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#LAB18
-	la t1,lab18
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#LAB19
-	la t1,lab19
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#LAB20
-	la t1,lab20
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#LAB21
-	la t1,lab21
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#LAB22
-	la t1,lab22
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#LAB23
-	la t1,lab23
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#LAB24
-	la t1,lab24
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#LAB25
-	la t1,lab25
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#LAB26
-	la t1,lab26
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#LAB27
-	la t1,lab27
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#LAB28
-	la t1,lab28
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#LAB29
-	la t1,lab29
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#LAB30
-	la t1,lab30
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#LAB31
-	la t1,lab31
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#LAB32
-	la t1,lab32
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#LAB33
-	la t1,lab33
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-	addi t0,t0,8
-#LAB34
-	la t1,lab34
-	sw t1,0(t0) #endereco da imagem
-	li t1,0
-	sw t1,4(t0) #não andavel
-
-#FIM
-	ret
+OBJETOS: .word GRASS0,TREE0,TREE1,TREE2,TREE3,TREE4,TREE5,TREE6,TREE7,TREE8,TREE9,TREE10,TREE11,
+          HOUSE0,HOUSE1,HOUSE2,HOUSE3,HOUSE4,HOUSE5,HOUSE6,HOUSE7,HOUSE8,HOUSE9,HOUSE10,HOUSE11,
+          HOUSE12,HOUSE13,HOUSE14,HOUSE15,HOUSE16,HOUSE17,HOUSE18,HOUSE19,HOUSE20,HOUSE21,
+          HOUSE22,HOUSE23,HOUSE24,LAB0,LAB1,LAB2,LAB3,LAB4,LAB5,LAB6,LAB7,LAB8,LAB9,LAB10,
+          LAB11,LAB12,LAB13,LAB14,LAB15,LAB16,LAB17,LAB18,LAB19,LAB20,LAB21,LAB22,LAB23,
+          LAB24,LAB25,LAB26,LAB27,LAB28,LAB29,LAB30,LAB31,LAB32,LAB33,LAB34,
+
+GRASS0: .word grass0 # endereço do sprite
+        .byte 1      # andavel
+       
+TREE0:  .word tree0
+        .byte 0
+
+TREE1:  .word tree1
+        .byte 0
+
+TREE2:  .word tree2
+        .byte 0
+
+TREE3:  .word tree3
+        .byte 0
+
+TREE4:  .word tree4
+        .byte 0
+
+TREE5:  .word tree5
+        .byte 0
+
+TREE6:  .word tree6
+        .byte 0
+
+TREE7:  .word tree7
+        .byte 0
+
+TREE8:  .word tree8
+        .byte 0
+
+TREE9:  .word tree9
+        .byte 0
+
+TREE10: .word tree10
+        .byte 0
+
+TREE11: .word tree11
+        .byte 0
+
+HOUSE0: .word house0
+        .byte 0
+
+HOUSE1: .word house1
+        .byte 0
+
+HOUSE2: .word house2
+        .byte 0
+
+HOUSE3: .word house3
+        .byte 0
+
+HOUSE4: .word house4
+        .byte 0
+
+HOUSE5: .word house5
+        .byte 0
+
+HOUSE6: .word house6
+        .byte 0
+
+HOUSE7: .word house7
+        .byte 0
+
+HOUSE8: .word house8
+        .byte 0
+
+HOUSE9: .word house9
+        .byte 0
+
+HOUSE10: .word house10
+        .byte 0
+
+HOUSE11: .word house11
+        .byte 0
+
+HOUSE12: .word house12
+        .byte 0
+
+HOUSE13: .word house13
+        .byte 0
+
+HOUSE14: .word house14
+        .byte 0
+
+HOUSE15: .word house15
+        .byte 0
+
+HOUSE16: .word house16
+        .byte 0
+
+HOUSE17: .word house17
+        .byte 0
+
+HOUSE18: .word house18
+        .byte 0
+
+HOUSE19: .word house19
+        .byte 0
+
+HOUSE20: .word house20
+        .byte 0
+
+HOUSE21: .word house21
+        .byte 0
+
+HOUSE22: .word house22
+        .byte 0
+
+HOUSE23: .word house23
+        .byte 0
+
+HOUSE24: .word house24
+        .byte 0
+
+LAB0:  .word lab0
+       .byte 0
+
+LAB1:  .word lab1
+       .byte 0
+
+LAB2:  .word lab2
+       .byte 0
+
+LAB3:  .word lab3
+       .byte 0
+
+LAB4:  .word lab4
+       .byte 0
+
+LAB5:  .word lab5
+       .byte 0
+
+LAB6:  .word lab6
+       .byte 0
+
+LAB7:  .word lab7
+       .byte 0
+
+LAB8:  .word lab8
+       .byte 0
+
+LAB9:  .word lab9
+       .byte 0
+
+LAB10:  .word lab10
+       .byte 0
+
+LAB11:  .word lab11
+       .byte 0
+
+LAB12:  .word lab12
+       .byte 0
+
+LAB13:  .word lab13
+       .byte 0
+
+LAB14:  .word lab14
+       .byte 0
+
+LAB15:  .word lab15
+       .byte 0
+
+LAB16:  .word lab16
+       .byte 0
+
+LAB17:  .word lab17
+       .byte 0
+
+LAB18:  .word lab18
+       .byte 0
+
+LAB19:  .word lab19
+       .byte 0
+
+LAB20:  .word lab20
+       .byte 0
+
+LAB21:  .word lab21
+       .byte 0
+
+LAB22:  .word lab22
+       .byte 0
+
+LAB23:  .word lab23
+       .byte 0
+
+LAB24:  .word lab24
+       .byte 0
+
+LAB25:  .word lab25
+       .byte 0
+
+LAB26:  .word lab26
+       .byte 0
+
+LAB27:  .word lab27
+       .byte 0
+
+LAB28:  .word lab28
+       .byte 0
+
+LAB29:  .word lab29
+       .byte 0
+
+LAB30:  .word lab30
+       .byte 0
+
+LAB31:  .word lab31
+       .byte 0
+
+LAB32:  .word lab32
+       .byte 0
+
+LAB33:  .word lab33
+       .byte 0
+
+LAB34:  .word lab34
+       .byte 0

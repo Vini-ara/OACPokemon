@@ -36,15 +36,6 @@ VOLTA_MOVE:
 	mv s0,t0
 	mv s1,t1
 
-	mv a0,s0
-	mv a1,s1
-	jal ra, CARREGA_MAPA
-
-	la a0,house0 #suposto personagem
-	li a1,160
-	li a2,112 ### (TO DO) Desse jeito ele comeca a ser printado pela cabeca nessa posicao, mas essa eh a posicao do pe dele
-	li a3,0
-	jal ra, DRAW_IMAGE
 
 	
 FIM_MOVE:
@@ -109,7 +100,8 @@ TILE_ANDAVEL:
 	addi t1,zero,T_OBJ # tamanho de cada objeto(VAI MUDAR)
 	mul t1,t1,t0 #quantidade de bytes que serao adicionados ao endereco objetos
 	add t1,t2,t1 #t1 recebe o endereco do objeto requisitado
-	lw a0,4(t1)
+	lw t1,0(t1) # t1 recebe o endereco do objeto
+  lb a0, 4(t1) # a0 recebe se o tile e andavel ou nao
 
 	lw t0,0(sp)
 	lw t1,4(sp)

@@ -1,6 +1,17 @@
 .data
 .include "sprites/grass0.data"
 
+# hero
+.include "sprites/hero0.data"
+.include "sprites/hero1.data"
+.include "sprites/hero2.data"
+.include "sprites/hero3.data"
+.include "sprites/hero4.data"
+.include "sprites/hero5.data"
+.include "sprites/hero6.data"
+.include "sprites/hero7.data"
+.include "sprites/hero8.data"
+
 #Single Tree
 .include "sprites/tree0.data"
 .include "sprites/tree1.data"
@@ -18,6 +29,7 @@
 .include "sprites/tree11.data"
 
 #House 
+.include "sprites/house0.data"
 .include "sprites/house1.data"
 .include "sprites/house2.data"
 .include "sprites/house3.data"

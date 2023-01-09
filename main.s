@@ -1,38 +1,47 @@
-.eqv T_OBJ 8 #tamanho de cada objeto
+.eqv T_OBJ 4 #tamanho de cada objeto
 .data
+.include "objetos.s"
 .include "mapas/mapa.data"
 .include "mapas/mapa2.data"
-.include "sprites/house0.data"
 
 .text
 #iniciando mapa
 SETUP:	
-  	jal inicia_objetos
-
 	li s0,30 #linha
 	li s1,30 #coluna
 
-	mv a0,s0
-	mv a1,s1
-	jal CARREGA_MAPA
-
-	la a0,house0 #suposto personagem
-	li a1,160
-	li a2,112 ### (TO DO) Desse jeito ele comeca a ser printado pela cabeca nessa posicao, mas essa eh a posicao do pe dele
-	li a3,0
-	jal DRAW_IMAGE
+  li s2, 0 # frame
 	
 GAME_LOOP:
+  xori s2, s2, 1
+
 	li a0,0
 	call KEY2
 
-	beqz a0,GAME_LOOP
+	beqz a0,GAME_PRINT
 
 	mv a3,a0 #a3 = tecla
 	mv a0,s0 #linha
 	mv a1,s1 #coluna
 	jal MOVE
 
+GAME_PRINT:
+	mv a0,s0
+	mv a1,s1
+	jal ra, CARREGA_MAPA
+
+	la a0,hero0 #suposto personagem
+	li a1,160
+	li a2,112 ### (TO DO) Desse jeito ele comeca a ser printado pela cabeca nessa posicao, mas essa eh a posicao do pe dele
+	mv a3, s2
+	jal ra, DRAW_IMAGE
+
+  li t0, 0xFF200604 # troca o frame exibido para o frame qeu acabou de ser pintado 
+  sb s2, 0(t0)
+
+  li a0, 70
+  li a7, 32
+  ecall       # espera 70ms entre cada frame
 
 	jal GAME_LOOP
 
@@ -70,14 +79,15 @@ LOOP_CARREGA_MAPA:
 	addi t5,zero,T_OBJ # t5 = tamanho de cada objeto(VAI MUDAR)
 	mul t5,t5,t4 # quantidade de bytes que serao adicionados ao endereco objetos
 	add t5,t3,t5 # t5 recebe o endereco do objeto requisitado
-	lw t4,0(t5) # t0 recebe o endereco do sprite do objeto
+	lw t4,0(t5) # t4 recebe o endereco do objeto daquele tile
+  lw t4, 0(t4) # t4 receve o endereco do sprite daquele tile
 	
 	#ajustando argumentos para funcao print
 	mv a0,t4 #a0 = endereco do sprite
 	li t5, 16
 	mul a1,t5,t0 #a1 = coluna
 	mul a2,t5,t1 #a2 = linha
-	li a3,0
+	mv a3, s2
 	jal DRAW_IMAGE
 	
 	li t5,20     # tamanho da tela 
@@ -153,5 +163,4 @@ AJUSTA_XY:
 
 
 .include "print.s"
-.include "objetos.s"
 .include "move.s"
