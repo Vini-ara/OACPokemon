@@ -7,13 +7,13 @@
 .text
 #iniciando mapa
 SETUP:	
-	li s0,30 #linha
-	li s1,30 #coluna
-
-  li s2, 0 # frame
+  	li s0, 0 # frame
+	li s1,30 #linha
+	li s2,30 #coluna
+	li s3, 0 #direçao (0 = cima, 1 = baixo, 2 = direita, 3 = esquerda)
 	
 GAME_LOOP:
-  xori s2, s2, 1
+	xori s0, s0, 1
 
 	li a0,0
 	call KEY2
@@ -21,23 +21,19 @@ GAME_LOOP:
 	beqz a0,GAME_PRINT
 
 	mv a3,a0 #a3 = tecla
-	mv a0,s0 #linha
-	mv a1,s1 #coluna
+	mv a0,s1 #linha
+	mv a1,s2 #coluna
 	jal MOVE
 
 GAME_PRINT:
-	mv a0,s0
-	mv a1,s1
+	mv a0,s1
+	mv a1,s2
 	jal ra, CARREGA_MAPA
 
-	la a0,hero0 #suposto personagem
-	li a1,160
-	li a2,112 ### (TO DO) Desse jeito ele comeca a ser printado pela cabeca nessa posicao, mas essa eh a posicao do pe dele
-	mv a3, s2
-	jal ra, DRAW_IMAGE
+	jal PRINT_PLAYER
 
   li t0, 0xFF200604 # troca o frame exibido para o frame qeu acabou de ser pintado 
-  sb s2, 0(t0)
+  sb s0, 0(t0)
 
   li a0, 70
   li a7, 32
@@ -87,7 +83,7 @@ LOOP_CARREGA_MAPA:
 	li t5, 16
 	mul a1,t5,t0 #a1 = coluna
 	mul a2,t5,t1 #a2 = linha
-	mv a3, s2
+	mv a3, s0
 	jal DRAW_IMAGE
 	
 	li t5,20     # tamanho da tela 
@@ -120,7 +116,7 @@ LOOP_CARREGA_MAPA:
 KEY2:	li t1,0xFF200000		# carrega o endereço de controle do KDMMIO
 	lw t0,0(t1)			# Le bit de Controle Teclado
 	andi t0,t0,0x0001		# mascara o bit menos significativo
-  beq t0,zero,FIM   	   	# Se não há tecla pressionada então vai para FIM
+  beq t0,zero,FIM  	   	# Se não há tecla pressionada então vai para FIM
   lw a0,4(t1)  			# le o valor da tecla tecla
 FIM:	ret				# retorna
 	
@@ -164,3 +160,4 @@ AJUSTA_XY:
 
 .include "print.s"
 .include "move.s"
+.include "print_player.s"
