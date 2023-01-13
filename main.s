@@ -84,6 +84,7 @@ LOOP_CARREGA_MAPA:
 	mul a1,t5,t0 #a1 = coluna
 	mul a2,t5,t1 #a2 = linha
 	mv a3, s0
+  mv a4, zero
 	jal DRAW_IMAGE
 	
 	li t5,20     # tamanho da tela 
