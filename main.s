@@ -72,19 +72,20 @@ CARREGA_MAPA:
 
 LOOP_CARREGA_MAPA:
 	lb t4,0(t2) # t4 recebe o byte da matriz do mapa (indice)
-	addi t5,zero,T_OBJ # t5 = tamanho de cada objeto(VAI MUDAR)
+	addi t5,zero,T_OBJ 
 	mul t5,t5,t4 # quantidade de bytes que serao adicionados ao endereco objetos
 	add t5,t3,t5 # t5 recebe o endereco do objeto requisitado
 	lw t4,0(t5) # t4 recebe o endereco do objeto daquele tile
-  lw t4, 0(t4) # t4 receve o endereco do sprite daquele tile
+  lw t5, 0(t4) # t5 receve o endereco do sprite daquele tile
+  lb t6, 5(t4) # t6 recebe se o tile eh espelhado ou nao
 	
 	#ajustando argumentos para funcao print
-	mv a0,t4 #a0 = endereco do sprite
+	mv a0,t5  #a0 = endereco do sprite
 	li t5, 16
 	mul a1,t5,t0 #a1 = coluna
 	mul a2,t5,t1 #a2 = linha
 	mv a3, s0
-  mv a4, zero
+  mv a4, t6
 	jal DRAW_IMAGE
 	
 	li t5,20     # tamanho da tela 
