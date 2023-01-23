@@ -1,8 +1,7 @@
 .eqv T_OBJ 4 #tamanho de cada objeto
 .data
 .include "objetos.s"
-.include "mapas/mapa.data"
-.include "mapas/mapa2.data"
+.include "mapas/mapa.s"
 
 .text
 #iniciando mapa
@@ -60,7 +59,7 @@ CARREGA_MAPA:
 
 	addi a1,a0,-7 #ajusta a0(linha) para a primeira linha do display   
 	addi a2,t0,-10 # ajusta a1(coluna) para a primeira coluna do display
-	la a0,mapa2 # endereco da matriz do mapa
+	la a0,MAPA # endereco da matriz do mapa
 	li a3,1 # .data do mapa em byte
 
 	jal AJUSTA_XY # retorna o endereco do mapa para printar somente a parte em que o jogador esta
@@ -73,6 +72,7 @@ CARREGA_MAPA:
 LOOP_CARREGA_MAPA:
 	lb t4,0(t2) # t4 recebe o byte da matriz do mapa (indice)
 	addi t5,zero,T_OBJ 
+
 	mul t5,t5,t4 # quantidade de bytes que serao adicionados ao endereco objetos
 	add t5,t3,t5 # t5 recebe o endereco do objeto requisitado
 	lw t4,0(t5) # t4 recebe o endereco do objeto daquele tile
@@ -93,7 +93,7 @@ LOOP_CARREGA_MAPA:
 	addi t0,t0,1 # adiciona 1 ao contador coluna
 	blt t0,t5,LOOP_CARREGA_MAPA # verifica se acabaram as colunas
 
-	la t5,mapa2 
+	la t5,MAPA 
 	lw t5,0(t5) # largura do mapa
 	addi t2,t2,-20 
 	add t2,t2,t5 # vai para a proxima linha

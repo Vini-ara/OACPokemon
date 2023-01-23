@@ -74,7 +74,7 @@ MOVE_BAIXO:
 	li t3, 1 # direçao baixo
 	bne s3, t3, MUDA_DIRECAO_BAIXO
 
-	la t2,mapa2
+	la t2,MAPA
 	lw t2,4(t2)
 	beq t0,t2,FIM_MOVE
 	addi t0,t0,1
@@ -87,7 +87,7 @@ MOVE_DIR:
 	li t3, 2 # direçao baixo
 	bne s3, t3, MUDA_DIRECAO_DIR
 
-	la t2,mapa2
+	la t2,MAPA
 	lw t2,0(t2)
 	beq t2,t1,FIM_MOVE
 	addi t1,t1,1
@@ -113,7 +113,7 @@ TILE_ANDAVEL:
 	mv t0,a0
 	mv t1,a1
 
-	la a0,mapa2
+	la a0,MAPA
 	mv a1,t0
 	mv a2,t1
 	li a3,1
