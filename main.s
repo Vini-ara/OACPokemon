@@ -7,7 +7,7 @@
 #iniciando mapa
 SETUP:	
   	li s0, 0 # frame
-	li s1,30 #linha
+	li s1,31 #linha
 	li s2,30 #coluna
 	li s3, 0 #direçao (0 = cima, 1 = baixo, 2 = direita, 3 = esquerda)
 	
@@ -70,7 +70,7 @@ CARREGA_MAPA:
 	la t3,OBJETOS #a3 = comecco do vetor objetos
 
 LOOP_CARREGA_MAPA:
-	lb t4,0(t2) # t4 recebe o byte da matriz do mapa (indice)
+	lbu t4,0(t2) # t4 recebe o byte da matriz do mapa (indice)
 	addi t5,zero,T_OBJ 
 
 	mul t5,t5,t4 # quantidade de bytes que serao adicionados ao endereco objetos

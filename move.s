@@ -106,7 +106,7 @@ MUDA_DIRECAO_DIR:
 TILE_ANDAVEL:
 	addi sp,sp,-16
 	sw ra,12(sp)
-  	sw t2,8(sp)
+  sw t2,8(sp)
 	sw t1,4(sp)
 	sw t0,0(sp)
 
@@ -119,18 +119,18 @@ TILE_ANDAVEL:
 	li a3,1
 	jal ra, AJUSTA_XY
 
-	lb t0,0(a0) # t0 = codigo do objeto
+	lbu t0,0(a0) # t0 = codigo do objeto
 	la t2,OBJETOS
 	
 	addi t1,zero,T_OBJ # tamanho de cada objeto(VAI MUDAR)
 	mul t1,t1,t0 #quantidade de bytes que serao adicionados ao endereco objetos
 	add t1,t2,t1 #t1 recebe o endereco do objeto requisitado
 	lw t1,0(t1) # t1 recebe o endereco do objeto
-  	lb a0, 4(t1) # a0 recebe se o tile e andavel ou nao
+  lb a0, 4(t1) # a0 recebe se o tile e andavel ou nao
 
 	lw t0,0(sp)
 	lw t1,4(sp)
-  	lw t2,8(sp)
+  lw t2,8(sp)
 	lw ra,12(sp)
 	addi sp,sp,16
 

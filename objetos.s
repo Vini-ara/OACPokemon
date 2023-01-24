@@ -18,7 +18,7 @@ OBJETOS: .word GRASS1,GRASS1,GRASS2,GRASS3,GRASS4,GRASS5,GRASS6,RIVER1,RIVER2,RI
 #              5E,     5F,     60,     61,     62,     63,     64,   65,   66,   67,   68,   69,   6A
           PKCTR14,PKCTR15,PKCTR16,PKCTR17,PKCTR18,PKCTR19,PKCTR20,MALL1,MALL2,MALL3,MALL4,MALL5,MALL6,
 #            6B,   6C,   6D,    6E,    6F,    70,    71,    72,   73,   74,  75,  76,  78,  79,  7A,  7B,
-          MALL7,MALL8,MALL9,MALL10,MALL11,MALL12,MALL13,MALL14,MALL15,GYM1,GYM2,GYM3,GYM4,GYM5,GYM6,GYM7,
+          MALL7,MALL8,MALL9,MALL10,MALL11,MALL12,MALL13,MALL14,MALL15,MALL16,GYM1,GYM2,GYM3,GYM4,GYM5,GYM6,GYM7,
 #           7C,  7D,   7E,   7F,   80,   81,   82,   83,   84,   85,   86,   87,   88,   89
           GYM8,GYM9,GYM10,GYM11,GYM12,GYM13,GYM14,GYM15,GYM16,GYM17,GYM18,GYM19,GYM20,GYM21
 
@@ -422,12 +422,12 @@ LAB26:  .word lab20
         .byte 0   # espelhado
         .byte 0   # interagivel
 
-PKCTR1: .word pokecenter1
+PKCTR1: .word pkctr1
         .byte 0
         .byte 0
         .byte 0
 
-PKCTR2: .word pokecenter1
+PKCTR2: .word pkctr1
         .byte 0
         .byte 1
         .byte 0
@@ -437,22 +437,22 @@ PKCTR3: .word pkctr2
         .byte 0
         .byte 0
 
-PKCTR4: .word pokecenter3
+PKCTR4: .word pkctr3
         .byte 0
         .byte 0
         .byte 0
 
-PKCTR5: .word pokecenter3
+PKCTR5: .word pkctr3
         .byte 0
         .byte 1
         .byte 0
 
-PKCTR6: .word pokecenter4
+PKCTR6: .word pkctr4
         .byte 0
         .byte 0
         .byte 0
 
-PKCTR7: .word pokecenter4
+PKCTR7: .word pkctr4
         .byte 0
         .byte 1
         .byte 0
@@ -472,52 +472,52 @@ PKCTR10: .word pkctr7
         .byte 0
         .byte 0
 
-PKCTR11: .word pokecenter8
+PKCTR11: .word pkctr8
         .byte 0
         .byte 0
         .byte 0
 
-PKCTR12: .word pokecenter8
+PKCTR12: .word pkctr8
         .byte 0
         .byte 1
         .byte 0
 
-PKCTR13: .word pokecenter9
+PKCTR13: .word pkctr9
         .byte 0
         .byte 0
         .byte 0
 
-PKCTR14: .word pokecenter9
+PKCTR14: .word pkctr9
         .byte 0
         .byte 1
         .byte 0
 
-PKCTR15: .word pokecenter10
+PKCTR15: .word pkctr10
         .byte 0
         .byte 0
         .byte 0
 
-PKCTR16: .word pokecenter11
+PKCTR16: .word pkctr11
         .byte 0
         .byte 0
         .byte 0
 
-PKCTR17: .word pokecenter12
+PKCTR17: .word pkctr12
         .byte 0
         .byte 0
         .byte 0
 
-PKCTR18: .word pokecenter13
+PKCTR18: .word pkctr13
         .byte 0
         .byte 0
         .byte 0
 
-PKCTR19: .word pokecenter14
+PKCTR19: .word pkctr14
         .byte 0
-        .byte 1
+        .byte 0
         .byte 0
 
-PKCTR20: .word pokecenter15
+PKCTR20: .word pkctr15
         .byte 0
         .byte 0
         .byte 0
@@ -593,6 +593,11 @@ MALL14: .word mall8
         .byte 0
 
 MALL15: .word mall9
+        .byte 0
+        .byte 0
+        .byte 0
+
+MALL16: .word mall10
         .byte 0
         .byte 0
         .byte 0
