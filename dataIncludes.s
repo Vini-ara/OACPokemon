@@ -134,3 +134,9 @@
 .include "sprites/gym17.data"
 .include "sprites/gym18.data"
 .include "sprites/gym19.data"
+
+# text box
+.include "sprites/tbx1.data"
+.include "sprites/tbx2.data"
+.include "sprites/tbx3.data"
+.include "sprites/tbx4.data"

@@ -17,7 +17,7 @@ MOVE:
 	mv t0, a0
 	mv t1, a1
 
-    li t2,'w'
+  li t2,'w'
 	beq a3,t2,MOVE_CIMA
 	li t2,'a'
 	beq a3,t2,MOVE_ESQ
@@ -96,6 +96,7 @@ MUDA_DIRECAO_DIR:
 	li s3, 2
 	jal zero, VOLTA_MOVE
 
+
 # TILE_ANDAVEL
 #   - checa se o tile eh andavel
 #   Parametros:
@@ -122,7 +123,7 @@ TILE_ANDAVEL:
 	lbu t0,0(a0) # t0 = codigo do objeto
 	la t2,OBJETOS
 	
-	addi t1,zero,T_OBJ # tamanho de cada objeto(VAI MUDAR)
+	addi t1,zero,T_OBJ
 	mul t1,t1,t0 #quantidade de bytes que serao adicionados ao endereco objetos
 	add t1,t2,t1 #t1 recebe o endereco do objeto requisitado
 	lw t1,0(t1) # t1 recebe o endereco do objeto
@@ -135,3 +136,11 @@ TILE_ANDAVEL:
 	addi sp,sp,16
 
 	ret
+
+# retorna em a0 a tecla pressionada
+KEY2:	li t1,0xFF200000		# carrega o endereço de controle do KDMMIO
+	lw t0,0(t1)			# Le bit de Controle Teclado
+	andi t0,t0,0x0001		# mascara o bit menos significativo
+  beq t0,zero,FIM  	   	# Se não há tecla pressionada então vai para FIM
+  lw a0,4(t1)  			# le o valor da tecla tecla
+FIM:	ret				# retorna

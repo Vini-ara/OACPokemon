@@ -1,106 +1,184 @@
 .text
-# DRAW_IMAGE
-#   - A função desenha uma imagem em uma determinada posição na tela;
-#   - Parâmetros:
-#       > a0 = Endereço da Imagem
-#       > a1 = Posição x
-#       > a2 = Posição y
-#       > a3 = Frame (0 ou 1)
-#       > a4 = espelhado (1 = sim, 0 = nao)
-#   - Registradores Temporários
-#       > t0 = Endereço do Bitmap Display
-#       > t1 = Endereço da imagem  
-#       > t2 = Contador de linha
-#       > t3 = Contador de coluna
-#       > t4 = Largura da imagem   
-#       > t5 = Comprimento da imagem
-
-DRAW_IMAGE:
-  addi sp, sp, -32
-  sw ra, 28(sp)
-  sw t6, 24(sp)
+# -CARREGA_MAPA
+#   Apenas printa o mapa
+#     Parametros: 
+#     > ao = linha do jogador
+#     > a1 = coluna do jogador
+CARREGA_MAPA:
+  addi sp, sp, -28
+  sw ra, 24(sp)
   sw t5, 20(sp)
   sw t4, 16(sp)
   sw t3, 12(sp)
   sw t2, 8(sp)
   sw t1, 4(sp)
   sw t0, 0(sp)
-    
-  # Calculando endereço do Frame
-  li t0, 0xFF0                    # Inicializando t0 = 0xFF0
-  add t0, t0, a3                  # t0 = t0 + a3
-  slli t0, t0, 20                 # Shiftando 20 bits a esquerda de t0
 
-  # Calcular endereço inicial (posição (x,y))
-  add t0, t0, a1                  # t0 = t0 + a1 (Movendo o endereço para a posição x)
-  li t1, 320                      # t1 = 320
-  mul t1, t1, a2                  # t1 = t1 x a2
-  add t0, t0, t1                  # t0 = t0 + t1
+	mv t0,a1 # t0 = coluna do jogador
 
-  # Inicializando variáveis (Registradores Temporários)
-  addi t1, a0, 8                  # t1 = a0 + 8 (Pular largura e comprimento da imagem)
-  mv t2, zero                     # t2 = 0 (Contador começa no 0)
-  mv t3, zero                     # t3 = 0 (Contador começa no 0)
-  lw t4, 0(a0)                    # t4 = a0 (Os primeiros 4 bytes do arquivo .data representam a largura da imagem)
-  lw t5, 4(a0)                    # t5 = a0 (Os bytes das posições 4 a 7 do arquivo .data representam a largura da imagem)
+	addi a1,a0,-7 #ajusta a0(linha) para a primeira linha do display   
+	addi a2,t0,-10 # ajusta a1(coluna) para a primeira coluna do display
+	la a0,MAPA # endereco da matriz do mapa
+	li a3,1 # .data do mapa em byte
 
-  beqz a4, Print_Line             # Printar sem espelhar
+	jal AJUSTA_XY # retorna o endereco do mapa para printar somente a parte em que o jogador esta
 
-  add t1, t1, t4                 # t1 = ultimo byte da primeira linha da imagem + 1
-  addi t1, t1, -1                # t4 = t4 - 1 (ultimo byte da linha) 
+	li t0,0 #a0 = contador coluna
+	li t1,0 #a1 = contador linha
+	mv t2,a0  #t2 = endereco do .data
+	la t3,OBJETOS #a3 = comecco do vetor objetos
 
-  # Desenha as linhas de tras para frente 
-  Print_Inverted_Line: 
-    lb t6, 0(t1)                     # Le 1 byte da imagem e armazena em t6
-    sb t6, 0(t0)                     # Armazena o byte lido no endereco do frame
+LOOP_CARREGA_MAPA:
+	lbu t4,0(t2) # t4 recebe o byte da matriz do mapa (indice)
+	addi t5,zero,T_OBJ 
 
-    addi t0, t0, 1                   # t0 = t0 + 1
-    addi t1, t1, -1                  # t1 = t1 + 1
+	mul t5,t5,t4 # quantidade de bytes que serao adicionados ao endereco objetos
+	add t5,t3,t5 # t5 recebe o endereco do objeto requisitado
+	lw t4,0(t5) # t4 recebe o endereco do objeto daquele tile
+  lw t5, 0(t4) # t5 receve o endereco do sprite daquele tile
+  lb t6, 5(t4) # t6 recebe se o tile eh espelhado ou nao
+	
+	#ajustando argumentos para funcao print
+	mv a0,t5  #a0 = endereco do sprite
+	li t5, 16
+	mul a1,t5,t0 #a1 = coluna
+	mul a2,t5,t1 #a2 = linha
+	mv a3, s0
+  mv a4, t6
+	jal DRAW_IMAGE
+	
+	li t5,20     # tamanho da tela 
+	addi t2,t2,1 # incrementa endereco do mapa
+	addi t0,t0,1 # adiciona 1 ao contador coluna
+	blt t0,t5,LOOP_CARREGA_MAPA # verifica se acabaram as colunas
 
-    addi t3, t3, 1                   # t3 = t3 + 1
-    blt t3, t4, Print_Inverted_Line  # se t3 < t4, ir para Print_Inverted_Line
+	la t5,MAPA 
+	lw t5,0(t5) # largura do mapa
+	addi t2,t2,-20 
+	add t2,t2,t5 # vai para a proxima linha
 
-    addi t0, t0, 320                 # t0 = t0 + 320 (pular para a proxima linha)
-    sub t0, t0, t4                   # t0 = t0 - t4 (voltar para o inicio da linha)
+	li t0,0 # reinicia o contador de colunas
+	addi t1,t1,1  # incrementa o contador de linhas
+	li t5,15 
+	blt t1,t5,LOOP_CARREGA_MAPA # verifica se acabaram as linhas
+	
+  lw t0, 0(sp)
+  lw t1, 4(sp)
+  lw t2, 8(sp)
+  lw t3, 12(sp)
+  lw t4, 16(sp)
+  lw t5, 20(sp)
+  lw ra, 24(sp)
+  addi sp, sp, 28
 
-    mv t3, zero                      # t3 = 0 (Resetar o contador)
-    addi t2, t2, 1                   # t2 = t2 + 1 (incrementar o contador)
+	ret
 
-    add t1, t1, t4                  # Volta ao ultimo byte da linha
-    add t1, t1, t4                  # Pula uma linha (ultimo byte da proxima linha)
+# --- AJUSTA_XY 
+#  - Retorna o endereco de um objeto em um .data, dadas suas coordenadas
+#     Parametros:
+#     > a0 = endereco .data
+#     > a1 = linha 
+#     > a2 = coluna
+#     > a3 = tamanho do conteudo(4 = word, 1 = byte ...)
+#     Retorno: 
+#     > a0 = endereco do .data em que o objeto esta
+AJUSTA_XY:
+  addi sp, sp, -16
+  sw ra, 12(sp)
+  sw t2, 8(sp)
+  sw t1, 4(sp)
+  sw t0, 0(sp)
 
-    bgt t5, t2, Print_Inverted_Line  # Se t5 > t2, ir para Print_Inverted_Line
-    
-    jal zero, DRAW_IMAGE.FIM         # Ir para o fim do procedimento
+	lw t0,0(a0) #t0 = tamanho X do .data
 
-  # Loop - Desenha a imagem linha a linha
-  Print_Line:
-    lw t6, 0(t1)                # Lê 4 bytes da imagem e armazena em t6
-    sw t6, 0(t0)                # Armazena os 4 bytes lidos no endereço do Frame
+	mul t1,t0,a1 #t1 = t0 (largura do .data) * a2 (linha)
+	mul t1,t1,a3 #t1 = t1 * a3 (offset/tamanho do passo que eu tenho que dar)
 
-    addi t0, t0, 4              # t0 = t0 + 4
-    addi t1, t1, 4              # t0 = t0 + 4
+	mul t2,a3,a2 #t2 = a3 * a2 (coluna em que meu ojeto esta)
 
-    addi t3, t3, 4              # t3 = t3 + 4
-    blt t3, t4, Print_Line      # Se t3 < t4, ir para Print_Line
+	add a0,a0,t1 #a0 = a0 (endereco do .data) + t1 (o Y do meu objeto)
+	add a0,a0,t2 #a0 = a0 + t2 (o X do meu objeto)
 
-    addi t0, t0, 320            # t0 = t0 + 320 (pular para a próxima linha)
-    sub t0, t0, t4              # t0 = t0 - t4 (voltar para o início da linha)
+	addi a0,a0,8 #corrige as duas words do tamanho do .data
 
-    mv t3, zero                 # t3 = 0 (Resetar o contador t3)
-    addi t2, t2, 1              # t2 = t2 + 1 
-    bgt t5, t2, Print_Line      # Se t5 > t2, ir para Print_Line
+  lw t0, 0(sp)
+  lw t1, 4(sp)
+  lw t2, 8(sp)
+  lw ra, 12(sp)
+  addi sp, sp, 16
+	
+	ret
+
+
+PRINT_TEXT_BOX:
+  addi sp, sp, -16
+  sw ra, 12(sp)
+  sw t2, 8(sp)
+  sw t1, 4(sp)
+  sw t0, 0(sp)
   
-  DRAW_IMAGE.FIM:
-    lw t0, 0(sp)
-    lw t1, 4(sp)
-    lw t2, 8(sp)
-    lw t3, 12(sp)
-    lw t4, 16(sp)
-    lw t5, 20(sp)
-    lw t6, 24(sp)
-    lw ra, 28(sp)
-    addi sp, sp, 32
+  la a0, tbx1
+  li a1, 6
+  li a2, 194
+  mv a3, s0
+  li a4, 0
 
-    ret
+  jal DRAW_IMAGE
 
+  la a0, tbx2
+  li a1, 6
+  li a2, 214
+  mv a3, s0
+  li a4, 0
+  jal DRAW_IMAGE
+
+  li t0, 0
+  li t1, 24
+  
+  PRINT_TEXT_BOX.LOOP:
+    li t2, 12
+    mul t2, t2, t0
+    addi t2, t2, 18
+
+    la a0, tbx3
+    mv a1, t2
+    li a2, 194
+    mv a3, s0
+    li a4, 0
+
+    jal DRAW_IMAGE
+
+    la a0, tbx4
+    mv a1, t2
+    li a2, 214
+    mv a3, s0
+    li a4, 0
+
+    jal DRAW_IMAGE
+
+    addi t0, t0, 1
+    blt t0, t1, PRINT_TEXT_BOX.LOOP
+    
+  la a0, tbx1
+  li a1, 302
+  li a2, 194
+  mv a3, s0
+  li a4, 1
+
+  jal DRAW_IMAGE
+
+  la a0, tbx2
+  li a1, 302
+  li a2, 214
+  mv a3, s0
+  li a4, 1
+
+  jal DRAW_IMAGE
+ 
+  lw t0, 0(sp)
+  lw t1, 4(sp)
+  lw t2, 8(sp)
+  lw ra, 12(sp)
+  addi sp, sp, 16
+
+  ret
