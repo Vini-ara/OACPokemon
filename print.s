@@ -110,6 +110,8 @@ AJUSTA_XY:
 	ret
 
 
+# ---- PRINT_TEXT_BOX
+# - por enquanto ela só printa a caixa de dialogo na tela
 PRINT_TEXT_BOX:
   addi sp, sp, -16
   sw ra, 12(sp)
@@ -117,6 +119,7 @@ PRINT_TEXT_BOX:
   sw t1, 4(sp)
   sw t0, 0(sp)
   
+  # desenha o canto superior esquerdo
   la a0, tbx1
   li a1, 6
   li a2, 194
@@ -125,9 +128,10 @@ PRINT_TEXT_BOX:
 
   jal DRAW_IMAGE
 
+  # desenha o canto inferior esquerdo
   la a0, tbx2
   li a1, 6
-  li a2, 214
+  li a2, 216
   mv a3, s0
   li a4, 0
   jal DRAW_IMAGE
@@ -135,6 +139,7 @@ PRINT_TEXT_BOX:
   li t0, 0
   li t1, 24
   
+  # desenha o meio da caixa
   PRINT_TEXT_BOX.LOOP:
     li t2, 12
     mul t2, t2, t0
@@ -150,7 +155,7 @@ PRINT_TEXT_BOX:
 
     la a0, tbx4
     mv a1, t2
-    li a2, 214
+    li a2, 216
     mv a3, s0
     li a4, 0
 
@@ -159,6 +164,7 @@ PRINT_TEXT_BOX:
     addi t0, t0, 1
     blt t0, t1, PRINT_TEXT_BOX.LOOP
     
+  # desenha o canto superior direito
   la a0, tbx1
   li a1, 302
   li a2, 194
@@ -167,9 +173,10 @@ PRINT_TEXT_BOX:
 
   jal DRAW_IMAGE
 
+  # desenha o canto inferior direito
   la a0, tbx2
   li a1, 302
-  li a2, 214
+  li a2, 216
   mv a3, s0
   li a4, 1
 
@@ -180,5 +187,4 @@ PRINT_TEXT_BOX:
   lw t2, 8(sp)
   lw ra, 12(sp)
   addi sp, sp, 16
-
   ret

@@ -3,8 +3,8 @@
 
 #                   0,    1,      2,     3,     4,     5,     6,     7,     8,     9,     A,     B,     C
 OBJETOS: .word GRASS1,GRASS1,GRASS2,GRASS3,GRASS4,GRASS5,GRASS6,RIVER1,RIVER2,RIVER3,RIVER4,RIVER5,RIVER6,
-#              D,     E,     F,   10,   11,   12,   13,   14,   15,   16,   17,   18,    19,   1A
-          RIVER7,RIVER8,RIVER9,TREE1,TREE2,TREE3,TREE4,TREE5,TREE6,TREE7,TREE8,TREE9,TREE10,ROCK1,
+#              D,     E,     F,     10,   11,   12,   13,   14,   15,   16,   17,   18,    19,   1A
+          RIVER7,RIVER8,RIVER9,RIVER10,TREE1,TREE2,TREE3,TREE4,TREE5,TREE6,TREE7,TREE8,TREE9,TREE10,ROCK1,
 #            1B,   1C,   1D,   1E,   1F,   20,   21,   22,    23,    24,    25,    26,    27
           ROCK2,ROCK3,ROCK4,ROCK5,ROCK6,ROCK7,ROCK8,ROCK9,ROCK10,HOUSE1,HOUSE2,HOUSE3,HOUSE4,
 #             28,    29,    2A,    2B,    2C,     2D,     2E,     2F,     30,    31,      32,     33,
@@ -93,6 +93,11 @@ RIVER8:  .word river5 # endereco do sprite
         .byte 0     # interagivel
 
 RIVER9:  .word river6 # endereco do sprite
+        .byte 0     # andavel
+        .byte 0     # espelhado
+        .byte 0     # interagivel
+
+RIVER10:  .word river7 # endereco do sprite
         .byte 0     # andavel
         .byte 0     # espelhado
         .byte 0     # interagivel
