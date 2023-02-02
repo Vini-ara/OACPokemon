@@ -18,7 +18,8 @@ CARREGA_MAPA:
 
 	addi a1,a0,-7 #ajusta a0(linha) para a primeira linha do display   
 	addi a2,t0,-10 # ajusta a1(coluna) para a primeira coluna do display
-	la a0,MAPA # endereco da matriz do mapa
+  la t0, CURRENT_MAP
+	lw a0,0(t0) # endereco da matriz do mapa
 	li a3,1 # .data do mapa em byte
 
 	jal AJUSTA_XY # retorna o endereco do mapa para printar somente a parte em que o jogador esta
@@ -52,7 +53,8 @@ LOOP_CARREGA_MAPA:
 	addi t0,t0,1 # adiciona 1 ao contador coluna
 	blt t0,t5,LOOP_CARREGA_MAPA # verifica se acabaram as colunas
 
-	la t5,MAPA 
+  la t6, CURRENT_MAP
+	lw t5, 0(t6)
 	lw t5,0(t5) # largura do mapa
 	addi t2,t2,-20 
 	add t2,t2,t5 # vai para a proxima linha

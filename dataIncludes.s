@@ -1,4 +1,7 @@
 .data
+
+.include "sprites/black.data"
+
 # grass
 .include "sprites/grass1.data"
 .include "sprites/grass2.data"
@@ -43,6 +46,7 @@
 .include "sprites/river4.data"
 .include "sprites/river5.data"
 .include "sprites/river6.data"
+.include "sprites/river7.data"
 
 #House 
 .include "sprites/house1.data"
@@ -140,3 +144,37 @@
 .include "sprites/tbx2.data"
 .include "sprites/tbx3.data"
 .include "sprites/tbx4.data"
+
+# in_lab
+.include "sprites/in_lab1.data"
+.include "sprites/in_lab2.data"
+.include "sprites/in_lab3.data"
+.include "sprites/in_lab4.data"
+.include "sprites/in_lab5.data"
+
+# in_mall
+.include "sprites/in_mall1.data"
+.include "sprites/in_mall2.data"
+.include "sprites/in_mall3.data"
+.include "sprites/in_mall4.data"
+.include "sprites/in_mall5.data"
+
+# in_pkctr
+.include "sprites/in_pkctr1.data"
+.include "sprites/in_pkctr2.data"
+.include "sprites/in_pkctr3.data"
+.include "sprites/in_pkctr4.data"
+.include "sprites/in_pkctr5.data"
+
+# in_gym
+.include "sprites/in_gym1.data"
+.include "sprites/in_gym2.data"
+.include "sprites/in_gym3.data"
+.include "sprites/in_gym4.data"
+.include "sprites/in_gym5.data"
+
+# interiors
+.include "mapas/lab.data"
+.include "mapas/pkctr.data"
+.include "mapas/loja.data"
+.include "mapas/gym.data"

@@ -8,7 +8,7 @@ PRINT_PLAYER:
     sw t0, 0(sp)
 
     li a1,160 # posiçao x 
-    li a2,112 # posiçao y
+    li a2,109 # posiçao y
     mv a3, s0 # frame
 
     li t0, 0
