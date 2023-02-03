@@ -284,7 +284,7 @@ BATTLE_MENU:
             mv a1, t2
             li a2, 0x0000FF0F
             jal DRAW_SETA
-            mv t3, zero
+            addi t3, t3, -2
             j Battle_Menu_Loop
 
         Move_Seta_Down:
@@ -305,7 +305,7 @@ BATTLE_MENU:
             mv a1, t2
             li a2, 0x0000FF0F
             jal DRAW_SETA
-            li t3, 1
+            addi t3, t3, 2
             j Battle_Menu_Loop
         
         Move_Seta_Right:
@@ -326,7 +326,7 @@ BATTLE_MENU:
             mv a1, t2
             li a2, 0x0000FF0F
             jal DRAW_SETA
-            li t3, 2
+            addi t3, t3, 1
             j Battle_Menu_Loop
 
         Move_Seta_Left:
@@ -347,7 +347,7 @@ BATTLE_MENU:
             mv a1, t2
             li a2, 0x0000FF0F
             jal DRAW_SETA
-            li t3, 3
+            addi t3, t3, -1
             j Battle_Menu_Loop
 
         Change_Menu: 
@@ -358,7 +358,29 @@ BATTLE_MENU:
         Go_Pokemon_Attacks_Menu:
             jal POKEMON_ATTACKS_MENU
             # Verificar se o player escolheu um ataque
-            beqz a0, Battle_Menu_Loop
+            bnez a0, End_Battle_Menu
+            # Desenhar a caixa de diálogo
+            la a0, dialog_box_battle
+            mv a1, zero
+            li a2, 180
+            mv a3, zero
+            jal DRAW_IMAGE
+            
+            # Desenhar as opções
+            la a0, options_battle
+            li a1, 160
+            li a2 180
+            mv a3, zero
+            jal DRAW_IMAGE
+
+            # Desenhar a seta no lugar
+            mv a0, t1
+            mv a1, t2
+            li a2, 0x0000FF0F
+            jal DRAW_SETA
+
+            j Battle_Menu_Loop
+
 
 
     End_Battle_Menu:
@@ -529,7 +551,6 @@ POKEMON_ATTACKS_MENU:
         Back_Battle_Menu:
             mv a0, zero
             mv a1, zero
-            j End_Pokemon_Attacks_Menu
 
 
     End_Pokemon_Attacks_Menu:
