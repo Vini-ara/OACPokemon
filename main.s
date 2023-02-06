@@ -68,17 +68,17 @@ GAME_LOOP:
 	jal MOVE
 
 GAME_PRINT:
-#	mv a0,s1
-#	mv a1,s2
-#	jal ra, CARREGA_MAPA
+ 	mv a0,s1
+	mv a1,s2
+	jal ra, CARREGA_MAPA
 
-#jal PRINT_PLAYER
+  jal PRINT_PLAYER
 
   #jal PRINT_TEXT_BOX
 
-  la a0, P_BULBASAUR
-  li a1, 5
-  jal BATTLE_WILD_POKEMON
+#  la a0, P_BULBASAUR
+#  li a1, 5
+#  jal BATTLE_WILD_POKEMON
 
   li t0, 0xFF200604 # troca o frame exibido para o frame qeu acabou de ser pintado 
   sb s0, 0(t0)
