@@ -25,7 +25,7 @@ DRAW_POKEMON:
     # Desenhar a sprite
     mv a1, t1
     mv a2, t2
-    mv a3, zero             # a3 = 0
+    mv a3, s0             # a3 = 0
     jal DRAW_IMAGE2
 
     lw t4, 20(sp)

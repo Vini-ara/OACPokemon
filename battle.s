@@ -1,4 +1,4 @@
-.text
+.textbase
 # BATTLE
 #   - Promove uma batalha entre 2 pokémons (o pokémon armazenado em P_INIMIGO e o armazenado em P_PLAYER)
 
@@ -21,6 +21,7 @@ BATTLE_WILD_POKEMON:
     sw t4, 20(sp)
     sw t5, 24(sp)
     sw t6, 28(sp)
+
     
     # Criar pokémon selvagem
     la a2, P_INIMIGO
@@ -54,7 +55,7 @@ BATTLE_WILD_POKEMON:
         la a0, dialog_box_battle
         mv a1, zero
         li a2, 180
-        mv a3, zero
+        mv a3, s0
         jal DRAW_IMAGE
 
         # Verificar se o jogador um item
@@ -86,7 +87,7 @@ BATTLE_WILD_POKEMON:
             la a0, dialog_box_battle
             mv a1, zero
             li a2, 180
-            mv a3, zero
+            mv a3, s0
             jal DRAW_IMAGE
 
             # Atualizar vida do pokémon selvagem
@@ -223,14 +224,14 @@ BATTLE_MENU:
     la a0, dialog_box_battle
     mv a1, zero
     li a2, 180
-    mv a3, zero
+    mv a3, s0
     jal DRAW_IMAGE
     
     # Desenhar as opções
     la a0, options_battle
     li a1, 160
     li a2 180
-    mv a3, zero
+    mv a3, s0
     jal DRAW_IMAGE
     
     # Inicializar registradores
@@ -363,14 +364,14 @@ BATTLE_MENU:
             la a0, dialog_box_battle
             mv a1, zero
             li a2, 180
-            mv a3, zero
+            mv a3, s0
             jal DRAW_IMAGE
             
             # Desenhar as opções
             la a0, options_battle
             li a1, 160
             li a2 180
-            mv a3, zero
+            mv a3, s0
             jal DRAW_IMAGE
 
             # Desenhar a seta no lugar
@@ -414,7 +415,7 @@ POKEMON_ATTACKS_MENU:
     la a0, pokemon_attacks_menu_bg
     mv a1, zero
     li a2, 180
-    mv a3, zero
+    mv a3, s0
     jal DRAW_IMAGE
     
     # Printa o nome dos ataques
@@ -581,7 +582,7 @@ WILD_BATTLE_VICTORY:
     la a0, dialog_box_battle
     mv a1, zero
     li a2, 180
-    mv a3, zero
+    mv a3, s0
     jal DRAW_IMAGE
 
     # Printar diálogos

@@ -58,7 +58,7 @@ GAME_LOOP:
 	xori s0, s0, 1
 
 	li a0,0
-	call KEY2
+	jal KEY2
 
 	beqz a0,GAME_PRINT
 
@@ -74,11 +74,11 @@ GAME_PRINT:
 
   jal PRINT_PLAYER
 
-  #jal PRINT_TEXT_BOX
+#   jal PRINT_TEXT_BOX
 
-#  la a0, P_BULBASAUR
-#  li a1, 5
-#  jal BATTLE_WILD_POKEMON
+ la a0, P_BULBASAUR
+ li a1, 5
+ jal BATTLE_WILD_POKEMON
 
   li t0, 0xFF200604 # troca o frame exibido para o frame qeu acabou de ser pintado 
   sb s0, 0(t0)
