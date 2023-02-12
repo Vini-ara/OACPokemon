@@ -1,4 +1,3 @@
-.include "MACROSv21.s"
 .eqv T_OBJ 4 #tamanho de cada objeto
 .data
 .include "data_files/dialog_box_battle.data"
@@ -46,6 +45,7 @@ P_INIMIGO: .word 0, 0, 0
 P_PLAYER: .word 0, 0, 0
 
 .text
+.include "MACROSv21.s"
 #iniciando mapa
 SETUP:	
   li s0, 0 # frame
@@ -58,7 +58,7 @@ GAME_LOOP:
 	xori s0, s0, 1
 
 	li a0,0
-	call KEY2
+	jal KEY2
 
 	beqz a0,GAME_PRINT
 
@@ -74,8 +74,6 @@ GAME_PRINT:
 
   jal PRINT_PLAYER
 
-  #jal PRINT_TEXT_BOX
-
 #  la a0, P_BULBASAUR
 #  li a1, 5
 #  jal BATTLE_WILD_POKEMON
@@ -89,6 +87,7 @@ GAME_PRINT:
 
 	jal GAME_LOOP
 
+.include "SYSTEMv21.s"
 .include "print.s"
 .include "battle.s"
 .include "pokemons.s"
@@ -101,8 +100,8 @@ GAME_PRINT:
 .include "draw_player_pokemon.s"
 .include "sleep.s"
 .include "print_save.s"
-.include "SYSTEMv21.s"
 .include "dialog.s"
 .include "move.s"
 .include "print_player.s"
 .include "draw.s"
+.include "print_text_box.s"

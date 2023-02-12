@@ -9,7 +9,7 @@
 #       > a4 ---> Freame
 PRINT_STRING_SAVE:
     # Store na pilha
-    addi sp, sp, -32
+    addi sp, sp, -48
     sw ra, 0(sp)
     sw t0, 4(sp)
     sw t1, 8(sp)
@@ -18,10 +18,18 @@ PRINT_STRING_SAVE:
     sw t4, 20(sp)
     sw t5, 24(sp)
     sw t6, 28(sp)
+    sw s0, 32(sp)
+    sw s1, 36(sp)
+    sw s2, 40(sp)
+    sw s3, 44(sp)
 
     jal printString
     
     # Load na pilha
+    lw s0, 32(sp)
+    lw s1, 36(sp)
+    lw s2, 40(sp)
+    lw s3, 44(sp)
     lw t6, 28(sp)
     lw t5, 24(sp)
     lw t4, 20(sp)
@@ -30,7 +38,7 @@ PRINT_STRING_SAVE:
     lw t1, 8(sp)
     lw t0, 4(sp)
     lw ra, 0(sp)
-    addi sp, sp, 32
+    addi sp, sp, 48
     ret
 
 # PRINT_STRING_SAVE:
@@ -43,7 +51,7 @@ PRINT_STRING_SAVE:
 #       > a4 ---> Frame
 PRINT_INT_SAVE:
     # Store na pilha
-    addi sp, sp, -32
+    addi sp, sp, -48
     sw ra, 0(sp)
     sw t0, 4(sp)
     sw t1, 8(sp)
@@ -52,10 +60,18 @@ PRINT_INT_SAVE:
     sw t4, 20(sp)
     sw t5, 24(sp)
     sw t6, 28(sp)
+    sw s0, 32(sp)
+    sw s1, 36(sp)
+    sw s2, 40(sp)
+    sw s3, 44(sp)
 
     jal printIntUnsigned
 
     # Load na pilha
+    lw s0, 32(sp)
+    lw s1, 36(sp)
+    lw s2, 40(sp)
+    lw s3, 44(sp)
     lw t6, 28(sp)
     lw t5, 24(sp)
     lw t4, 20(sp)
@@ -64,5 +80,5 @@ PRINT_INT_SAVE:
     lw t1, 8(sp)
     lw t0, 4(sp)
     lw ra, 0(sp)
-    addi sp, sp, 32
+    addi sp, sp, 48
     ret
