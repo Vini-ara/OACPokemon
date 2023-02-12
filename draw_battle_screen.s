@@ -14,28 +14,28 @@ DRAW_BATTLE_SCREEN:
     la a0, dialog_box_battle
     mv a1, zero
     li a2, 180
-    mv a3, zero
+    mv a3, s0
     jal DRAW_IMAGE
 
    # Desenhar as opções
     la a0, options_battle
     li a1, 160
     li a2 180
-    mv a3, zero
+    mv a3, s0
     jal DRAW_IMAGE
 
     # Desenhar o box de vida do pokemon do jogador
     la a0, battle_pokemon_stats
     li a1, 192
     li a2, 136
-    mv a3, zero
+    mv a3, s0
     jal DRAW_IMAGE
 
     # Desenhar o box de vida do pokemon inimigo
     la a0, battle_pokemon_stats
     li a1, 60
     li a2, 4
-    mv a3, zero
+    mv a3, s0
     jal DRAW_IMAGE
 
     lw ra, 0(sp)

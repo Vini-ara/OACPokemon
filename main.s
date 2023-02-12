@@ -77,6 +77,7 @@ GAME_PRINT:
 #  la a0, P_BULBASAUR
 #  li a1, 5
 #  jal BATTLE_WILD_POKEMON
+#   jal PRINT_TEXT_BOX
 
   li t0, 0xFF200604 # troca o frame exibido para o frame qeu acabou de ser pintado 
   sb s0, 0(t0)

@@ -26,10 +26,10 @@ PRINT_STRING_SAVE:
     jal printString
     
     # Load na pilha
-    lw s0, 32(sp)
-    lw s1, 36(sp)
-    lw s2, 40(sp)
     lw s3, 44(sp)
+    lw s2, 40(sp)
+    lw s1, 36(sp)
+    lw s0, 32(sp)
     lw t6, 28(sp)
     lw t5, 24(sp)
     lw t4, 20(sp)
@@ -68,10 +68,10 @@ PRINT_INT_SAVE:
     jal printIntUnsigned
 
     # Load na pilha
-    lw s0, 32(sp)
-    lw s1, 36(sp)
-    lw s2, 40(sp)
     lw s3, 44(sp)
+    lw s2, 40(sp)
+    lw s1, 36(sp)
+    lw s0, 32(sp)
     lw t6, 28(sp)
     lw t5, 24(sp)
     lw t4, 20(sp)
