@@ -9,13 +9,12 @@
 .include "mapas/mapa.s"
 
 CURRENT_MAP: .word MAPA
-#RETURN_POS: .byte 23, 21
 
 LAB_OBJ: .word LAB
          .byte 10, 9
 
 PKCTR_OBJ: .word PKCTR
-           .byte 8, 10 
+           .byte 9, 10 
 
 MAPA_OBJ: .word MAPA 
           .byte 23, 21
@@ -62,6 +61,9 @@ GAME_LOOP:
 
 	beqz a0,GAME_PRINT
 
+  li t0, 'z'
+  beq a0, t0, INTERACTION
+
 	mv a3,a0 #a3 = tecla
 	mv a0,s1 #linha
 	mv a1,s2 #coluna
@@ -74,11 +76,21 @@ GAME_PRINT:
 
   jal PRINT_PLAYER
 
-#   jal PRINT_TEXT_BOX
+  j GAME_LOOP.END
 
- la a0, P_BULBASAUR
- li a1, 5
- jal BATTLE_WILD_POKEMON
+INTERACTION:
+  mv a0, s1
+  mv a1, s2
+  mv a2, s3
+  jal CHECK_DIALOG
+
+GAME_LOOP.END:
+
+#  jal PRINT_TEXT_BOX
+
+# la a0, P_BULBASAUR
+# li a1, 5
+# jal BATTLE_WILD_POKEMON
 
   li t0, 0xFF200604 # troca o frame exibido para o frame qeu acabou de ser pintado 
   sb s0, 0(t0)
@@ -89,7 +101,9 @@ GAME_PRINT:
 
 	jal GAME_LOOP
 
+.include "SYSTEMv21.s"
 .include "print.s"
+.include "check_interaction.s"
 .include "battle.s"
 .include "pokemons.s"
 .include "ataques.s"
@@ -101,7 +115,6 @@ GAME_PRINT:
 .include "draw_player_pokemon.s"
 .include "sleep.s"
 .include "print_save.s"
-.include "SYSTEMv21.s"
 .include "dialog.s"
 .include "move.s"
 .include "print_player.s"

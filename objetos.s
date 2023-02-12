@@ -66,7 +66,7 @@ RIVER1:  .word river1 # endereco do sprite
         .byte 0     # espelhado
         .byte 0     #interagivel
 
-RIVER2:  .word river1 # endereco do sprite
+RIVER2: .word river1 # endereco do sprite
         .byte 0     # andavel
         .byte 1     # espelhado
         .byte 0     #interagivel
@@ -728,7 +728,7 @@ IN_LAB1: .word in_lab1
 IN_LAB2: .word in_lab2
           .byte 0
           .byte 0
-          .byte 0
+          .byte 3
 
 IN_LAB3: .word in_lab3
           .byte 1
@@ -754,7 +754,7 @@ IN_PKCTR1: .word in_pkctr1
 IN_PKCTR2: .word in_pkctr2
            .byte 0
            .byte 0
-           .byte 0
+           .byte 3
 
 IN_PKCTR3: .word in_pkctr3
            .byte 1
@@ -780,7 +780,7 @@ IN_MALL1: .word in_mall1
 IN_MALL2: .word in_mall2
           .byte 0
           .byte 0
-          .byte 0
+          .byte 3
 
 IN_MALL3: .word in_mall3
           .byte 1
@@ -807,7 +807,7 @@ IN_GYM1: .word in_gym1
 IN_GYM2: .word in_gym2
           .byte 0
           .byte 0
-          .byte 0
+          .byte 3
 
 IN_GYM3: .word in_gym3
           .byte 1
