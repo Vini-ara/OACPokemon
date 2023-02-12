@@ -1,4 +1,3 @@
-.include "MACROSv21.s"
 .eqv T_OBJ 4 #tamanho de cada objeto
 .data
 .include "data_files/dialog_box_battle.data"
@@ -45,6 +44,7 @@ P_INIMIGO: .word 0, 0, 0
 P_PLAYER: .word 0, 0, 0
 
 .text
+.include "MACROSv21.s"
 #iniciando mapa
 SETUP:	
   li s0, 0 # frame
@@ -86,11 +86,9 @@ INTERACTION:
 
 GAME_LOOP.END:
 
-#  jal PRINT_TEXT_BOX
-
-# la a0, P_BULBASAUR
-# li a1, 5
-# jal BATTLE_WILD_POKEMON
+#  la a0, P_BULBASAUR
+#  li a1, 5
+#  jal BATTLE_WILD_POKEMON
 
   li t0, 0xFF200604 # troca o frame exibido para o frame qeu acabou de ser pintado 
   sb s0, 0(t0)
@@ -119,3 +117,4 @@ GAME_LOOP.END:
 .include "move.s"
 .include "print_player.s"
 .include "draw.s"
+.include "print_text_box.s"

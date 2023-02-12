@@ -22,7 +22,7 @@ PRINT_STRING_SAVE:
     sw s1, 36(sp)
     sw s2, 40(sp)
     sw s3, 44(sp)
-    
+
     jal printString
     
     # Load na pilha
