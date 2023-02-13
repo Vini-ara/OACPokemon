@@ -30,11 +30,14 @@ MOVE:
 VOLTA_MOVE:	
   mv a0, t0
   mv a1, t1
-	jal ra, TILE_ANDAVEL
+	jal ra, CHECK_TILE
 
+  # checa se nao pode se mover na tile
 	beqz a0,FIM_MOVE
 
+  # checa se mudou de mapa
   bne a1, zero, FIM_MOVE
+
 	mv s1,t0
 	mv s2,t1
 
@@ -101,7 +104,7 @@ MUDA_DIRECAO_DIR:
 	jal zero, VOLTA_MOVE
 
 
-# TILE_ANDAVEL
+# CHECK_TILE
 #   - checa se o tile eh andavel
 #   Parametros
 #     > a0 = linha
@@ -109,7 +112,7 @@ MUDA_DIRECAO_DIR:
 #   Retorno: 
 #     > a0 = andavel ? 1 : 0
 #     > a1 = mudou o mapa ? 1 : 0
-TILE_ANDAVEL:
+CHECK_TILE:
 	addi sp,sp,-16
 	sw ra,12(sp)
   sw t2,8(sp)
@@ -136,26 +139,60 @@ TILE_ANDAVEL:
 
   lb a0, 4(t1) # a0 recebe se o tile e andavel ou nao
   lb t0, 6(t1) # t0 recebe se o tile tem alguma acao
+
+  # muda de mapa
   li t2, 1
+  beq t0, t2, CHECK_TILE.CHANGE
 
-  beq t0, t2, CHANGE
+  # se for uma grama alta, verifica se vai batalhar ou nao
+  li t2, 2
+  beq t0, t2, CHECK_TILE.SET_BATTLE
+
   li a1, 0
+  j CHECK_TILE.FIM
 
-  jal zero, TILE_ANDAVEL.FIM
-
-  CHANGE:
+  # muda de mapa para o mapa da tile
+  CHECK_TILE.CHANGE:
     lw a0, 7(t1)
-    call CHANGE_MAP
+    jal CHANGE_MAP
+
+    li a0, 1
     li a1, 1
 
-TILE_ANDAVEL.FIM:
+    j CHECK_TILE.FIM
+
+  # gera um numero aleatorio e ve se o pokemon vai batalhar ou nao
+  CHECK_TILE.SET_BATTLE:
+    la t0, WILL_BATTLE
+
+    jal RANDOM_SAVE
+
+    li t1, 0
+    and t1, t1, a0
+
+    li a0, 1
+    li a1, 0
+    beqz t1, CHECK_TILE.CONFIRM_BATTLE
+
+    jal CHECK_TILE.FIM
+
+    # salva 1 em WILL_BATTLE, o que vai gerar uma batalha no fim do loop
+    CHECK_TILE.CONFIRM_BATTLE:
+      li t1, 1 
+      sb t1, 0(t0)
+
+CHECK_TILE.FIM:
 	lw t0,0(sp)
 	lw t1,4(sp)
   lw t2,8(sp)
 	lw ra,12(sp)
 	addi sp,sp,16
-
 	ret
+
+# CHANGE_MAP
+#   -- muda o CURRENT_MAP para o novo mapa passado, mundando tambem as coordenadas do player para o
+#   comeco desse mapa
+#   > a0 = objeto do novo mapa
 
 CHANGE_MAP:
 	addi sp, sp, -16

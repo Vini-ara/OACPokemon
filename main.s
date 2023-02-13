@@ -24,6 +24,8 @@ MALL_OBJ: .word LOJA
 GYM_OBJ: .word GYM
          .byte 10, 8
 
+WILL_BATTLE: .byte 0
+
 # STRINGS
 barra:  .string "/"
 seta:   .string ">"
@@ -45,6 +47,7 @@ P_PLAYER: .word 0, 0, 0
 
 .text
 .include "MACROSv21.s"
+
 #iniciando mapa
 SETUP:	
   li s0, 0 # frame
@@ -85,10 +88,12 @@ INTERACTION:
   jal CHECK_DIALOG
 
 GAME_LOOP.END:
+  jal CHECK_BATTLE
 
 #  la a0, P_BULBASAUR
 #  li a1, 5
 #  jal BATTLE_WILD_POKEMON
+  
 
   li t0, 0xFF200604 # troca o frame exibido para o frame qeu acabou de ser pintado 
   sb s0, 0(t0)
@@ -97,7 +102,7 @@ GAME_LOOP.END:
   li a7, 32
   ecall       # espera 70ms entre cada frame
 
-	jal GAME_LOOP
+	j GAME_LOOP
 
 .include "SYSTEMv21.s"
 .include "print.s"
@@ -118,3 +123,5 @@ GAME_LOOP.END:
 .include "print_player.s"
 .include "draw.s"
 .include "print_text_box.s"
+.include "random_save.s"
+.include "check_battle.s"

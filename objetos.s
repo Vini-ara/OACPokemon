@@ -798,7 +798,6 @@ IN_MALL5: .word in_mall5
           .byte 0
           .byte 0
 
-
 IN_GYM1: .word in_gym1
           .byte 1
           .byte 0
