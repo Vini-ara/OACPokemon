@@ -22,6 +22,8 @@ BATTLE_WILD_POKEMON:
     sw t5, 24(sp)
     sw t6, 28(sp)
 
+    # xori no s0
+    xori s0, s0, 1
     
     # Criar pokémon selvagem
     la a2, P_INIMIGO
@@ -59,6 +61,8 @@ BATTLE_WILD_POKEMON:
         jal DRAW_IMAGE
 
         # Verificar se o jogador um item
+        li t5, 1
+        beq t2, t5, Player_Use_Item
 
         # Se não usou item, o pokémon com maior velocidade começa atacando
         # Adquirir a velocidade do pokémon do jogador
@@ -179,6 +183,79 @@ BATTLE_WILD_POKEMON:
             li a2, 33
             li a3, 0x0000FF00
             jal DRAW_POKEMON_LIFE
+
+            # Voltar para o início do loop
+            j Battle_Wild_Pokemon_Loop
+
+        Player_Use_Item:
+            # Printar a string use_potion_dial
+            la a0, use_potion_dial
+            li a1, 25
+            li a2, 195
+            li a3, 0x000051FF
+            mv a4, zero
+            jal PRINT_STRING_SAVE
+            
+            # Usar a potion
+            mv a0, t0   
+            mv a1, t3
+            jal USE_POTION
+            
+            # Esperar o jogador apertar a tecla z
+            jal CONFIRM_DIALOG 
+            
+            # Atualizar a vida do pokémon do jogador
+            ## Limpar a vida antiga
+            mv a0, t0
+            li a1, 265
+            li a2, 165
+            li a3, 0x0000FFFF
+            jal DRAW_POKEMON_LIFE_MAX
+
+            ## Printar o novo valor
+            mv a0, t0
+            li a1, 265
+            li a2, 165
+            li a3, 0x0000FF00
+            jal DRAW_POKEMON_LIFE
+
+            # Limpar a caixa de diálogo
+            la a0, use_potion_dial
+            li a1, 25
+            li a2, 195
+            li a3, 0x00005151
+            mv a4, zero
+            jal PRINT_STRING_SAVE
+
+            # Esperar o jogador apertar a tecla z
+            jal CONFIRM_DIALOG 
+
+
+            # Executar o ataque do pokémon selvagem
+            mv a0, t4
+            mv a1, t1
+            mv a2, t0
+            jal RUN_ATTACK
+
+            # Atualizar a vida do pokémon do jogador
+            ## Limpar a vida antiga
+            mv a0, t0
+            li a1, 265
+            li a2, 165
+            li a3, 0x0000FFFF
+            jal DRAW_POKEMON_LIFE_MAX
+
+            ## Printar o novo valor
+            mv a0, t0
+            li a1, 265
+            li a2, 165
+            li a3, 0x0000FF00
+            jal DRAW_POKEMON_LIFE
+
+            # Verificar se o pokémon do jogador morreu
+            mv a0, t0
+            jal CHECK_LIFE
+            bnez a0, Wild_Pokemon_Won
 
             # Voltar para o início do loop
             j Battle_Wild_Pokemon_Loop
@@ -354,6 +431,10 @@ BATTLE_MENU:
         Change_Menu: 
             # Verificar se o player escolheu o menu de ataques
             beqz t3, Go_Pokemon_Attacks_Menu
+            # Verificar se o player escolheu o menu de items
+            li t0, 1
+            beq t3, t0, Go_Items_Menu
+
             j Battle_Menu_Loop
 
         Go_Pokemon_Attacks_Menu:
@@ -382,7 +463,31 @@ BATTLE_MENU:
 
             j Battle_Menu_Loop
 
+        Go_Items_Menu:
+            jal ITEMS_MENU
+            # Verificar se o player escolheu um item
+            bnez a0, End_Battle_Menu
+            # Desenhar a caixa de diálogo
+            la a0, dialog_box_battle
+            mv a1, zero
+            li a2, 180
+            mv a3, s0
+            jal DRAW_IMAGE
+            
+            # Desenhar as opções
+            la a0, options_battle
+            li a1, 160
+            li a2 180
+            mv a3, s0
+            jal DRAW_IMAGE
 
+            # Desenhar a seta no lugar
+            mv a0, t1
+            mv a1, t2
+            li a2, 0x0000FF0F
+            jal DRAW_SETA
+
+            j Battle_Menu_Loop
 
     End_Battle_Menu:
     mv a0, t3               # a0 = t3
@@ -571,7 +676,6 @@ POKEMON_ATTACKS_MENU:
 #       2) soma a xp adquirida na batalha;
 #       3) verifica o level up do pokémon;
 #       4) apaga o pokémon do endereço P_INIMIGO
-
 WILD_BATTLE_VICTORY:
     # Store na pilha
     addi sp, sp, -8
@@ -709,6 +813,87 @@ WILD_BATTLE_VICTORY:
     
     # Retornar
     ret
+#
 
+# POKEMON_ATTACKS_MENU
+#   - Permite o jogador escoher um dos ataques do pokémon para atacar
+#   - Retorno:
+#       > a0 ---> 0 se o jogador não escolheu um item, 1 se o jogador escolheu um item
+#       > a1 ---> o item escolhido pelo jogador (0 caso não tenha escolhido)
+ITEMS_MENU:
+    addi sp, sp -8
+    sw ra, 0(sp)
+    sw t0, 4(sp)
+
+    # Desenhar background
+    la a0, pokemon_attacks_menu_bg
+    mv a1, zero
+    li a2, 180
+    mv a3, s0
+    jal DRAW_IMAGE
+    
+    # Printa a string potion
+    la a0, n_potion
+    li a1, 25
+    li a2, 195
+    li a3, 0x0000FF00
+    mv a4, s0
+    jal PRINT_STRING_SAVE
+
+    # Printa a letra x
+    la a0, x
+    li a1, 80
+    li a2, 195
+    li a3, 0x0000FF00
+    mv a4, s0
+    jal PRINT_STRING_SAVE
+
+    # Printa a quantidade de poção que o jogador possui
+    la a0, player_bag
+    lw a0, 4(a0)
+    li a1, 88
+    li a2, 195
+    li a3, 0x0000FF00
+    mv a4, s0
+    jal PRINT_INT_SAVE
+
+    # Printa a seta
+    li a0, 17
+    li a1, 195
+    li a2, 0x0000FF0F
+    jal DRAW_SETA
+
+    Items_Menu_Loop:
+        # Pegar input
+        jal KEY2
+
+        # Administrar input
+        li t0, 'z'
+        beq a0, t0, Use_Item 
+        
+        li t0, 'x'
+        beq a0, t0, Back_Battle_Menu3
+
+        j Items_Menu_Loop
+
+        Use_Item:
+            la t0, player_bag
+            lw t0, 4(t0)
+            beqz t0, Items_Menu_Loop
+            li a0, 1
+            la a1, I_POTION
+            j End_Items_Menu
+
+        Back_Battle_Menu3:
+            mv a0, zero
+            mv a1, zero
+
+
+    End_Items_Menu:
+    # Load na pilha
+    lw t0, 4(sp)
+    lw ra, 0(sp)
+    addi sp, sp, 8
+    ret
 
 

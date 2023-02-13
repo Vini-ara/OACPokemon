@@ -7,6 +7,9 @@
 .include "objetos.s"
 .include "mapas/mapa.s"
 
+# BAG (Armazena os itens do jogador)
+player_bag: .word I_POTION, 5
+
 CURRENT_MAP: .word MAPA
 #RETURN_POS: .byte 23, 21
 
@@ -29,14 +32,15 @@ GYM_OBJ: .word GYM
 barra:  .string "/"
 seta:   .string ">"
 traco:  .string "-"
-
-# DIÁLOGOS DA BATALHA
+x:		.string "x"
+# DI�?LOGOS DA BATALHA
 dead_battle:        .string "O pokemon inimigo morreu!"
 xp_battle1:         .string "O seu pokemon adquiriu"
 xp_battle2:         .string "pontos de xp."
 lvl_up_battle:      .string "O seu pokemon evoluiu para o level"
 attack_battle:      .string "atacou com"
-atk_down_battle:         .string "teve o ataque diminuido!"
+atk_down_battle:    .string "teve o ataque diminuido!"
+use_potion_dial:	.string "O jogador utilizou uma potion."
 
 # POKEMON INIMIGO
 P_INIMIGO: .word 0, 0, 0
@@ -72,12 +76,17 @@ GAME_PRINT:
 	mv a1,s2
 	jal ra, CARREGA_MAPA
 
-  jal PRINT_PLAYER
+  	jal PRINT_PLAYER
 
-#  la a0, P_BULBASAUR
-#  li a1, 5
-#  jal BATTLE_WILD_POKEMON
-#   jal PRINT_TEXT_BOX
+	la a0, P_PLAYER
+	li a1, 0x10
+	li a2, 10
+	jal SET_POKEMON_STAT
+
+ 	la a0, P_BULBASAUR
+ 	li a1, 5
+	jal BATTLE_WILD_POKEMON
+	jal PRINT_TEXT_BOX
 
   li t0, 0xFF200604 # troca o frame exibido para o frame qeu acabou de ser pintado 
   sb s0, 0(t0)
@@ -106,3 +115,4 @@ GAME_PRINT:
 .include "print_player.s"
 .include "draw.s"
 .include "print_text_box.s"
+.include "items.s"
