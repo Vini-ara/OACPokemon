@@ -41,7 +41,7 @@ lista_nomes: .word n_squirtle, n_bulbasaur, n_geodude, n_vulpix, n_pidgey
 #   - A quantidade de xp necessária para o próximo lvl up dobra 
 
 # LEGENDA DE TIPOS
-# 0 --> �?GUA
+# 0 --> ÁGUA
 # 1 --> GRAMA
 # 2 --> FOGO
 # 3 --> NORMAL
@@ -81,7 +81,7 @@ P_BULBASAUR: .word 0x11000106, 0x06060C0C, 0x31514100
 #   > Xp = 0
 #   > Tipo1 = 3 (voador)
 #   > Index = 4                          
-P_GEODUDE: .word 0x34000107, 0x05060B0B, 0x31516100
+P_GEODUDE: .word 0x24000107, 0x05060B0B, 0x31516100
 
 # $ VULPIX
 #   > Vida = 11
@@ -420,7 +420,6 @@ LEVEL_UP:
     sw t1, 8(sp)
     sw t2, 12(sp)
     sw t3, 16(sp)
-
 
     # Inicializar registradores
     la t0, P_PLAYER

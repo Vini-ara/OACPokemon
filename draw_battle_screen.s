@@ -57,6 +57,7 @@ DRAW_SETA:
     mv a2, a1
     mv a1, a0
     la a0, seta
+    mv a4, s0
     jal PRINT_STRING_SAVE
 
     lw ra, 0(sp)

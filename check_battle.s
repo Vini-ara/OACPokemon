@@ -51,7 +51,6 @@ CHECK_BATTLE:
     j GO_BATTLE
 
   GO_BATTLE:
-    xori s0, s0, 1
     li a1, 5
     jal BATTLE_WILD_POKEMON
 
