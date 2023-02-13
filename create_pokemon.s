@@ -36,11 +36,11 @@ CREATE_POKEMON:
     add t3, t3, t5
 
     # Xp
-    li t6, 0x00FF0000
-    and t5, t4, t6
-    slli t6, t1, 16
-    add t5, t5, t6
-    add t3, t3, t5
+    # li t6, 0x00FF0000
+    # and t5, t4, t6
+    # slli t6, t1, 16
+    # add t5, t5, t6
+    # add t3, t3, t5
 
     # Level
     slli t5, t1, 8

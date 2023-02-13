@@ -29,6 +29,11 @@ BATTLE_WILD_POKEMON:
     la a2, P_INIMIGO
     jal CREATE_POKEMON
 
+    # la a0, P_INIMIGO
+	# li a1, 0x16
+	# li a2, 20
+	# jal SET_POKEMON_STAT
+
     # Desenhar tela de batalha
     jal DRAW_BATTLE_SCREEN
     
@@ -144,45 +149,57 @@ BATTLE_WILD_POKEMON:
             j Battle_Wild_Pokemon_Loop
 
         Wild_Pokemon_First:
-            # Executar o ataque do pokémon selvagem
+             # Executar o ataque do pokémon selvagem
             mv a0, t4
             mv a1, t1
             mv a2, t0
             jal RUN_ATTACK
 
-            # Limpar a vida do pokémon do player da tela
+            # Atualizar a vida do pokémon do jogador
+            ## Limpar a vida antiga
             mv a0, t0
             li a1, 265
             li a2, 165
             li a3, 0x0000FFFF
-            jal DRAW_POKEMON_LIFE
+            jal DRAW_POKEMON_LIFE_MAX
 
-            # Printar a nova vida do pokémon do player na tela
+            ## Printar o novo valor
             mv a0, t0
             li a1, 265
             li a2, 165
             li a3, 0x0000FF00
             jal DRAW_POKEMON_LIFE
 
+            # Verificar se o pokémon do jogador morreu
+            mv a0, t0
+            jal CHECK_LIFE
+            bnez a0, Wild_Pokemon_Won
+
             # Executar o ataque do pokémon do jogador
-            mv a0, t4
+            mv a0, t3
             mv a1, t0
             mv a2, t1
             jal RUN_ATTACK
 
-            # Limpar a vida do pokémon selvagem da tela
+            # Atualizar vida do pokémon selvagem
+            ## Limpar vida antiga
             mv a0, t1
             li a1, 134
             li a2, 33
             li a3, 0x0000FFFF
-            jal DRAW_POKEMON_LIFE
+            jal DRAW_POKEMON_LIFE_MAX
 
-            # Printar a nova vida do pokémon selvagem na tela
+            ## Printar a novo valor
             mv a0, t1
             li a1, 134
             li a2, 33
             li a3, 0x0000FF00
             jal DRAW_POKEMON_LIFE
+
+            # Verificar se o pokémon selvagem morreu
+            mv a0, t1
+            jal CHECK_LIFE
+            bnez a0, Player_Won
 
             # Voltar para o início do loop
             j Battle_Wild_Pokemon_Loop
@@ -230,7 +247,6 @@ BATTLE_WILD_POKEMON:
             # Esperar o jogador apertar a tecla z
             jal CONFIRM_DIALOG 
 
-
             # Executar o ataque do pokémon selvagem
             mv a0, t4
             mv a1, t1
@@ -265,6 +281,8 @@ BATTLE_WILD_POKEMON:
         j End_Battle_Wild_Pokemon
 
     Wild_Pokemon_Won:
+        jal BATTLE_DEFEAT
+        j End_Battle_Wild_Pokemon
 
     End_Battle_Wild_Pokemon:
 
@@ -895,5 +913,69 @@ ITEMS_MENU:
     lw ra, 0(sp)
     addi sp, sp, 8
     ret
+#
 
+# BATTLE_DEFEAT
+BATTLE_DEFEAT:
+    # Store na pilha
+    addi sp, sp, -4
+    sw ra, 0(sp)
+
+    # Desenhar a caixa de diálogo
+    la a0, dialog_box_battle
+    mv a1, zero
+    li a2, 180
+    mv a3, s0
+    jal DRAW_IMAGE 
+
+    # Printar nome do pokémon do jogador
+    la a0, P_PLAYER
+    jal GET_POKEMON_NAME
+
+    li a1, 16
+    li a2, 200
+    li a3, 0x000051FF
+    jal PRINT_STRING_SAVE
+
+    # Printar a string dead
+    la a0, dead
+    li a1, 90
+    li a2, 200
+    li a3, 0x000051FF
+    jal PRINT_STRING_SAVE
+
+    # Esperar o jogador apertar a tecla z
+    jal CONFIRM_DIALOG
+ 
+    # Colorir a tela de preto
+    li a0, 0
+    mv a1, s0
+    jal COLOR_SCREEN
+
+    # Esperar o jogador apertar a tecla z
+    jal CONFIRM_DIALOG
+
+    # Printar string defeat
+    la a0, defeat
+    li a1, 0
+    li a2, 100
+    li a3, 0x000000F0
+    jal PRINT_STRING_SAVE
+
+    # Printar string revive_poke
+    la a0, revive_poke
+    li a1, 0
+    li a2, 120
+    li a3, 0x0000000F
+    jal PRINT_STRING_SAVE
+
+    # Esperar o jogador apertar a tecla z
+    jal CONFIRM_DIALOG
+
+    # Load na pilha
+    lw ra, 0(sp)
+    addi sp, sp, 4
+
+    # Retornar
+    ret
 

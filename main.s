@@ -41,7 +41,9 @@ lvl_up_battle:      .string "O seu pokemon evoluiu para o level"
 attack_battle:      .string "atacou com"
 atk_down_battle:    .string "teve o ataque diminuido!"
 use_potion_dial:	.string "O jogador utilizou uma potion."
-
+defeat:				.string "Todos os seus pokemons foram derrotados em batalha!"
+revive_poke:		.string "Visite a curandeira para reviver seus pokemons."
+dead:				.string "morreu!"
 # POKEMON INIMIGO
 P_INIMIGO: .word 0, 0, 0
 
@@ -52,12 +54,12 @@ P_PLAYER: .word 0, 0, 0
 .include "MACROSv21.s"
 #iniciando mapa
 SETUP:	
-  li s0, 0 # frame
+  	li s0, 0 # frame
 	li s1,23 #linha
 	li s2,21 #coluna
 	li s3, 1 #direçao (0 = cima, 1 = baixo, 2 = direita, 3 = esquerda)
-  jal INIT_POKEMON_INICIAL
-	
+  	jal INIT_POKEMON_INICIAL
+
 GAME_LOOP:
 	xori s0, s0, 1
 
@@ -78,22 +80,17 @@ GAME_PRINT:
 
   	jal PRINT_PLAYER
 
-	la a0, P_PLAYER
-	li a1, 0x10
-	li a2, 10
-	jal SET_POKEMON_STAT
-
  	la a0, P_BULBASAUR
  	li a1, 5
 	jal BATTLE_WILD_POKEMON
 	jal PRINT_TEXT_BOX
 
-  li t0, 0xFF200604 # troca o frame exibido para o frame qeu acabou de ser pintado 
-  sb s0, 0(t0)
+	li t0, 0xFF200604 # troca o frame exibido para o frame qeu acabou de ser pintado 
+	sb s0, 0(t0)
 
-  li a0, 70
-  li a7, 32
-  ecall       # espera 70ms entre cada frame
+	li a0, 70
+	li a7, 32
+	ecall       # espera 70ms entre cada frame
 
 	jal GAME_LOOP
 
