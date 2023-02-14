@@ -63,6 +63,7 @@ BATTLE_WILD_POKEMON:
         mv a1, zero
         li a2, 180
         mv a3, s0
+        mv a4, zero
         jal DRAW_IMAGE
 
         # Verificar se o jogador um item
@@ -97,6 +98,7 @@ BATTLE_WILD_POKEMON:
             mv a1, zero
             li a2, 180
             mv a3, s0
+            mv a4, zero
             jal DRAW_IMAGE
 
             # Atualizar vida do pokémon selvagem
@@ -210,7 +212,7 @@ BATTLE_WILD_POKEMON:
             li a1, 25
             li a2, 195
             li a3, 0x000051FF
-            mv a4, zero
+            mv a4, s0
             jal PRINT_STRING_SAVE
             
             # Usar a potion
@@ -241,7 +243,7 @@ BATTLE_WILD_POKEMON:
             li a1, 25
             li a2, 195
             li a3, 0x00005151
-            mv a4, zero
+            mv a4, s0
             jal PRINT_STRING_SAVE
 
             # Esperar o jogador apertar a tecla z
@@ -320,6 +322,7 @@ BATTLE_MENU:
     mv a1, zero
     li a2, 180
     mv a3, s0
+    mv a4, zero
     jal DRAW_IMAGE
     
     # Desenhar as opções
@@ -327,6 +330,7 @@ BATTLE_MENU:
     li a1, 160
     li a2 180
     mv a3, s0
+    mv a4, zero
     jal DRAW_IMAGE
     
     # Inicializar registradores
@@ -464,6 +468,7 @@ BATTLE_MENU:
             mv a1, zero
             li a2, 180
             mv a3, s0
+            mv a4, zero
             jal DRAW_IMAGE
             
             # Desenhar as opções
@@ -471,6 +476,7 @@ BATTLE_MENU:
             li a1, 160
             li a2 180
             mv a3, s0
+            mv a4, zero
             jal DRAW_IMAGE
 
             # Desenhar a seta no lugar
@@ -490,6 +496,7 @@ BATTLE_MENU:
             mv a1, zero
             li a2, 180
             mv a3, s0
+            mv a4, zero
             jal DRAW_IMAGE
             
             # Desenhar as opções
@@ -497,6 +504,7 @@ BATTLE_MENU:
             li a1, 160
             li a2 180
             mv a3, s0
+            mv a4, zero
             jal DRAW_IMAGE
 
             # Desenhar a seta no lugar
@@ -539,6 +547,7 @@ POKEMON_ATTACKS_MENU:
     mv a1, zero
     li a2, 180
     mv a3, s0
+    mv a4, zero
     jal DRAW_IMAGE
     
     # Printa o nome dos ataques
@@ -705,6 +714,7 @@ WILD_BATTLE_VICTORY:
     mv a1, zero
     li a2, 180
     mv a3, s0
+    mv a4, zero
     jal DRAW_IMAGE
 
     # Printar diálogos
@@ -713,6 +723,7 @@ WILD_BATTLE_VICTORY:
     li a1, 16
     li a2, 200
     li a3, 0x000051FF
+    mv a4, s0
     jal PRINT_STRING_SAVE
 
     ## Esperar o jogador apertar a tecla z
@@ -723,6 +734,7 @@ WILD_BATTLE_VICTORY:
     li a1, 16
     li a2, 200
     li a3, 0x00005151
+    mv a4, s0
     jal PRINT_STRING_SAVE
 
     ## Printar a string xp_pokémon1
@@ -730,6 +742,7 @@ WILD_BATTLE_VICTORY:
     li a1, 16
     li a2, 200
     li a3, 0x000051FF
+    mv a4, s0
     jal PRINT_STRING_SAVE
 
     ## Printar a quantidade de xp adquirida
@@ -747,6 +760,7 @@ WILD_BATTLE_VICTORY:
     li a1, 16
     li a2, 220
     li a3, 0x000051FF
+    mv a4, s0
     jal PRINT_STRING_SAVE
 
     # Somar xp adquirida
@@ -780,6 +794,7 @@ WILD_BATTLE_VICTORY:
     li a1, 10
     li a2, 200
     li a3, 0x00005151
+    mv a4, s0
     jal PRINT_STRING_SAVE
     
     li a0, 10
@@ -793,6 +808,7 @@ WILD_BATTLE_VICTORY:
     li a1, 16
     li a2, 220
     li a3, 0x00005151
+    mv a4, s0
     jal PRINT_STRING_SAVE
 
     ## Printar a string lvl_up_battle
@@ -800,6 +816,7 @@ WILD_BATTLE_VICTORY:
     li a1, 16
     li a2, 200
     li a3, 0x000051FF
+    mv a4, s0
     jal PRINT_STRING_SAVE
 
     la a0, P_PLAYER
@@ -848,6 +865,7 @@ ITEMS_MENU:
     mv a1, zero
     li a2, 180
     mv a3, s0
+    mv a4, zero
     jal DRAW_IMAGE
     
     # Printa a string potion
@@ -926,6 +944,7 @@ BATTLE_DEFEAT:
     mv a1, zero
     li a2, 180
     mv a3, s0
+    mv a4, zero
     jal DRAW_IMAGE 
 
     # Printar nome do pokémon do jogador
@@ -935,6 +954,7 @@ BATTLE_DEFEAT:
     li a1, 16
     li a2, 200
     li a3, 0x000051FF
+    mv a4, s0
     jal PRINT_STRING_SAVE
 
     # Printar a string dead
@@ -942,6 +962,7 @@ BATTLE_DEFEAT:
     li a1, 90
     li a2, 200
     li a3, 0x000051FF
+    mv a4, s0
     jal PRINT_STRING_SAVE
 
     # Esperar o jogador apertar a tecla z
@@ -960,6 +981,7 @@ BATTLE_DEFEAT:
     li a1, 0
     li a2, 100
     li a3, 0x000000F0
+    mv a4, s0
     jal PRINT_STRING_SAVE
 
     # Printar string revive_poke
@@ -967,6 +989,7 @@ BATTLE_DEFEAT:
     li a1, 0
     li a2, 120
     li a3, 0x0000000F
+    mv a4, s0
     jal PRINT_STRING_SAVE
 
     # Esperar o jogador apertar a tecla z

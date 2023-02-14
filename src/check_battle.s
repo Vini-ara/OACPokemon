@@ -54,10 +54,6 @@ CHECK_BATTLE:
     li a1, 5
     jal BATTLE_WILD_POKEMON
 
-    la t0, WILL_BATTLE 
-    li t1, 1
-    sb t1, 0(t0)
-
 CHECK_BATTLE.FIM:
   lw ra, 0(sp)
   lw t0, 4(sp)

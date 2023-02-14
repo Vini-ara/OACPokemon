@@ -1,11 +1,11 @@
 .eqv T_OBJ 4 #tamanho de cada objeto
 .data
-.include "data_files/dialog_box_battle.data"
-.include "data_files/battle_pokemon_stats.data"
-.include "data_files/options_battle.data"
-.include "data_files/pokemon_attacks_menu_bg.data"
+.include "../data_files/dialog_box_battle.data"
+.include "../data_files/battle_pokemon_stats.data"
+.include "../data_files/options_battle.data"
+.include "../data_files/pokemon_attacks_menu_bg.data"
 .include "objetos.s"
-.include "mapas/mapa.s"
+.include "../mapas/mapa.s"
 
 # BAG (Armazena os itens do jogador)
 player_bag: .word I_POTION, 5
@@ -52,7 +52,7 @@ P_INIMIGO: .word 0, 0, 0
 P_PLAYER: .word 0, 0, 0
 
 .text
-.include "MACROSv21.s"
+.include "./libs/MACROSv21.s"
 
 #iniciando mapa
 SETUP:	
@@ -96,6 +96,10 @@ INTERACTION:
 GAME_LOOP.END:
   jal CHECK_BATTLE
 
+  la t0, WILL_BATTLE
+  li t1, 0
+  sb t1, 0(t0)
+
 	li t0, 0xFF200604 # troca o frame exibido para o frame qeu acabou de ser pintado 
 	sb s0, 0(t0)
 
@@ -105,18 +109,20 @@ GAME_LOOP.END:
 
 	j GAME_LOOP
 
-.include "SYSTEMv21.s"
+.include "./libs/SYSTEMv21.s"
 .include "print.s"
 .include "check_interaction.s"
-.include "battle.s"
-.include "pokemons.s"
-.include "ataques.s"
-.include "draw_battle_screen.s"
+
+.include "battle/battle.s"
+.include "battle/pokemons.s"
+.include "battle/ataques.s"
+.include "battle/draw_battle_screen.s"
+.include "battle/create_pokemon.s"
+.include "battle/draw_pokemon.s"
+.include "battle/draw_enemy_pokemon.s"
+.include "battle/draw_player_pokemon.s"
+
 .include "init_pokemon_inicial.s"
-.include "create_pokemon.s"
-.include "draw_pokemon.s"
-.include "draw_enemy_pokemon.s"
-.include "draw_player_pokemon.s"
 .include "sleep.s"
 .include "print_save.s"
 .include "dialog.s"

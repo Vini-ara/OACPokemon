@@ -7,7 +7,7 @@ DRAW_BATTLE_SCREEN:
     
     # Desenhar o background
     mv a0, zero
-    mv a1, zero
+    mv a1, s0
     jal COLOR_SCREEN
 
     # Desenhar a caixa de diálogo
@@ -15,6 +15,7 @@ DRAW_BATTLE_SCREEN:
     mv a1, zero
     li a2, 180
     mv a3, s0
+    mv a4, zero
     jal DRAW_IMAGE
 
    # Desenhar as opções
@@ -22,6 +23,7 @@ DRAW_BATTLE_SCREEN:
     li a1, 160
     li a2 180
     mv a3, s0
+    mv a4, zero
     jal DRAW_IMAGE
 
     # Desenhar o box de vida do pokemon do jogador
@@ -29,6 +31,7 @@ DRAW_BATTLE_SCREEN:
     li a1, 192
     li a2, 136
     mv a3, s0
+    mv a4, zero
     jal DRAW_IMAGE
 
     # Desenhar o box de vida do pokemon inimigo
@@ -36,6 +39,7 @@ DRAW_BATTLE_SCREEN:
     li a1, 60
     li a2, 4
     mv a3, s0
+    mv a4, zero
     jal DRAW_IMAGE
 
     lw ra, 0(sp)
@@ -109,6 +113,7 @@ PRINT_POKEMON_ATTACKS_NAMES:
             mv a1, t5
             mv a2, t6
             li a3, 0x0000FF00
+            mv a4, s0
             jal PRINT_STRING_SAVE
             addi t2, t2, 8
             addi t5, t5, 100

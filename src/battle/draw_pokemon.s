@@ -64,6 +64,7 @@ DRAW_POKEMON_NAME:
     # Printar o nome do pokémon
     mv a1, t1
     mv a2, t2
+    mv a4, s0
     jal PRINT_STRING_SAVE
 
     # Load na pilha
@@ -103,7 +104,7 @@ DRAW_POKEMON_LVL:
     # Printar lvl
     mv a1, t1
     mv a2, t2
-    mv a4, zero
+    mv a4, s0
     jal PRINT_INT_SAVE
 
     lw t2, 12(sp)
@@ -144,7 +145,7 @@ DRAW_POKEMON_LIFE:
     # Printar vida
     mv a1, t1
     mv a2, t2
-    mv a4, zero
+    mv a4, s0
     jal PRINT_INT_SAVE
 
     lw t6, 28(sp)
@@ -174,6 +175,7 @@ DRAW_BARRA:
     la a0, barra
     addi a1, a1, 15
     li a3, 0x0000FF00
+    mv a4, s0
     jal PRINT_STRING_SAVE
 
     lw ra, 0(sp)
@@ -211,7 +213,7 @@ DRAW_POKEMON_LIFE_MAX:
     # Printar a vida_máx do pokémon
     mv a1, t1
     mv a2, t2
-    mv a4, zero
+    mv a4, s0
     jal PRINT_INT_SAVE
 
     lw t6, 28(sp)

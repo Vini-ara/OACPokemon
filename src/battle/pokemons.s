@@ -1,10 +1,10 @@
 .data
 # SPRITES DOS POKÉMONS
-.include "data_files/s_squirtle.data"
-.include "data_files/s_bulbasaur.data"
-.include "data_files/s_vulpix.data"
-.include "data_files/s_pidgey.data"
-.include "data_files/s_geodude.data"
+.include "../../data_files/s_squirtle.data"
+.include "../../data_files/s_bulbasaur.data"
+.include "../../data_files/s_vulpix.data"
+.include "../../data_files/s_pidgey.data"
+.include "../../data_files/s_geodude.data"
 
 lista_sprites: .word s_squirtle, s_bulbasaur, s_geodude, s_vulpix, s_pidgey
 

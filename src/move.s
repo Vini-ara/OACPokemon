@@ -167,7 +167,7 @@ CHECK_TILE:
 
     jal RANDOM_SAVE
 
-    li t1, 0
+    li t1, 7
     and t1, t1, a0
 
     li a0, 1
