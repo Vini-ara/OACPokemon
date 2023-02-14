@@ -1,12 +1,12 @@
 .data
 # NOMES DOS ATAQUES
-n_fire_ball: .string "Bola de fogo"
-n_bubble:    .string "Bolha"
-n_vine_whip: .string "Chicote de mato"
+n_fire_ball: .string "Revoada"
+n_bubble:    .string "Dentada"
+n_vine_whip: .string "Patada"
 n_slap:      .string "Tapasso"
 n_nap:       .string "Cochilo"
 n_look:      .string "Olhada"
-n_stoned:    .string "Pedrada"
+n_stoned:    .string "Teniase"
 lista_n_ataques: .word n_fire_ball, n_bubble, n_vine_whip, n_slap, n_nap, n_look, n_stoned
 
 # LEGENDA DE TIPOS

@@ -45,6 +45,8 @@ use_potion_dial:	.string "O jogador utilizou uma potion."
 defeat:				.string "Todos os seus pokemons foram derrotados em batalha!"
 revive_poke:		.string "Visite a curandeira para reviver seus pokemons."
 dead:				.string "morreu!"
+str_run:			.string "Voce fugiu com sucesso!"
+covarde:			.string "Covarde kkkkkk"			
 # POKEMON INIMIGO
 P_INIMIGO: .word 0, 0, 0
 
