@@ -119,7 +119,7 @@ CHECK_DIALOG:
     j CHECK_DIALOG.FIM
 
   ACTION:
-    jal GYM_BATTLE
+    jal VENDEDORA
 
   CHECK_DIALOG.FIM:
     lw ra, 0(sp)

@@ -6,7 +6,7 @@
 #       > a1 ---> Coordenada x
 #       > a2 ---> Coordenada y
 #       > a3 ---> Cor (0x0000BBFF --> BB = background e FF = cor da letra)
-#       > a4 ---> Freame
+#       > a4 ---> Frame
 PRINT_STRING_SAVE:
     # Store na pilha
     addi sp, sp, -48

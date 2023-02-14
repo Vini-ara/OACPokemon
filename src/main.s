@@ -49,6 +49,15 @@ dead:				.string "morreu!"
 str_run:			.string "Voce fugiu com sucesso!"
 covarde:			.string "Covarde kkkkkk"		
 
+# DIÁLOGOS DA VENDEDORA
+vendedora_fala1:    .string "Bom dia, meu jovem."
+vendedora_fala2:    .string "Gostaria de comprar uma marmita?"
+vendedora_fala3:    .string "Comprar marmita por 50 creditos"
+sim:                .string "Sim"
+nao:                .string "Nao"
+vendedora_fala4:    .string "Volte sempre!"
+vendedora_fala5:    .string "Voce nao possui cresitos suficientes!"
+
 
 CURANDEIRA1: .string "Menino levado. Vou curar seu pokemon"
 CURANDEIRA2: .string "Pronto. Agora cuida bem dele" 
@@ -123,7 +132,7 @@ GAME_LOOP.END:
   li t1, 0
   sb t1, 0(t0)
 
-	jal MENU
+	# jal MENU
 
 	li t0, 0xFF200604 # troca o frame exibido para o frame qeu acabou de ser pintado 
 	sb s0, 0(t0)
@@ -136,6 +145,7 @@ GAME_LOOP.END:
 	
 .include "menu.s"
 .include "npc/curandeira.s"
+.include "npc/vendedora.s"
 .include "./libs/SYSTEMv21.s"
 .include "print.s"
 .include "check_interaction.s"
