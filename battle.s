@@ -11,6 +11,8 @@ BATTLE:
 #   - Parâmetros:
 #       > a0 ---> pokemon base
 #       > a1 ---> lvl do pokemon selvagem
+#   - Retorno:
+#       > a0 ---> 0 se derrota, 1 se vitória
 BATTLE_WILD_POKEMON:
     addi sp, sp, -32
     sw ra, 0(sp)
@@ -54,6 +56,8 @@ BATTLE_WILD_POKEMON:
         mv t2, a0
         mv t3, a1
 
+        li t4, 3
+        beq t2, t4, Run_Bat
         # Adquirir ação da IA
         jal WILD_POKEMON_DECISION
         mv t4, a0
@@ -278,14 +282,19 @@ BATTLE_WILD_POKEMON:
 
     Player_Won:
         jal WILD_BATTLE_VICTORY
+        li a0, 1
         j End_Battle_Wild_Pokemon
 
     Wild_Pokemon_Won:
         jal BATTLE_DEFEAT
+        mv a0, zero
         j End_Battle_Wild_Pokemon
 
+    Run_Bat:
+        jal RUN_BATTLE
+        li a0, 1
+    
     End_Battle_Wild_Pokemon:
-
     # Load na pilha
     lw t6, 28(sp)
     lw t5, 24(sp)
@@ -452,6 +461,10 @@ BATTLE_MENU:
             # Verificar se o player escolheu o menu de items
             li t0, 1
             beq t3, t0, Go_Items_Menu
+
+            # Verificar se o player escolheu run
+            li t0, 3
+            beq t3, t0, End_Battle_Menu
 
             j Battle_Menu_Loop
 
@@ -978,4 +991,45 @@ BATTLE_DEFEAT:
 
     # Retornar
     ret
+#
 
+# RUN_BATTLE
+RUN_BATTLE:
+    # Store na pilha
+    addi sp, sp, -4
+    sw ra, 0(sp)
+
+    # Desenhar a caixa de diálogo
+    la a0, dialog_box_battle
+    mv a1, zero
+    li a2, 180
+    mv a3, s0
+    jal DRAW_IMAGE
+
+    # Printar a string str_run
+    la a0, str_run
+    li a1, 16
+    li a2, 200
+    li a3, 0x000051FF
+    mv a4, s0
+    jal PRINT_STRING_SAVE
+
+    # Printar a string covarde
+    la a0, covarde
+    li a1, 16
+    li a2, 220
+    li a3, 0x000051FF
+    mv a4, s0
+    jal PRINT_STRING_SAVE
+
+
+
+    # Esperar o jogador apertar a tecla z
+    jal CONFIRM_DIALOG   
+
+    # Load na pilha
+    lw ra, 0(sp)
+    addi sp, sp, 4
+
+    # Retornar
+    ret

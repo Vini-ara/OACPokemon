@@ -5,8 +5,9 @@
 .include "data_files/s_vulpix.data"
 .include "data_files/s_pidgey.data"
 .include "data_files/s_geodude.data"
+.include "data_files/caramelo.data"
 
-lista_sprites: .word s_squirtle, s_bulbasaur, s_geodude, s_vulpix, s_pidgey
+lista_sprites: .word caramelo, s_bulbasaur, s_geodude, s_vulpix, s_pidgey
 
 # NOMES DOS POKÉMONS
 n_squirtle:  .string "Sarue"
