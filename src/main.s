@@ -47,7 +47,12 @@ defeat:				.string "Todos os seus pokemons foram derrotados em batalha!"
 revive_poke:		.string "Visite a curandeira para reviver seus pokemons."
 dead:				.string "morreu!"
 str_run:			.string "Voce fugiu com sucesso!"
-covarde:			.string "Covarde kkkkkk"			
+covarde:			.string "Covarde kkkkkk"		
+
+
+CURANDEIRA1: .string "Menino levado. Vou curar seu pokemon"
+CURANDEIRA2: .string "Pronto. Agora cuida bem dele" 
+
 
 # POKEMON INIMIGO
 P_INIMIGO: .word 0, 0, 0
@@ -57,6 +62,17 @@ P_PLAYER: .word 0, 0, 0
 
 # Dinheiro
 creditos: .byte 0
+
+# Diálogo do líder de ginásio
+fala1:      .string "Calouro, chegou o momento de testar suas habilidades!"
+fala2:      .string "Perca e seja reprovado,"
+fala3:      .string "ou ganhe e passe com SS."
+fuga:       .string "Nao tente fugir, covarde!"
+fala4:      .string "Parabens, Calouro! Tome seu SS!"
+fala5:  	.string "O inimigo utilizou uma potion."
+turnos:     .byte 0
+pot_usada:  .byte 0
+
 
 .text
 .include "./libs/MACROSv21.s"
@@ -107,19 +123,24 @@ GAME_LOOP.END:
   li t1, 0
   sb t1, 0(t0)
 
+	jal MENU
+
 	li t0, 0xFF200604 # troca o frame exibido para o frame qeu acabou de ser pintado 
 	sb s0, 0(t0)
 
-	li a0, 70
-	li a7, 32
-	ecall       # espera 70ms entre cada frame
+	#li a0, 70
+	#li a7, 32
+	#ecall       # espera 70ms entre cada frame
 
 	j GAME_LOOP
-
+	
+.include "menu.s"
+.include "npc/curandeira.s"
 .include "./libs/SYSTEMv21.s"
 .include "print.s"
 .include "check_interaction.s"
 
+.include "battle/gym_battle.s"
 .include "battle/battle.s"
 .include "battle/pokemons.s"
 .include "battle/ataques.s"

@@ -115,7 +115,7 @@ MUDA_DIRECAO_DIR:
 CHECK_TILE:
 	addi sp,sp,-16
 	sw ra,12(sp)
-  sw t2,8(sp)
+  	sw t2,8(sp)
 	sw t1,4(sp)
 	sw t0,0(sp)
 
@@ -153,7 +153,7 @@ CHECK_TILE:
 
   # muda de mapa para o mapa da tile
   CHECK_TILE.CHANGE:
-    lw a0, 7(t1)
+    lw a0, 8(t1)
     jal CHANGE_MAP
 
     li a0, 1

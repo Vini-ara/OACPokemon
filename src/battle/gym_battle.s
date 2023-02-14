@@ -1,13 +1,4 @@
 .data
-# Diálogo do líder de ginásio
-fala1:      .string "Calouro, chegou o momento de testar suas habilidades!"
-fala2:      .string "Perca e seja reprovado,"
-fala3:      .string "ou ganhe e passe com SS."
-fuga:       .string "Nao tente fugir, covarde!"
-fala4:      .string "Parabens, Calouro! Tome seu SS!"
-fala5:  	.string "O inimigo utilizou uma potion."
-turnos:     .byte 0
-pot_usada:  .byte 0
 
 .text
 GYM_BATTLE:
@@ -21,33 +12,26 @@ GYM_BATTLE:
     sw t4, 20(sp)
     sw t5, 24(sp)
     sw t6, 28(sp)
+
+    # xori no s0
+    xori s0, s0, 1
     
     # Printar a fala1
     la a0, fala1
     mv a1, s0
-    jal print_text_box
-
-    # Esperar o jogador apertar a tecla z
-    jal CONFIRM_DIALOG 
+    jal PRINT_TEXT_BOX
 
     # Printar a fala2
     la a0, fala2
     mv a1, s0
-    jal print_text_box
+    jal PRINT_TEXT_BOX
 
-    # Esperar o jogador apertar a tecla z
-    jal CONFIRM_DIALOG 
 
     # Printar a fala3
-    la a0, fala2
+    la a0, fala3
     mv a1, s0
-    jal print_text_box
-
-    # Esperar o jogador apertar a tecla z
-    jal CONFIRM_DIALOG 
-
-    # xori no s0
-    xori s0, s0, 1
+    jal PRINT_TEXT_BOX
+  
 
     # Transição para a batalha
     li a0, 0
@@ -81,9 +65,9 @@ GYM_BATTLE:
     Loop_Gym_Battle:
         # Contar o número de turnos
         la t2, turnos
-        lw t3, 0(t2)
+        lb t3, 0(t2)
         addi t3, t3, 1
-        sw t3, 0(t2)
+        sb t3, 0(t2)
 
         # Adquirir a ação do jogador
         jal BATTLE_MENU
@@ -93,7 +77,9 @@ GYM_BATTLE:
         li t4, 3
         beq t2, t4, Run_Bat2
         # Adquirir ação da IA
-        jal WILD_POKEMON_DECISION
+        la a0, turnos
+        lb a0, 0(a0)
+        jal GYM_POKEMON_DECISION
         mv t4, a0
 
         # Desenhar a caixa de diálogo
@@ -194,6 +180,14 @@ GYM_BATTLE:
             mv a1, t1
             mv a2, t0
             jal RUN_ATTACK
+
+            # Desenhar a caixa de diálogo
+            la a0, dialog_box_battle
+            mv a1, zero
+            li a2, 180
+            mv a3, s0
+            mv a4, zero
+            jal DRAW_IMAGE
 
             # Atualizar a vida do pokémon do jogador
             ## Limpar a vida antiga
@@ -464,7 +458,7 @@ GYM_POKEMON_DECISION:
     
     la t0, pot_usada
     lb t0, 0 (t0)
-    bnez t0, Escolher_Ataque
+    beqz t0, Escolher_Ataque
 
     la a0, P_INIMIGO
     li a1, 0x10

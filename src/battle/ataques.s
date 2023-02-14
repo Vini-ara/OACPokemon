@@ -79,6 +79,7 @@ PREGO: .half 0x7300
 #       > Poder: 40
 CAPOTE: .half 0x8428
 
+.align 2
 #                    0x01       0x11    0x21       0x31  0x41 0x51  0x61    0x71    0x81
 lista_ataques: .word FIRE_BALL, BUBBLE, VINE_WHIP, SLAP, NAP, LOOK, STONED, PREGO, CAPOTE
 .text

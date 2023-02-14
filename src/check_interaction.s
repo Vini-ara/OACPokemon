@@ -13,6 +13,7 @@ CHECK_DIALOG:
   sw t4, 20(sp)
   sw t5, 24(sp)
 
+
   mv t0, s1
   mv t1, s2
 
@@ -118,7 +119,7 @@ CHECK_DIALOG:
     j CHECK_DIALOG.FIM
 
   ACTION:
-    jal PRINT_TEXT_BOX
+    jal GYM_BATTLE
 
   CHECK_DIALOG.FIM:
     lw ra, 0(sp)

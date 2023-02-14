@@ -979,8 +979,8 @@ BATTLE_DEFEAT:
 
     # Printar a string dead
     la a0, dead
-    li a1, 90
-    li a2, 200
+    li a1, 16
+    li a2, 220
     li a3, 0x000051FF
     mv a4, s0
     jal PRINT_STRING_SAVE

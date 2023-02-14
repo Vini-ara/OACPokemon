@@ -178,3 +178,13 @@
 .include "../mapas/pkctr.data"
 .include "../mapas/loja.data"
 .include "../mapas/gym.data"
+
+# menu
+.include "../sprites/pause1.data"
+#.include "../sprites/pause2.data"
+.include "../sprites/pause3.data"
+.include "../sprites/pause4.data"
+.include "../sprites/pause5.data"
+.include "../sprites/pause6.data"
+.include "../sprites/pause7.data"
+.include "../sprites/pause8.data"

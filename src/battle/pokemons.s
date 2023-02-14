@@ -1,10 +1,10 @@
 .data
 # SPRITES DOS POKÉMONS
-.include "../../data_files/s_squirtle.data"
-.include "../../data_files/s_bulbasaur.data"
-.include "../../data_files/s_vulpix.data"
-.include "../../data_files/s_pidgey.data"
-.include "../../data_files/s_geodude.data"
+#.include "../../data_files/s_squirtle.data"
+#.include "../../data_files/s_bulbasaur.data"
+#.include "../../data_files/s_vulpix.data"
+#.include "../../data_files/s_pidgey.data"
+#.include "../../data_files/s_geodude.data"
 .include "../../data_files/caramelo.data"
 .include "../../data_files/sarue.data"
 .include "../../data_files/pombo.data"
@@ -560,6 +560,7 @@ WILD_POKEMON_DECISION:
     li t2, 28
     sub t0, t2, t0
     srl a0, t1, t0
+    andi a0, a0, 0xFF
 
     # Load na pilha
     lw t2, 12(sp)
