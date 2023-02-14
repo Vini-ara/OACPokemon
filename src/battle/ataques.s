@@ -586,15 +586,15 @@ PRINT_DAMAGE_ATTACK:
     li a1, 16
     li a2, 200
     li a3, 0x000051FF
-    mv a4, zero
+    mv a4, s0
     jal PRINT_STRING_SAVE
 
     # Printar a string attack_battle
     la a0, attack_battle
-    li a1, 100
-    li a2, 200
+    li a1, 16
+    li a2, 220
     li a3, 0x000051FF
-    mv a4, zero
+    mv a4, s0
     jal PRINT_STRING_SAVE
 
     # Adquirir o nome do ataque
@@ -603,10 +603,10 @@ PRINT_DAMAGE_ATTACK:
     jal GET_ATTACK_NAME
 
     # Printar o nome do ataque
-    li a1, 200
-    li a2, 200
+    li a1, 116
+    li a2, 220
     li a3, 0x000051FF
-    mv a4, zero
+    mv a4, s0
     jal PRINT_STRING_SAVE
 
     # Esperar o jogador apertar a tecla z
@@ -683,7 +683,7 @@ PRINT_LOOK_ATTACK:
     li a1, 16
     li a2, 200
     li a3, 0x000051FF
-    mv a4, zero
+    mv a4, s0
     jal PRINT_STRING_SAVE
 
     # Printar a string attack_battle
@@ -691,7 +691,7 @@ PRINT_LOOK_ATTACK:
     li a1, 100
     li a2, 200
     li a3, 0x000051FF
-    mv a4, zero
+    mv a4, s0
     jal PRINT_STRING_SAVE
 
     # Printar o nome do ataque
@@ -699,7 +699,7 @@ PRINT_LOOK_ATTACK:
     li a1, 200
     li a2, 200
     li a3, 0x000051FF
-    mv a4, zero
+    mv a4, s0
     jal PRINT_STRING_SAVE
 
     # Esperar o jogador apertar a tecla z
@@ -720,7 +720,7 @@ PRINT_LOOK_ATTACK:
     li a1, 16
     li a2, 200
     li a3, 0x000051FF
-    mv a4, zero
+    mv a4, s0
     jal PRINT_STRING_SAVE
 
     # Printar a string atk_battle
@@ -728,7 +728,7 @@ PRINT_LOOK_ATTACK:
     li a1, 100
     li a2, 200
     li a3, 0x000051FF
-    mv a4, zero
+    mv a4, s0
     jal PRINT_STRING_SAVE
 
     # Esperar o jogador apertar a tecla z

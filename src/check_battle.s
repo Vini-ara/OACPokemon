@@ -51,7 +51,7 @@ CHECK_BATTLE:
     j GO_BATTLE
 
   GO_BATTLE:
-    li a1, 5
+    li a1, 3
     jal BATTLE_WILD_POKEMON
 
 CHECK_BATTLE.FIM:

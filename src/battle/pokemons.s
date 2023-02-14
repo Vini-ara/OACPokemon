@@ -10,11 +10,11 @@
 lista_sprites: .word caramelo, s_bulbasaur, s_geodude, s_vulpix, s_pidgey
 
 # NOMES DOS POKÉMONS
-n_squirtle:  .string "Sarue"
+n_squirtle:  .string "Pedro Sarue"
 n_bulbasaur: .string "Caramelo"
-n_vulpix:    .string "Pombo"
+n_vulpix:    .string "Pombo do Bebedouro"
 n_pidgey:    .string "Gato"
-n_geodude:   .string "Larva"
+n_geodude:   .string "Larva do RU"
 
 lista_nomes: .word n_squirtle, n_bulbasaur, n_geodude, n_vulpix, n_pidgey
 
