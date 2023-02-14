@@ -9,11 +9,11 @@
 lista_sprites: .word s_squirtle, s_bulbasaur, s_geodude, s_vulpix, s_pidgey
 
 # NOMES DOS POKÉMONS
-n_squirtle:  .string "Squirtle"
-n_bulbasaur: .string "Bulbasaur"
-n_vulpix:    .string "Vulpix"
-n_pidgey:    .string "Pidgey"
-n_geodude:   .string "Geodude"
+n_squirtle:  .string "Sarue"
+n_bulbasaur: .string "Caramelo"
+n_vulpix:    .string "Pombo"
+n_pidgey:    .string "Gato"
+n_geodude:   .string "Larva"
 
 lista_nomes: .word n_squirtle, n_bulbasaur, n_geodude, n_vulpix, n_pidgey
 
@@ -41,11 +41,11 @@ lista_nomes: .word n_squirtle, n_bulbasaur, n_geodude, n_vulpix, n_pidgey
 #   - A quantidade de xp necessária para o próximo lvl up dobra 
 
 # LEGENDA DE TIPOS
-# 0 --> ÁGUA
-# 1 --> GRAMA
-# 2 --> FOGO
+# 0 --> Atirador
+# 1 --> Lutador
+# 2 --> Voador
 # 3 --> NORMAL
-# 4 --> PEDRA
+# 4 --> Venenoso
 
 # $ SQUIRTLE
 #   > Vida = 12
@@ -55,9 +55,9 @@ lista_nomes: .word n_squirtle, n_bulbasaur, n_geodude, n_vulpix, n_pidgey
 #   > Defesa = 6
 #   > Level = 1
 #   > Xp = 0
-#   > Tipo1 = 0 (água)
+#   > Tipo1 = 0 ()
 #   > Index = 0
-P_SQUIRTLE: .word 0x00000106, 0x06060C0C, 0x31510000    
+P_SARUE: .word 0x00000106, 0x06060C0C, 0x31510000    
 
 # $ BULBASAUR
 #   > Vida = 12
@@ -69,7 +69,7 @@ P_SQUIRTLE: .word 0x00000106, 0x06060C0C, 0x31510000
 #   > Xp = 0
 #   > Tipo1 = 1 (grama)
 #   > Index = 1     
-P_BULBASAUR: .word 0x11000106, 0x06060C0C, 0x31514100
+P_CARAMELO: .word 0x11000106, 0x06060C0C, 0x31514100
 
 # $ GEODUDE
 #   > Vida = 11
@@ -81,7 +81,7 @@ P_BULBASAUR: .word 0x11000106, 0x06060C0C, 0x31514100
 #   > Xp = 0
 #   > Tipo1 = 3 (voador)
 #   > Index = 4                          
-P_GEODUDE: .word 0x24000107, 0x05060B0B, 0x31516100
+P_LARVA: .word 0x24000107, 0x05060B0B, 0x31516100
 
 # $ VULPIX
 #   > Vida = 11
@@ -93,7 +93,7 @@ P_GEODUDE: .word 0x24000107, 0x05060B0B, 0x31516100
 #   > Xp = 0 
 #   > Tipo1 = 2 (fogo)
 #   > Index = 3                          
-P_VULPIX: .word 0x32000105, 0x06050B0B, 0x31514100
+P_POMBO: .word 0x32000105, 0x06050B0B, 0x31514100
 
 # $ PIDGEY
 #   > Vida = 11
@@ -105,7 +105,7 @@ P_VULPIX: .word 0x32000105, 0x06050B0B, 0x31514100
 #   > Xp = 0 
 #   > Tipo1 = 3 (voador)
 #   > Index = 4                          
-P_PIDGEY: .word 0x43000105, 0x06050B0B, 0x31510000
+P_GATO: .word 0x43000105, 0x06050B0B, 0x31510000
 .text
 # GET_POKEMON_STAT
 #   - Retorna um stat de um pokémon

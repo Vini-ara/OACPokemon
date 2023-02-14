@@ -17,37 +17,37 @@ CHECK_BATTLE:
   and t1, t1, a0
 
   li t2, 0
-  beq t1, t2, CHOOSE_BULBASAUR
+  beq t1, t2, CHOOSE_CARAMELO
 
   li t2, 1
-  beq t1, t2, CHOOSE_SQUIRTLE
+  beq t1, t2, CHOOSE_SARUE
    
   li t2, 2
-  beq t1, t2, CHOOSE_VULPIX
+  beq t1, t2, CHOOSE_POMBO
 
   li t2, 3
-  beq t1, t2, CHOOSE_PIDGEY
+  beq t1, t2, CHOOSE_GATO
 
-  j CHOOSE_GEODUDE
+  j CHOOSE_LARVA
 
-  CHOOSE_BULBASAUR:
-    la a0, P_BULBASAUR
+  CHOOSE_CARAMELO:
+    la a0, P_CARAMELO
     j GO_BATTLE
 
-  CHOOSE_SQUIRTLE:
-    la a0, P_SQUIRTLE
+  CHOOSE_SARUE:
+    la a0, P_SARUE
     j GO_BATTLE
 
-  CHOOSE_VULPIX:
-    la a0, P_VULPIX
+  CHOOSE_POMBO:
+    la a0, P_POMBO
     j GO_BATTLE
 
-  CHOOSE_PIDGEY:
-    la a0, P_PIDGEY
+  CHOOSE_GATO:
+    la a0, P_GATO
     j GO_BATTLE
 
-  CHOOSE_GEODUDE:
-    la a0, P_GEODUDE
+  CHOOSE_LARVA:
+    la a0, P_LARVA
     j GO_BATTLE
 
   GO_BATTLE:
