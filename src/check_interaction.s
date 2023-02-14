@@ -118,7 +118,7 @@ CHECK_DIALOG:
     j CHECK_DIALOG.FIM
 
   ACTION:
-    jal PRINT_TEXT_BOX
+    jal NPC_CURANDEIRA
 
   CHECK_DIALOG.FIM:
     lw ra, 0(sp)

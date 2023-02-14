@@ -13,7 +13,7 @@ CHECK_BATTLE:
 
   jal RANDOM_SAVE
 
-  li t1, 5
+  li t1, 7
   and t1, t1, a0
 
   li t2, 0
@@ -54,6 +54,13 @@ CHECK_BATTLE:
     li a1, 5
     jal BATTLE_WILD_POKEMON
 
+#    beqz a0, RESPAWN
+
+#    j CHECK_BATTLE.FIM
+
+#    RESPAWN:
+#      jal MORREU
+
 CHECK_BATTLE.FIM:
   lw ra, 0(sp)
   lw t0, 4(sp)
@@ -61,3 +68,20 @@ CHECK_BATTLE.FIM:
   lw t2, 12(sp)
   addi sp, sp, 16
   ret
+
+
+MORREU:
+  addi sp, sp, -8
+  sw ra, 0(sp)
+  sw t0, 4(sp)
+
+  la t0, PKCTR_OBJ
+  jal CHANGE_MAP
+
+  li s3, 3
+
+  lw t0, 4(sp)
+  lw ra, 0(sp)
+  addi sp, sp, 8
+  ret
+

@@ -124,6 +124,8 @@ GAME_LOOP.END:
 .include "battle/draw_enemy_pokemon.s"
 .include "battle/draw_player_pokemon.s"
 
+.include "npc/curandeira.s"
+
 .include "init_pokemon_inicial.s"
 .include "sleep.s"
 .include "print_save.s"
