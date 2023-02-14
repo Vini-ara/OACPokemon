@@ -1,32 +1,31 @@
 .text
 # -   > a0 = endereço da string
-# -   > a1 = frame
 PRINT_TEXT_BOX: 
-  addi sp, sp, -8
-  sw t0, 4(sp)
+  addi sp, sp, -4
   sw ra, 0(sp)
 
-  mv t0, a0
-  mv t1, a1
+  xori s0, s0, 1
 
-  mv a0, t0
   jal PRINT_BOX
 
-  mv a0, t0 
-  li a1, 15
+  la a0, dead_battle
+  li a1, 20
   li a2, 204
   li a3, 0x0000FF00
-  mv a4, t1
+  mv a4, s0
   jal PRINT_STRING_SAVE
 
-  lw t0, 4(sp)
+  jal CONFIRM_DIALOG
+
   lw ra, 0(sp)
-  addi sp, sp, 8
+  addi sp, sp, 4
   ret
+
+
+
 
 # ---- PRINT_BOX
 # - desenha a caixa de dialogo branca em que o texto vai ser exibido
-#  > a0 = frame 
 PRINT_BOX:
   addi sp, sp, -20
   sw ra, 16(sp)
@@ -39,7 +38,7 @@ PRINT_BOX:
   
   # desenha o canto superior esquerdo
   la a0, tbx1
-  li a1, 0
+  li a1, 6
   li a2, 194
   mv a3, t3
   li a4, 0
@@ -48,20 +47,20 @@ PRINT_BOX:
 
   # desenha o canto inferior esquerdo
   la a0, tbx2
-  li a1, 0
+  li a1, 6
   li a2, 216
   mv a3, t3
   li a4, 0
   jal DRAW_IMAGE
 
   li t0, 0
-  li t1, 25
+  li t1, 24
   
   # desenha o meio da caixa
   PRINT_TEXT_BOX.LOOP:
     li t2, 12
     mul t2, t2, t0
-    addi t2, t2, 12
+    addi t2, t2, 18
 
     la a0, tbx3
     mv a1, t2
@@ -84,7 +83,7 @@ PRINT_BOX:
     
   # desenha o canto superior direito
   la a0, tbx1
-  li a1, 308
+  li a1, 302
   li a2, 194
   mv a3, t3
   li a4, 1
@@ -93,7 +92,7 @@ PRINT_BOX:
 
   # desenha o canto inferior direito
   la a0, tbx2
-  li a1, 308
+  li a1, 302
   li a2, 216
   mv a3, t3
   li a4, 1

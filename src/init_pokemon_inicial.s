@@ -5,7 +5,7 @@ INIT_POKEMON_INICIAL:
     addi sp, sp, -4
     sw ra, 0(sp)
     
-    la a0, P_SARUE
+    la a0, P_SINUCA
     li a1, 5
     la a2, P_PLAYER
     jal CREATE_POKEMON

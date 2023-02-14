@@ -1,16 +1,18 @@
 .data
 # NOMES DOS ATAQUES
-n_fire_ball: .string "Revoada"
-n_bubble:    .string "Dentada"
-n_vine_whip: .string "Patada"
-n_slap:      .string "Tapasso"
-n_nap:       .string "Cochilo"
-n_look:      .string "Olhada"
-n_stoned:    .string "Teniase"
-lista_n_ataques: .word n_fire_ball, n_bubble, n_vine_whip, n_slap, n_nap, n_look, n_stoned
+n_fire_ball:    .string "Revoada"
+n_bubble:       .string "Dentada"
+n_vine_whip:    .string "Patada"
+n_slap:         .string "Tapasso"
+n_nap:          .string "Cochilo"
+n_look:         .string "Olhada"
+n_stoned:       .string "Teniase"
+n_prego:        .string "Prego"
+n_capote:       .string "Capote"
+lista_n_ataques: .word n_fire_ball, n_bubble, n_vine_whip, n_slap, n_nap, n_look, n_stoned, n_prego, n_capote
 
 # LEGENDA DE TIPOS
-# 0 --> ÁGUA
+# 0 --> �?GUA
 # 1 --> GRAMA
 # 2 --> FOGO
 # 3 --> NORMAL
@@ -64,8 +66,21 @@ LOOK: .half 0x5300
 #       > Tipo: pedra
 #       > Poder: 40
 STONED: .half 0x6428
-#                    0x01       0x11    0x21       0x31  0x41 0x51  0x61
-lista_ataques: .word FIRE_BALL, BUBBLE, VINE_WHIP, SLAP, NAP, LOOK, STONED
+
+#   - Prego
+#       > Index: 7
+#       > Tipo: normal
+#       > Poder: 0
+PREGO: .half 0x7300
+
+#   - Capote
+#       > Index: 8
+#       > Tipo: venenoso
+#       > Poder: 40
+CAPOTE: .half 0x8428
+
+#                    0x01       0x11    0x21       0x31  0x41 0x51  0x61    0x71    0x81
+lista_ataques: .word FIRE_BALL, BUBBLE, VINE_WHIP, SLAP, NAP, LOOK, STONED, PREGO, CAPOTE
 .text
 
 # DAMAGE_ATTACK:
@@ -527,6 +542,14 @@ RUN_ATTACK:
     li t3, 6
     beq t3, a0, Run_Damage_Attack
 
+    # Verificar se o ataque é o PREGO
+    li t3, 7
+    beq t3, a0, Run_Prego_Attack
+
+    # Verificar se o ataque é o CAPOTE
+    li t3, 8
+    beq t3, a0, Run_Damage_Attack
+
     Run_Damage_Attack:
         jal DECODE_ATTACK
         jal DAMAGE_ATTACK
@@ -543,12 +566,22 @@ RUN_ATTACK:
         jal LOOK_ATTACK
         mv a0, t1
         mv a1, t2
+        mv a2, zero
         jal PRINT_LOOK_ATTACK
         j End_Run_Attack
 
     Run_Nap_Attack:
         jal DECODE_ATTACK
         jal NAP_ATTACK
+        j End_Run_Attack
+
+    Run_Prego_Attack:
+        mv a0, t2
+        jal LOOK_ATTACK
+        mv a0, t1
+        mv a1, t2
+        li a2, 1
+        jal PRINT_LOOK_ATTACK
         j End_Run_Attack
 
     End_Run_Attack:
@@ -662,6 +695,7 @@ NAP_ATTACK:
 #   - Parâmetros:
 #       > a0 ---> Endereço do pokémon atacante
 #       > a1 ---> Endereço do pokémon defensor
+#       > a2 ---> 0 se for olhada, 1 se for o prego
 PRINT_LOOK_ATTACK:
     # Store na pilha
     addi sp, sp, -16
@@ -674,6 +708,7 @@ PRINT_LOOK_ATTACK:
     mv t0, a0
     mv t1, a1
     mv t2, zero
+    mv t3, a2
 
     # Adquirir o nome do pokémon atacante
     jal GET_POKEMON_NAME
@@ -688,16 +723,22 @@ PRINT_LOOK_ATTACK:
 
     # Printar a string attack_battle
     la a0, attack_battle
-    li a1, 100
-    li a2, 200
+    li a1, 16
+    li a2, 222
     li a3, 0x000051FF
     mv a4, s0
     jal PRINT_STRING_SAVE
 
     # Printar o nome do ataque
+    beqz t3, Atq_Olhada
+    la a0, n_prego
+    j Print_Nome
+    Atq_Olhada:
     la a0, n_look
-    li a1, 200
-    li a2, 200
+
+    Print_Nome:
+    li a1, 116
+    li a2, 220
     li a3, 0x000051FF
     mv a4, s0
     jal PRINT_STRING_SAVE
@@ -709,7 +750,7 @@ PRINT_LOOK_ATTACK:
     la a0, dialog_box_battle
     mv a1, zero
     li a2, 180
-    mv a3, zero
+    mv a3, s0
     jal DRAW_IMAGE
     
     # Adquirir o nome do pokémon defensor
@@ -725,8 +766,8 @@ PRINT_LOOK_ATTACK:
 
     # Printar a string atk_battle
     la a0, atk_down_battle
-    li a1, 100
-    li a2, 200
+    li a1, 16
+    li a2, 220
     li a3, 0x000051FF
     mv a4, s0
     jal PRINT_STRING_SAVE

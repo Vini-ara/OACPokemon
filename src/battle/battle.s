@@ -718,9 +718,10 @@ POKEMON_ATTACKS_MENU:
 #       4) apaga o pokémon do endereço P_INIMIGO
 WILD_BATTLE_VICTORY:
     # Store na pilha
-    addi sp, sp, -8
+    addi sp, sp, -12
     sw ra, 0(sp)
     sw t0, 4(sp)
+    sw t1, 8(sp)
     
     # Desenhar a caixa de diálogo
     la a0, dialog_box_battle
@@ -852,12 +853,18 @@ WILD_BATTLE_VICTORY:
     ## Esperar o jogador apertar a tecla z
     jal CONFIRM_DIALOG 
 
+    # Aumentar o número de créditos
+    la t0, creditos
+    lb t1, 0(t0)
+    addi t1, t1, 10
+    sb t1, 0(t0)
 
     End_Wild_Battle_Victory:
     # Load na pilha
+    lw t1, 8(sp)
     lw t0, 4(sp)
     lw ra, 0(sp)
-    addi sp, sp, 8
+    addi sp, sp, 12
     
     # Retornar
     ret

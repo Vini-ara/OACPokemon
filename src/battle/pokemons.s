@@ -10,7 +10,8 @@
 .include "../../data_files/pombo.data"
 .include "../../data_files/larva.data"
 .include "../../data_files/gato.data"
-lista_sprites: .word sarue, caramelo, larva, pombo, gato
+.include "../../data_files/sinuca.data"
+lista_sprites: .word sarue, caramelo, larva, pombo, gato, sinuca
 
 # NOMES DOS POKÉMONS
 n_squirtle:  .string "Pedro Sarue"
@@ -18,8 +19,9 @@ n_bulbasaur: .string "Caramelo"
 n_vulpix:    .string "Pombo do Bebedouro"
 n_pidgey:    .string "Gato"
 n_geodude:   .string "Larva do RU"
+n_sinuca:    .string "Sinuca Cacomp"
 
-lista_nomes: .word n_squirtle, n_bulbasaur, n_geodude, n_vulpix, n_pidgey
+lista_nomes: .word n_squirtle, n_bulbasaur, n_geodude, n_vulpix, n_pidgey, n_sinuca
 
 # POKEMONS:
 #   - Um pokemon preceisa ter os atributos vida, vida_max, ataque, velocidade, defesa, tipo1, level, xp, xp para subir de lvl, sprite, nome 
@@ -110,6 +112,19 @@ P_POMBO: .word 0x32000106, 0x06060C0C, 0x31510100
 #   > Tipo1 = 3 (voador)
 #   > Index = 4                          
 P_GATO: .word 0x43000105, 0x06050B0B, 0x31510000
+
+# $ PIDGEY
+#   > Vida = 11
+#   > Vida_max = 11
+#   > Ataque = 6
+#   > Velocidade = 7
+#   > Defesa = 6
+#   > Level = 1
+#   > Xp = 0 
+#   > Tipo1 = 4 (voador)
+#   > Index = 5 
+P_SINUCA: .word 0x54000106, 0x07060B0B, 0x71810000
+
 .text
 # GET_POKEMON_STAT
 #   - Retorna um stat de um pokémon

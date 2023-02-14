@@ -34,6 +34,7 @@ barra:  .string "/"
 seta:   .string ">"
 traco:  .string "-"
 x:		.string "x"
+
 # DI�?LOGOS DA BATALHA
 dead_battle:        .string "O pokemon inimigo morreu!"
 xp_battle1:         .string "O seu pokemon adquiriu"
@@ -47,11 +48,15 @@ revive_poke:		.string "Visite a curandeira para reviver seus pokemons."
 dead:				.string "morreu!"
 str_run:			.string "Voce fugiu com sucesso!"
 covarde:			.string "Covarde kkkkkk"			
+
 # POKEMON INIMIGO
 P_INIMIGO: .word 0, 0, 0
 
 # POKÉMON INICIAL DO JOGADOR
 P_PLAYER: .word 0, 0, 0
+
+# Dinheiro
+creditos: .byte 0
 
 .text
 .include "./libs/MACROSv21.s"
@@ -123,8 +128,6 @@ GAME_LOOP.END:
 .include "battle/draw_pokemon.s"
 .include "battle/draw_enemy_pokemon.s"
 .include "battle/draw_player_pokemon.s"
-
-.include "npc/curandeira.s"
 
 .include "init_pokemon_inicial.s"
 .include "sleep.s"
