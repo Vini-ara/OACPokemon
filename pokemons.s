@@ -57,7 +57,7 @@ lista_nomes: .word n_squirtle, n_bulbasaur, n_geodude, n_vulpix, n_pidgey
 #   > Xp = 0
 #   > Tipo1 = 0 ()
 #   > Index = 0
-P_SARUE: .word 0x00000106, 0x06060C0C, 0x31510000    
+P_SARUE: .word 0x00000106, 0x06060C0C, 0x31511100    
 
 # $ BULBASAUR
 #   > Vida = 12
@@ -69,7 +69,7 @@ P_SARUE: .word 0x00000106, 0x06060C0C, 0x31510000
 #   > Xp = 0
 #   > Tipo1 = 1 (grama)
 #   > Index = 1     
-P_CARAMELO: .word 0x11000106, 0x06060C0C, 0x31514100
+P_CARAMELO: .word 0x11000106, 0x06060C0C, 0x31512100
 
 # $ GEODUDE
 #   > Vida = 11
@@ -81,7 +81,7 @@ P_CARAMELO: .word 0x11000106, 0x06060C0C, 0x31514100
 #   > Xp = 0
 #   > Tipo1 = 3 (voador)
 #   > Index = 4                          
-P_LARVA: .word 0x24000107, 0x05060B0B, 0x31516100
+P_LARVA: .word 0x24000106, 0x05060B0B, 0x31516100
 
 # $ VULPIX
 #   > Vida = 11
@@ -93,7 +93,7 @@ P_LARVA: .word 0x24000107, 0x05060B0B, 0x31516100
 #   > Xp = 0 
 #   > Tipo1 = 2 (fogo)
 #   > Index = 3                          
-P_POMBO: .word 0x32000105, 0x06050B0B, 0x31514100
+P_POMBO: .word 0x32000106, 0x06060C0C, 0x31510100
 
 # $ PIDGEY
 #   > Vida = 11
