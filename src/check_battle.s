@@ -14,7 +14,7 @@ CHECK_BATTLE:
   jal RANDOM_SAVE
 
   li t1, 5
-  and t1, t1, a0
+  rem t1, a0, t1
 
   li t2, 0
   beq t1, t2, CHOOSE_CARAMELO

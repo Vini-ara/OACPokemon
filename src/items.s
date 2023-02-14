@@ -3,7 +3,7 @@
 ## POÇÃO --> CURA 10 PONTOS DE VIDA DE UM POKÉMON
 I_POTION: .byte 0x0A
 
-n_potion: .string "Marmita"
+n_potion: .string "Potion"
 .text
 # USE_POTION
 #   - Usa uma poção
