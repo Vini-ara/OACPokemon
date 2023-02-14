@@ -6,15 +6,18 @@
 .include "../../data_files/s_pidgey.data"
 .include "../../data_files/s_geodude.data"
 .include "../../data_files/caramelo.data"
-
-lista_sprites: .word caramelo, s_bulbasaur, s_geodude, s_vulpix, s_pidgey
+.include "../../data_files/sarue.data"
+.include "../../data_files/pombo.data"
+.include "../../data_files/larva.data"
+.include "../../data_files/gato.data"
+lista_sprites: .word sarue, caramelo, larva, pombo, gato
 
 # NOMES DOS POKÉMONS
-n_squirtle:  .string "Sarue"
+n_squirtle:  .string "Pedro Sarue"
 n_bulbasaur: .string "Caramelo"
-n_vulpix:    .string "Pombo"
+n_vulpix:    .string "Pombo do Bebedouro"
 n_pidgey:    .string "Gato"
-n_geodude:   .string "Larva"
+n_geodude:   .string "Larva do RU"
 
 lista_nomes: .word n_squirtle, n_bulbasaur, n_geodude, n_vulpix, n_pidgey
 
