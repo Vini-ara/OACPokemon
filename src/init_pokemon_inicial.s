@@ -1,11 +1,12 @@
 .text
 # INIT_POKEMON_INICIAL
-#   - Carrega no endereço P_PLAYER o pokémon inicial squirtle lvl 5
+#   - Carrega no endereço P_PLAYER o pokémon inicial escolhido lvl 5
+#   - Parâmetros:
+#       > a0 ---> Endereço do pokemon inicial
 INIT_POKEMON_INICIAL:
     addi sp, sp, -4
     sw ra, 0(sp)
     
-    la a0, P_SARUE
     li a1, 5
     la a2, P_PLAYER
     jal CREATE_POKEMON

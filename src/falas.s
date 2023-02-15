@@ -27,7 +27,7 @@
 
 # LABORATÓRIO
 
-    LAMAR0: .string "Antes de começarmos..."
+    LAMAR0: .string "Antes de comecarmos..."
 
     LAMAR2: .string "Ja fez o testinho hoje?"
 
@@ -97,7 +97,7 @@
 
     GIN6: .string "Prepare-se para ser derrotado!"
 
-    GIN8: .string "Tem uma moeda de 50?..."
+    GIN8: .string "Tem uma moeda de 25?..."
 
     # a luta começa
     # se o jogador ganhar
@@ -130,3 +130,5 @@
 
     LOJA0: .string "Eae campeao, vai uma marmita?"
     LOJA1: .string "Te vendo essa por 50. Aceito pix."
+    LOJA2: .string "Voce nao possui creditos suficientes!" 
+    LOJA3: .string "Volte sempre!" 

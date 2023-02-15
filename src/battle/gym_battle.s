@@ -1,5 +1,3 @@
-.data
-
 .text
 GYM_BATTLE:
     # Load na pilha
@@ -16,22 +14,29 @@ GYM_BATTLE:
     # xori no s0
     xori s0, s0, 1
     
-    # Printar a fala1
-    la a0, fala1
+    # Printar a string GIN2 e GIN3
+    la a0, GIN2
     mv a1, s0
+    la a2, GIN3
     jal PRINT_TEXT_BOX
 
-    # Printar a fala2
-    la a0, fala2
+    # Printar a string GIN4 e GIN5
+    la a0, GIN4
     mv a1, s0
+    la a2, GIN5
     jal PRINT_TEXT_BOX
 
-
-    # Printar a fala3
-    la a0, fala3
+    # Printar a string GIN6
+    la a0, GIN6
     mv a1, s0
+    mv a2, zero
     jal PRINT_TEXT_BOX
-  
+    
+    # Printar a string GIN8
+    la a0, GIN8
+    mv a1, s0
+    mv a2, zero
+    jal PRINT_TEXT_BOX
 
     # Transição para a batalha
     li a0, 0
@@ -43,7 +48,7 @@ GYM_BATTLE:
     jal SLEEP
 
     # Criar pokémon do líder
-    la a0, P_SINUCA         # MUDAR!!!!!!!!!!!!!
+    la a0, P_SINUCA         
     li a1, 10
     la a2, P_INIMIGO
     jal CREATE_POKEMON
@@ -392,25 +397,42 @@ GYM_BATTLE:
 
     Won_Battle_Gym:
         jal WILD_BATTLE_VICTORY
-        
-        # Printar a string fala4
-        la a0, fala4
+        jal GYM_BATTLE_VICTORY
+        li a0, 1
+        j End_Gym_Battle
+
+    Defeat_Battle_Gym:
+        # Desenhar a caixa de diálogo
+        la a0, dialog_box_battle
+        mv a1, zero
+        li a2, 180
+        mv a3, s0
+        mv a4, zero
+        jal DRAW_IMAGE 
+
+        # Printar nome do pokémon do jogador
+        la a0, P_PLAYER
+        jal GET_POKEMON_NAME
+
         li a1, 16
         li a2, 200
         li a3, 0x000051FF
         mv a4, s0
         jal PRINT_STRING_SAVE
-        
-        li a0, 1
-        j End_Gym_Battle
 
-    Defeat_Battle_Gym:
+        # Printar a string dead
+        la a0, dead
+        li a1, 16
+        li a2, 220
+        li a3, 0x000051FF
+        mv a4, s0
+        jal PRINT_STRING_SAVE
+
+        # Esperar o jogador apertar a tecla z
+        jal CONFIRM_DIALOG
+        
+        jal GYM_BATTLE_DEFEAT
         jal BATTLE_DEFEAT
-
-        la t0, passe 
-        li t1, 0
-        sb t1, 0(t0)
-        
         mv a0, zero
         j End_Gym_Battle
 
@@ -489,11 +511,11 @@ GYM_POKEMON_DECISION:
     j End_Pokemon_Gym_Decision
 
     Use_Pot:
-    li a0, 'p'
-    la t0, pot_usada
-    lb t1, 0(t0)
-    addi t1, t1, 1
-    sb t1, 0(t0)
+        li a0, 'p'
+        la t0, pot_usada
+        lb t1, 0(t0)
+        addi t1, t1, 1
+        sb t1, 0(t0)
 
     End_Pokemon_Gym_Decision:
     lw t1, 8(sp)
@@ -501,4 +523,66 @@ GYM_POKEMON_DECISION:
     lw ra, 0(sp)
     addi sp, sp, 12
     ret
- 
+#
+
+#
+GYM_BATTLE_VICTORY:
+    # Printar mapa
+    mv a0,s1
+	mv a1,s2
+	jal ra, CARREGA_MAPA
+
+  	jal PRINT_PLAYER
+
+    # Printar string GIN10
+    la a0, GIN10
+    mv a1, s0
+    mv a2, zero
+    jal PRINT_TEXT_BOX
+
+    # Printar string GIN12 e GIN13
+    la a0, GIN12
+    mv a1, s0
+    la a2, GIN13
+    jal PRINT_TEXT_BOX
+
+    jal END_GAME
+#
+
+#
+GYM_BATTLE_DEFEAT:
+    # Store na pilha
+    addi sp, sp -8
+    sw ra, 0(sp)
+    sw t0, 4(sp)
+    
+    # Printar mapa
+    mv a0,s1
+	mv a1,s2
+	jal ra, CARREGA_MAPA
+
+  	jal PRINT_PLAYER
+
+    # Printar string GIN14 e GIN15
+    la a0, GIN14
+    mv a1, s0
+    la a2, GIN15
+    jal PRINT_TEXT_BOX
+
+    # Printar string GIN16 e GIN17
+    la a0, GIN16
+    mv a1, s0
+    la a2, GIN17
+    jal PRINT_TEXT_BOX
+
+    # Tirar o passe do jogador
+    la t0, passe
+    sb zero, 0(t0) 
+
+    # Load no pilha
+    lw t0, 4(sp)
+    lw ra, 0(sp)
+    addi sp, sp, 8
+
+    # Retornar
+    ret

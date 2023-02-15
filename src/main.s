@@ -58,7 +58,7 @@ P_INIMIGO: .word 0, 0, 0
 P_PLAYER: .word 0, 0, 0
 
 # Dinheiro
-creditos: .byte 0
+creditos: .byte 200
 
 # Diálogo do líder de ginásio
 fala1:      .string "Calouro, chegou o momento de testar suas habilidades!"
@@ -69,7 +69,8 @@ fala4:      .string "Parabens, Calouro! Tome seu SS!"
 fala5:  	.string "O inimigo utilizou uma potion."
 turnos:     .byte 0
 pot_usada:  .byte 0
-
+sim:			.string "Sim"
+nao:			.string "Nao"
 menu_lvl: 		.string "Lvl."
 menu_exp: 		.string "Exp."
 menu_dinheiro:	.string "Dinheiro $"
@@ -84,9 +85,9 @@ passe: .byte 0
 #iniciando mapa
 SETUP:	
   	li s0, 0 # frame
-	li s1,25 #linha
-	li s2,19 #coluna
-	li s3, 0 #direçao (0 = cima, 1 = baixo, 2 = direita, 3 = esquerda)
+    li s1,25 #linha
+    li s2,19 #coluna
+    li s3, 0 #direçao (0 = cima, 1 = baixo, 2 = direita, 3 = esquerda)
   	
   	jal INTRODUCTION
 
@@ -98,8 +99,8 @@ GAME_LOOP:
 
 	beqz a0,GAME_PRINT
 
-  	li t0, 'z'
-  	beq a0, t0, INTERACTION
+  li t0, 'z'
+  beq a0, t0, INTERACTION
 
 	li t0, 27
 	beq a0, t0, PAUSE
@@ -119,9 +120,9 @@ GAME_PRINT:
 	mv a1,s2
 	jal ra, CARREGA_MAPA
 
-  	jal PRINT_PLAYER
+  jal PRINT_PLAYER
 
-  	j GAME_LOOP.END
+  j GAME_LOOP.END
 
 INTERACTION:
 	mv a0, s1
@@ -152,7 +153,8 @@ GAME_LOOP.END:
 .include "menu.s"
 
 .include "npc/curandeira.s"
-#.include "npc/vendedora.s"
+.include "npc/vendedora.s"
+.include "npc/professor.s"
 
 .include "./libs/SYSTEMv21.s"
 .include "print.s"
@@ -179,3 +181,4 @@ GAME_LOOP.END:
 .include "random_save.s"
 .include "check_battle.s"
 .include "items.s"
+.include "end_game.s"

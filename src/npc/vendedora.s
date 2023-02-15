@@ -7,16 +7,11 @@ VENDEDORA:
     # Xori no s0
     xori s0, s0, 1
 
-    # Printar string vendedora_fala1
+    # Printar string LOJA0
     la a0, LOJA0
     mv a1, s0
-    la a2, LOJA1
+    mv a2, zero
     jal PRINT_TEXT_BOX
-
-    # Printar string venddedora_fala2
-    # la a0, LOJA1
-    # mv a1, s0
-    # jal PRINT_TEXT_BOX
 
     # Menu de compra
     jal VENDEDORA_MENU
@@ -39,8 +34,9 @@ VENDEDORA_MENU:
     sw t3, 16(sp)
 
     # Printar string vendedora_fala3
-    la a0, vendedora_fala3
+    la a0, LOJA1
     mv a1, s0
+    mv a2, zero
     jal PRINT_TEXT_BOX
     
     # Pritar string sim na tela
@@ -136,7 +132,7 @@ VENDEDORA_MENU:
             
             # Verificar se o jogador possui creditos suficientes para comprar
             la t1, creditos
-            lb t2, 0(t1)
+            lbu t2, 0(t1)
             li t3, 50
             blt t2, t3, Creditos_Insuficientes
             
@@ -155,14 +151,16 @@ VENDEDORA_MENU:
 
         Creditos_Insuficientes:
             # Printar a string vendedora_fala4
-            la a0, vendedora_fala5
+            la a0, LOJA2
             mv a1, s0
+            mv a2, zero
             jal PRINT_TEXT_BOX
 
     End_Vendedora_Menu:
         # Printar a string vendedora_fala3
-        la a0, vendedora_fala4
+        la a0, LOJA3
         mv a1, s0
+        mv a2, zero
         jal PRINT_TEXT_BOX    
 
     # Load na pilha
