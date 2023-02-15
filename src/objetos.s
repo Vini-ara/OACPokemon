@@ -11,18 +11,16 @@ OBJETOS: .word BLACK,GRASS1,GRASS2,GRASS3,GRASS4,GRASS5,GRASS6,RIVER1,RIVER2,RIV
           LAB2,LAB3,LAB4,LAB5,LAB6,LAB7,LAB8,LAB9,LAB10,LAB11,LAB12,LAB13,LAB14,LAB15,LAB16,LAB17
 #            3A,   3B,   3C,  3D,    3E,   3F,   40,   41,   42,   43,     44,    45,    46,
           LAB18,LAB19,LAB20,LAB21,LAB22,LAB23,LAB24,LAB25,LAB26,PKCTR1,PKCTR2,PKCTR3,PKCTR4,
-#             47,   48,     49,    4A,    4B,     4C,     4D,     4E,     4F,     50
+#             47,   48,     49,    4A,    4B,     4C,     4D,     4E,     4F,     50,     51,
           PKCTR5,PKCTR6,PKCTR7,PKCTR8,PKCTR9,PKCTR10,PKCTR11,PKCTR12,PKCTR12,PKCTR13,PKCTR14,
-#              51,     52,     53,     54,     55,     56,    57,   58,   59,   5A,   5B,   5C,   5D
+#              52,     53,     54,     55,     56,     57,   58,   59,   5A,   5B,   5C,   5D
           PKCTR15,PKCTR16,PKCTR17,PKCTR18,PKCTR19,PKCTR20,MALL1,MALL2,MALL3,MALL4,MALL5,MALL6,
 #            5E,   5F,   60,    61,    62,    63,    64,    65,    66,    67,     68,     69,     6A
           MALL7,MALL8,MALL9,MALL10,MALL11,MALL12,MALL13,MALL14,MALL15,MALL16,IN_LAB1,IN_LAB2,IN_LAB3,
 #              6B,     6C,       6D,       6E,       6F,       70,       71,      72,      73,      74,  
           IN_LAB4,IN_LAB5,IN_PKCTR1,IN_PKCTR2,IN_PKCTR3,IN_PKCTR4,IN_PKCTR5,IN_MALL1,IN_MALL2,IN_MALL3,
-#               75,      76,     77,     78,     79,     7A,     7B,  7C, 7D,  7E,   7F,   80,   81,   82,   83,   84,   85,   86,   87,   88,   89,   8A,     8B,     8C,
-          IN_MALL4,IN_MALL5,IN_GYM1,IN_GYM2,IN_GYM3,IN_GYM4,
-#              8D,     8E,     8F,       90,       91,       92,       93,       94,      95,      96,      97,
-#               98,      99,     9A,     9B,     9C,     9D,     9E
+#               75,      76,     77,     78,     79,     7A,     7B,  
+          IN_MALL4,IN_MALL5,IN_GYM1,IN_GYM2,IN_GYM3,IN_GYM4,IN_GYM4
 
 BLACK:  .word black
         .byte 0
@@ -217,7 +215,7 @@ BUS12:  .word bus12 # endereco do sprite
 BUS13:  .word bus13 # endereco do sprite
         .byte 0     # andavel
         .byte 0   # espelhado
-        .byte 1   # interagivel
+        .byte 4   # interagivel
         .word GYM_OBJ
 
 BUS14:  .word bus14 # endereco do sprite

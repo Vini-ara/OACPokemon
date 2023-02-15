@@ -1,4 +1,4 @@
-.textbase
+.text
 # BATTLE
 #   - Promove uma batalha entre 2 pokémons (o pokémon armazenado em P_INIMIGO e o armazenado em P_PLAYER)
 

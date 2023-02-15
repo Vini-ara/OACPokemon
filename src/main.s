@@ -27,7 +27,7 @@ MALL_OBJ: .word LOJA
           .byte 9, 12
 
 GYM_OBJ: .word GYM
-         .byte 10, 15
+         .byte 9, 12
 
 WILL_BATTLE: .byte 0
 
@@ -89,7 +89,7 @@ SETUP:
     li s2,19 #coluna
     li s3, 0 #direçao (0 = cima, 1 = baixo, 2 = direita, 3 = esquerda)
   	
-  	jal INTRODUCTION
+  	#jal INTRODUCTION
 
 GAME_LOOP:
 	xori s0, s0, 1
@@ -120,9 +120,9 @@ GAME_PRINT:
 	mv a1,s2
 	jal ra, CARREGA_MAPA
 
-  jal PRINT_PLAYER
+  	jal PRINT_PLAYER
 
-  j GAME_LOOP.END
+  	j GAME_LOOP.END
 
 INTERACTION:
 	mv a0, s1

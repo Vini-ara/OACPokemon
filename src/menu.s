@@ -59,7 +59,7 @@ MENU:
     jal PRINT_STRING_SAVE
 
     la a0, creditos
-    lb a0, 0(a0)
+    lbu a0, 0(a0)
     li a1, 200
     li a2, 150
     li a3, 0x0000A3FF

@@ -148,12 +148,29 @@ CHECK_TILE:
 	li t2, 2
 	beq t0, t2, CHECK_TILE.SET_BATTLE
 
+	li t2, 4
+	beq t0, t2, CHECK_TILE.VALID_PASSE
+
 	li a1, 0
 	j CHECK_TILE.FIM
 
   # muda de mapa para o mapa da tile
   CHECK_TILE.CHANGE:
-    lw a0, 8(t1)
+    lw a0, 7(t1)
+    jal CHANGE_MAP
+
+    li a0, 1
+    li a1, 1
+
+    j CHECK_TILE.FIM
+
+  CHECK_TILE.VALID_PASSE:
+	jal CHECK_PASSE
+
+	li a1, 0
+	beqz a0, CHECK_TILE.FIM
+
+	lw a0, 7(t1)
     jal CHANGE_MAP
 
     li a0, 1
@@ -230,6 +247,36 @@ CHANGE_MAP:
     addi sp,sp,16
 
     ret
+
+# retorna se o jogador tem ou nao o passe e caso nao tenha printa a fala
+# retorna > a0 = 1 ou 0
+CHECK_PASSE:
+	addi sp, sp, -8
+	sw ra, 0(sp)
+	sw t0, 4(sp)
+
+	la t0, passe
+	lb t0, 0(t0)
+
+	li a0, 1
+	bne t0, zero, CHECK_PASSE.FIM
+
+	xori s0, s0, 1
+
+	la a0, GIN0
+	mv a1, s0
+	la a2, GIN2 
+	jal PRINT_TEXT_BOX
+
+	li a0, 0
+
+	CHECK_PASSE.FIM:
+	lw t0, 4(sp)
+	lw ra, 0(sp)
+	addi sp, sp, 8
+	ret
+
+
 
 # retorna em a0 a tecla pressionada
 KEY2:	
