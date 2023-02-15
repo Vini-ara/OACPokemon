@@ -10,7 +10,7 @@ VENDEDORA:
     # Printar string vendedora_fala1
     la a0, LOJA0
     mv a1, s0
-    la a2, LOJA1
+    mv a2, zero
     jal PRINT_TEXT_BOX
 
     # Printar string venddedora_fala2
@@ -39,8 +39,9 @@ VENDEDORA_MENU:
     sw t3, 16(sp)
 
     # Printar string vendedora_fala3
-    la a0, vendedora_fala3
+    la a0, LOJA1
     mv a1, s0
+    mv a2, zero
     jal PRINT_TEXT_BOX
     
     # Pritar string sim na tela
@@ -155,13 +156,13 @@ VENDEDORA_MENU:
 
         Creditos_Insuficientes:
             # Printar a string vendedora_fala4
-            la a0, vendedora_fala5
+            la a0, LOJA2
             mv a1, s0
             jal PRINT_TEXT_BOX
 
     End_Vendedora_Menu:
         # Printar a string vendedora_fala3
-        la a0, vendedora_fala4
+        la a0, LOJA3
         mv a1, s0
         jal PRINT_TEXT_BOX    
 
