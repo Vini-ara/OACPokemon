@@ -31,11 +31,6 @@ BATTLE_WILD_POKEMON:
     la a2, P_INIMIGO
     jal CREATE_POKEMON
 
-    # la a0, P_INIMIGO
-	# li a1, 0x16
-	# li a2, 20
-	# jal SET_POKEMON_STAT
-
     # Desenhar tela de batalha
     jal DRAW_BATTLE_SCREEN
     
@@ -599,7 +594,7 @@ POKEMON_ATTACKS_MENU:
     # Inicializando registradores
     li t1, 17                   # Coordadena x da seta
     li t2, 195                  # Coordenada y da seta
-    li t3, 28
+    li t3, 24
 
     # Printa a seta
     mv a0, t1
@@ -718,8 +713,9 @@ POKEMON_ATTACKS_MENU:
             la t0, P_PLAYER
             lw t0, 8(t0)                        # Load na word de ataques do pokémon do jogador
             srl t0, t0, t3                      # t0 = t0 shifitado t3 bits para a direita (extrair o index do ataque selecionado)
-            andi t0, t0, 0xF 
+            andi t0, t0, 0xFF 
             beqz t0, Pokemon_Attacks_Menu_Loop  # Se t0 = 0, o slot de ataque está vazio
+            srli t0, t0, 4
             mv a1, t0
             li a0, 1
             j End_Pokemon_Attacks_Menu

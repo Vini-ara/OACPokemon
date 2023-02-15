@@ -455,10 +455,14 @@ LEVEL_UP:
     jal GET_POKEMON_STAT
     mv t2, a0
 
+    # Verificar se t2 = 0
+    beqz t2, Setar0
+
     # Subtrair a xp e setar nova xp
     li t3, 5
     mul t3, t3, t1
     sub t2, t2, t3
+    Setar0:
     mv a2, t2
     mv a0, t0
     jal SET_POKEMON_STAT
