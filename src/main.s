@@ -89,7 +89,7 @@ SETUP:
     li s2,19 #coluna
     li s3, 0 #direçao (0 = cima, 1 = baixo, 2 = direita, 3 = esquerda)
   	
-  	#jal INTRODUCTION
+  	jal INTRODUCTION
 
 GAME_LOOP:
 	xori s0, s0, 1

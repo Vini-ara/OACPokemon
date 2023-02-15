@@ -156,7 +156,7 @@ CHECK_TILE:
 
   # muda de mapa para o mapa da tile
   CHECK_TILE.CHANGE:
-    lw a0, 7(t1)
+    lw a0, 8(t1)
     jal CHANGE_MAP
 
     li a0, 1
@@ -170,7 +170,7 @@ CHECK_TILE:
 	li a1, 0
 	beqz a0, CHECK_TILE.FIM
 
-	lw a0, 7(t1)
+	lw a0, 8(t1)
     jal CHANGE_MAP
 
     li a0, 1
