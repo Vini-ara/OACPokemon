@@ -62,7 +62,7 @@ P_INIMIGO: .word 0, 0, 0
 P_PLAYER: .word 0, 0, 0
 
 # Dinheiro
-creditos: .byte 0
+creditos: .byte 200
 
 # Diálogo do líder de ginásio
 fala1:      .string "Calouro, chegou o momento de testar suas habilidades!"
@@ -73,7 +73,8 @@ fala4:      .string "Parabens, Calouro! Tome seu SS!"
 fala5:  	.string "O inimigo utilizou uma potion."
 turnos:     .byte 0
 pot_usada:  .byte 0
-
+sim:			.string "Sim"
+nao:			.string "Nao"
 menu_lvl: 		.string "Lvl."
 menu_exp: 		.string "Exp."
 menu_dinheiro:	.string "Dinheiro $"
@@ -92,7 +93,6 @@ SETUP:
 	li s1,23 #linha
 	li s2,21 #coluna
 	li s3, 1 #direçao (0 = cima, 1 = baixo, 2 = direita, 3 = esquerda)
-  	jal INIT_POKEMON_INICIAL
 
 GAME_LOOP:
 	xori s0, s0, 1
@@ -155,7 +155,8 @@ GAME_LOOP.END:
 .include "menu.s"
 
 .include "npc/curandeira.s"
-#.include "npc/vendedora.s"
+.include "npc/vendedora.s"
+.include "npc/professor.s"
 
 .include "./libs/SYSTEMv21.s"
 .include "print.s"
@@ -182,3 +183,4 @@ GAME_LOOP.END:
 .include "random_save.s"
 .include "check_battle.s"
 .include "items.s"
+.include "end_game.s"

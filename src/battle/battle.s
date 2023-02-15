@@ -288,6 +288,36 @@ BATTLE_WILD_POKEMON:
         j End_Battle_Wild_Pokemon
 
     Wild_Pokemon_Won:
+        # Desenhar a caixa de diálogo
+        la a0, dialog_box_battle
+        mv a1, zero
+        li a2, 180
+        mv a3, s0
+        mv a4, zero
+        jal DRAW_IMAGE 
+
+        # Printar nome do pokémon do jogador
+        la a0, P_PLAYER
+        jal GET_POKEMON_NAME
+
+        li a1, 16
+        li a2, 200
+        li a3, 0x000051FF
+        mv a4, s0
+        jal PRINT_STRING_SAVE
+
+        # Printar a string dead
+        la a0, dead
+        li a1, 16
+        li a2, 220
+        li a3, 0x000051FF
+        mv a4, s0
+        jal PRINT_STRING_SAVE
+
+        # Esperar o jogador apertar a tecla z
+        jal CONFIRM_DIALOG
+        
+        
         jal BATTLE_DEFEAT
         mv a0, zero
         j End_Battle_Wild_Pokemon
@@ -839,7 +869,7 @@ WILD_BATTLE_VICTORY:
     li a1, 298
     li a2, 200
     li a3, 0x000051FF
-    mv a4, zero
+    mv a4, s0
     jal PRINT_INT_SAVE
 
     ## Esperar o jogador apertar a tecla z
@@ -853,13 +883,13 @@ WILD_BATTLE_VICTORY:
     ## Esperar o jogador apertar a tecla z
     jal CONFIRM_DIALOG 
 
+    End_Wild_Battle_Victory:
     # Aumentar o número de créditos
     la t0, creditos
-    lb t1, 0(t0)
+    lbu t1, 0(t0)
     addi t1, t1, 10
     sb t1, 0(t0)
 
-    End_Wild_Battle_Victory:
     # Load na pilha
     lw t1, 8(sp)
     lw t0, 4(sp)
@@ -958,35 +988,6 @@ BATTLE_DEFEAT:
     # Store na pilha
     addi sp, sp, -4
     sw ra, 0(sp)
-
-    # Desenhar a caixa de diálogo
-    la a0, dialog_box_battle
-    mv a1, zero
-    li a2, 180
-    mv a3, s0
-    mv a4, zero
-    jal DRAW_IMAGE 
-
-    # Printar nome do pokémon do jogador
-    la a0, P_PLAYER
-    jal GET_POKEMON_NAME
-
-    li a1, 16
-    li a2, 200
-    li a3, 0x000051FF
-    mv a4, s0
-    jal PRINT_STRING_SAVE
-
-    # Printar a string dead
-    la a0, dead
-    li a1, 16
-    li a2, 220
-    li a3, 0x000051FF
-    mv a4, s0
-    jal PRINT_STRING_SAVE
-
-    # Esperar o jogador apertar a tecla z
-    jal CONFIRM_DIALOG
  
     # Colorir a tela de preto
     li a0, 0

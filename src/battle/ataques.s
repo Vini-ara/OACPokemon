@@ -510,7 +510,6 @@ RUN_ATTACK:
     sw t2, 12(sp)
     sw t3, 16(sp)
 
-
     # Inicializar registradores
     mv t0, a0
     mv t1, a1
