@@ -44,7 +44,7 @@ xp_battle2:         .string "pontos de xp."
 lvl_up_battle:      .string "O seu pokemon evoluiu para o level"
 attack_battle:      .string "atacou com"
 atk_down_battle:    .string "teve o ataque diminuido!"
-use_potion_dial:	.string "O jogador utilizou uma potion."
+use_potion_dial:	.string "O jogador utilizou uma marmita."
 defeat:				.string "Todos os seus pokemons foram derrotados em batalha!"
 revive_poke:		.string "Visite a curandeira para reviver seus pokemons."
 dead:				.string "morreu!"
@@ -97,10 +97,16 @@ GAME_LOOP:
 	li a0,0
 	jal KEY2
 
-	beqz a0,GAME_PRINT
+	beqz a0, GAME_PRINT
 
-  li t0, 'z'
-  beq a0, t0, INTERACTION
+	li t0, 'z'
+	beq a0, t0, INTERACTION
+
+	li t0, '1'
+	beq a0, t0, CHEAT_ADD_MONEY
+
+	li t0, '2'
+	beq a0, t0, CHEAT_LEVEL_UP
 
 	li t0, 27
 	beq a0, t0, PAUSE
@@ -182,3 +188,4 @@ GAME_LOOP.END:
 .include "check_battle.s"
 .include "items.s"
 .include "end_game.s"
+.include "cheats.s"
