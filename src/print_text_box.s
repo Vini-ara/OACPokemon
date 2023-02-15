@@ -52,8 +52,8 @@ PRINT_TEXT_BOX:
   mv t1, a1
 
   mv a0, t0
-  li a1, 30
-  li a2, 204
+  li a1, 14
+  li a2, 220
   li a3, 0x0000FF00
   mv a4, s0
   jal PRINT_STRING_SAVE
