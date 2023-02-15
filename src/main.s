@@ -58,7 +58,7 @@ P_INIMIGO: .word 0, 0, 0
 P_PLAYER: .word 0, 0, 0
 
 # Dinheiro
-creditos: .byte 200
+creditos: .byte 0
 
 # Diálogo do líder de ginásio
 fala1:      .string "Calouro, chegou o momento de testar suas habilidades!"
@@ -103,10 +103,10 @@ GAME_LOOP:
 	beq a0, t0, INTERACTION
 
 	li t0, '1'
-	beq a0, t0, CHEAT_ADD_MONEY
+	beq a0, t0, Use_Cheat1
 
 	li t0, '2'
-	beq a0, t0, CHEAT_LEVEL_UP
+	beq a0, t0, Use_Cheat2
 
 	li t0, 27
 	beq a0, t0, PAUSE
@@ -130,11 +130,23 @@ GAME_PRINT:
 
   j GAME_LOOP.END
 
+Use_Cheat1:
+	jal CHEAT_ADD_MONEY
+	j GAME_LOOP.END
+
+Use_Cheat2:
+	jal CHEAT_LEVEL_UP
+	j GAME_LOOP.END
+
 INTERACTION:
 	mv a0, s1
 	mv a1, s2
 	mv a2, s3
 	jal CHECK_DIALOG
+
+
+
+
 
 GAME_LOOP.END:
 	jal CHECK_BATTLE
