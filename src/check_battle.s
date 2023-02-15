@@ -54,6 +54,19 @@ CHECK_BATTLE:
     li a1, 3
     jal BATTLE_WILD_POKEMON
 
+    bne a0, zero, CHECK_BATTLE.FIM
+
+    la t0, MAPA_OBJ
+    lw t0, 0(t0)
+
+    la t1, CURRENT_MAP
+    sw t0, 0(t1)
+
+    li s1, 24
+    li s2, 26
+    li s3, 0
+
+
 CHECK_BATTLE.FIM:
   lw ra, 0(sp)
   lw t0, 4(sp)

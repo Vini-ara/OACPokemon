@@ -14,7 +14,7 @@ RANDOM_SAVE:
     sw s2, 40(sp)
     sw s3, 44(sp)
 
-    jal Random.DE1
+    jal Random
 
     # Load na pilha
     lw s3, 44(sp)

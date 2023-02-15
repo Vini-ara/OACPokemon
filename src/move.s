@@ -17,7 +17,7 @@ MOVE:
 	mv t0, a0
 	mv t1, a1
 
-  li t2,'w'
+  	li t2,'w'
 	beq a3,t2,MOVE_CIMA
 	li t2,'a'
 	beq a3,t2,MOVE_ESQ
@@ -28,15 +28,15 @@ MOVE:
 	ret
 	
 VOLTA_MOVE:	
-  mv a0, t0
-  mv a1, t1
+	mv a0, t0
+	mv a1, t1
 	jal ra, CHECK_TILE
 
   # checa se nao pode se mover na tile
 	beqz a0,FIM_MOVE
 
   # checa se mudou de mapa
-  bne a1, zero, FIM_MOVE
+  	bne a1, zero, FIM_MOVE
 
 	mv s1,t0
 	mv s2,t1
@@ -79,7 +79,7 @@ MOVE_BAIXO:
 	bne s3, t3, MUDA_DIRECAO_BAIXO
 
 	la t3,CURRENT_MAP
-  lw t2, 0(t3)
+  	lw t2, 0(t3)
 	lw t2,4(t2)
 	beq t0,t2,FIM_MOVE
 	addi t0,t0,1
@@ -93,7 +93,7 @@ MOVE_DIR:
 	bne s3, t3, MUDA_DIRECAO_DIR
 
 	la t3,CURRENT_MAP
-  lw t2, 0(t3)
+  	lw t2, 0(t3)
 	la t2,MAPA
 	lw t2,0(t2)
 	beq t2,t1,FIM_MOVE
@@ -122,7 +122,7 @@ CHECK_TILE:
 	mv t0,a0
 	mv t1,a1
   
-  la t2, CURRENT_MAP
+  	la t2, CURRENT_MAP
 	lw a0,0(t2)
 	mv a1,t0
 	mv a2,t1
@@ -137,19 +137,19 @@ CHECK_TILE:
 	add t1,t2,t1 #t1 recebe o endereco do objeto requisitado
 	lw t1,0(t1) # t1 recebe o endereco do objeto
 
-  lb a0, 4(t1) # a0 recebe se o tile e andavel ou nao
-  lb t0, 6(t1) # t0 recebe se o tile tem alguma acao
+	lb a0, 4(t1) # a0 recebe se o tile e andavel ou nao
+	lb t0, 6(t1) # t0 recebe se o tile tem alguma acao
 
-  # muda de mapa
-  li t2, 1
-  beq t0, t2, CHECK_TILE.CHANGE
+	# muda de mapa
+	li t2, 1
+	beq t0, t2, CHECK_TILE.CHANGE
 
-  # se for uma grama alta, verifica se vai batalhar ou nao
-  li t2, 2
-  beq t0, t2, CHECK_TILE.SET_BATTLE
+	# se for uma grama alta, verifica se vai batalhar ou nao
+	li t2, 2
+	beq t0, t2, CHECK_TILE.SET_BATTLE
 
-  li a1, 0
-  j CHECK_TILE.FIM
+	li a1, 0
+	j CHECK_TILE.FIM
 
   # muda de mapa para o mapa da tile
   CHECK_TILE.CHANGE:
@@ -163,6 +163,13 @@ CHECK_TILE:
 
   # gera um numero aleatorio e ve se o pokemon vai batalhar ou nao
   CHECK_TILE.SET_BATTLE:
+	la t0, P_PLAYER
+	lw t0, 0(t0)
+
+	li a0, 1
+    li a1, 0
+	beqz t0, CHECK_TILE.FIM
+
     la t0, WILL_BATTLE
 
     jal RANDOM_SAVE
@@ -184,7 +191,7 @@ CHECK_TILE:
 CHECK_TILE.FIM:
 	lw t0,0(sp)
 	lw t1,4(sp)
-  lw t2,8(sp)
+  	lw t2,8(sp)
 	lw ra,12(sp)
 	addi sp,sp,16
 	ret

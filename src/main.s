@@ -4,6 +4,7 @@
 .include "../data_files/battle_pokemon_stats.data"
 .include "../data_files/options_battle.data"
 .include "../data_files/pokemon_attacks_menu_bg.data"
+.include "../data_files/lamar.data"
 .include "objetos.s"
 .include "../mapas/mapa.s"
 .include "falas.s"
@@ -14,19 +15,19 @@ player_bag: .word I_POTION, 5
 CURRENT_MAP: .word MAPA
 
 LAB_OBJ: .word LAB
-         .byte 10, 9
+         .byte 10, 13
 
 PKCTR_OBJ: .word PKCTR
-           .byte 9, 10 
+           .byte 9, 13 
 
 MAPA_OBJ: .word MAPA 
           .byte 23, 21
 
 MALL_OBJ: .word LOJA
-          .byte 9, 9
+          .byte 9, 12
 
 GYM_OBJ: .word GYM
-         .byte 10, 8
+         .byte 10, 15
 
 WILL_BATTLE: .byte 0
 
@@ -49,11 +50,6 @@ revive_poke:		.string "Visite a curandeira para reviver seus pokemons."
 dead:				.string "morreu!"
 str_run:			.string "Voce fugiu com sucesso!"
 covarde:			.string "Covarde kkkkkk"		
-
-
-CURANDEIRA1: .string "Menino levado. Vou curar seu pokemon"
-CURANDEIRA2: .string "Pronto. Agora cuida bem dele" 
-
 
 # POKEMON INIMIGO
 P_INIMIGO: .word 0, 0, 0
@@ -82,17 +78,17 @@ menu_passe: 	.string "Passe"
 
 passe: .byte 0
 
-
 .text
 .include "./libs/MACROSv21.s"
 
 #iniciando mapa
 SETUP:	
   	li s0, 0 # frame
-	li s1,23 #linha
-	li s2,21 #coluna
-	li s3, 1 #direçao (0 = cima, 1 = baixo, 2 = direita, 3 = esquerda)
-  	jal INIT_POKEMON_INICIAL
+	li s1,25 #linha
+	li s2,19 #coluna
+	li s3, 0 #direçao (0 = cima, 1 = baixo, 2 = direita, 3 = esquerda)
+  	
+  	jal INTRODUCTION
 
 GAME_LOOP:
 	xori s0, s0, 1
@@ -125,20 +121,20 @@ GAME_PRINT:
 
   	jal PRINT_PLAYER
 
-  j GAME_LOOP.END
+  	j GAME_LOOP.END
 
 INTERACTION:
-  mv a0, s1
-  mv a1, s2
-  mv a2, s3
-  jal CHECK_DIALOG
+	mv a0, s1
+	mv a1, s2
+	mv a2, s3
+	jal CHECK_DIALOG
 
 GAME_LOOP.END:
-  jal CHECK_BATTLE
+	jal CHECK_BATTLE
 
-  la t0, WILL_BATTLE
-  li t1, 0
-  sb t1, 0(t0)
+	la t0, WILL_BATTLE
+	li t1, 0
+	sb t1, 0(t0)
 
 	#jal TOCA_MUSICA
 
@@ -151,6 +147,7 @@ GAME_LOOP.END:
 
 	j GAME_LOOP
 	
+.include "intro.s"
 .include "musica.s"
 .include "menu.s"
 

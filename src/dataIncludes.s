@@ -27,18 +27,6 @@
 .include "../sprites/tree4.data"
 .include "../sprites/tree5.data"
 
-#Rock
-.include "../sprites/rock1.data"
-.include "../sprites/rock2.data"
-.include "../sprites/rock3.data"
-.include "../sprites/rock4.data"
-.include "../sprites/rock5.data"
-.include "../sprites/rock6.data"
-.include "../sprites/rock7.data"
-.include "../sprites/rock8.data"
-.include "../sprites/rock9.data"
-.include "../sprites/rock10.data"
-
 # River
 .include "../sprites/river1.data"
 .include "../sprites/river2.data"
@@ -48,24 +36,22 @@
 .include "../sprites/river6.data"
 .include "../sprites/river7.data"
 
-#House 
-.include "../sprites/house1.data"
-.include "../sprites/house2.data"
-.include "../sprites/house3.data"
-.include "../sprites/house4.data"
-.include "../sprites/house5.data"
-.include "../sprites/house6.data"
-.include "../sprites/house7.data"
-.include "../sprites/house8.data"
-.include "../sprites/house9.data"
-.include "../sprites/house10.data"
-.include "../sprites/house11.data"
-.include "../sprites/house12.data"
-.include "../sprites/house13.data"
-.include "../sprites/house14.data"
-.include "../sprites/house15.data"
-.include "../sprites/house16.data"
-.include "../sprites/house17.data"
+# Busao
+.include "../sprites/bus1.data"
+.include "../sprites/bus2.data"
+.include "../sprites/bus3.data"
+.include "../sprites/bus4.data"
+.include "../sprites/bus5.data"
+.include "../sprites/bus6.data"
+.include "../sprites/bus7.data"
+.include "../sprites/bus8.data"
+.include "../sprites/bus9.data"
+.include "../sprites/bus10.data"
+.include "../sprites/bus11.data"
+.include "../sprites/bus12.data"
+.include "../sprites/bus13.data"
+.include "../sprites/bus14.data"
+.include "../sprites/bus15.data"
 
 #Laboratorio
 .include "../sprites/lab1.data"
@@ -118,27 +104,6 @@
 .include "../sprites/mall9.data"
 .include "../sprites/mall10.data"
 
-# gym
-.include "../sprites/gym1.data"
-.include "../sprites/gym2.data"
-.include "../sprites/gym3.data"
-.include "../sprites/gym4.data"
-.include "../sprites/gym5.data"
-.include "../sprites/gym6.data"
-.include "../sprites/gym7.data"
-.include "../sprites/gym8.data"
-.include "../sprites/gym9.data"
-.include "../sprites/gym10.data"
-.include "../sprites/gym11.data"
-.include "../sprites/gym12.data"
-.include "../sprites/gym13.data"
-.include "../sprites/gym14.data"
-.include "../sprites/gym15.data"
-.include "../sprites/gym16.data"
-.include "../sprites/gym17.data"
-.include "../sprites/gym18.data"
-.include "../sprites/gym19.data"
-
 # text box
 .include "../sprites/tbx1.data"
 .include "../sprites/tbx2.data"
@@ -169,7 +134,6 @@
 # in_gym
 .include "../sprites/in_gym1.data"
 .include "../sprites/in_gym2.data"
-.include "../sprites/in_gym3.data"
 .include "../sprites/in_gym4.data"
 .include "../sprites/in_gym5.data"
 

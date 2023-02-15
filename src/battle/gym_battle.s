@@ -406,6 +406,11 @@ GYM_BATTLE:
 
     Defeat_Battle_Gym:
         jal BATTLE_DEFEAT
+
+        la t0, passe 
+        li t1, 0
+        sb t1, 0(t0)
+        
         mv a0, zero
         j End_Gym_Battle
 
