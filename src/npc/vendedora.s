@@ -8,14 +8,15 @@ VENDEDORA:
     xori s0, s0, 1
 
     # Printar string vendedora_fala1
-    la a0, vendedora_fala1
+    la a0, LOJA0
     mv a1, s0
+    la a2, LOJA1
     jal PRINT_TEXT_BOX
 
     # Printar string venddedora_fala2
-    la a0, vendedora_fala2
-    mv a1, s0
-    jal PRINT_TEXT_BOX
+    # la a0, LOJA1
+    # mv a1, s0
+    # jal PRINT_TEXT_BOX
 
     # Menu de compra
     jal VENDEDORA_MENU

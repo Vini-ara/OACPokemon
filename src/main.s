@@ -6,6 +6,7 @@
 .include "../data_files/pokemon_attacks_menu_bg.data"
 .include "objetos.s"
 .include "../mapas/mapa.s"
+.include "falas.s"
 
 # BAG (Armazena os itens do jogador)
 player_bag: .word I_POTION, 5
@@ -73,6 +74,14 @@ fala5:  	.string "O inimigo utilizou uma potion."
 turnos:     .byte 0
 pot_usada:  .byte 0
 
+menu_lvl: 		.string "Lvl."
+menu_exp: 		.string "Exp."
+menu_dinheiro:	.string "Dinheiro $"
+menu_cura: 		.string "Cura"
+menu_passe: 	.string "Passe"
+
+passe: .byte 0
+
 
 .text
 .include "./libs/MACROSv21.s"
@@ -93,13 +102,21 @@ GAME_LOOP:
 
 	beqz a0,GAME_PRINT
 
-  li t0, 'z'
-  beq a0, t0, INTERACTION
+  	li t0, 'z'
+  	beq a0, t0, INTERACTION
+
+	li t0, 27
+	beq a0, t0, PAUSE
 
 	mv a3,a0 #a3 = tecla
 	mv a0,s1 #linha
 	mv a1,s2 #coluna
 	jal MOVE
+
+	j GAME_PRINT
+
+PAUSE:
+	jal MENU
 
 GAME_PRINT:
  	mv a0,s1
@@ -135,8 +152,11 @@ GAME_LOOP.END:
 	j GAME_LOOP
 	
 .include "musica.s"
-#.include "menu.s"
+.include "menu.s"
+
 .include "npc/curandeira.s"
+.include "npc/vendedora.s"
+
 .include "./libs/SYSTEMv21.s"
 .include "print.s"
 .include "check_interaction.s"

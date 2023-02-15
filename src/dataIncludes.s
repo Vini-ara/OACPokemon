@@ -181,7 +181,7 @@
 
 # menu
 .include "../sprites/pause1.data"
-#.include "../sprites/pause2.data"
+.include "../sprites/pause2.data"
 .include "../sprites/pause3.data"
 .include "../sprites/pause4.data"
 .include "../sprites/pause5.data"

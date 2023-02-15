@@ -1,6 +1,7 @@
 .text
 # -   > a0 = endereço da string
 # -   > a1 = frame
+# -   > a2 = 0 ? nada : printa a string do endereco passado
 PRINT_TEXT_BOX: 
   addi sp, sp, -8
   sw ra, 0(sp)
@@ -8,6 +9,7 @@ PRINT_TEXT_BOX:
 
   mv t0, a0
   mv t1, a1
+  mv t2, a2
 
   mv a0, t1
   jal PRINT_BOX
@@ -19,7 +21,38 @@ PRINT_TEXT_BOX:
   mv a4, s0
   jal PRINT_STRING_SAVE
 
+  beqz t2, PRINT_BELLOW
+
+  PRINT_BELLOW:
+    mv a0, t2
+    mv a1, t1
+    jal PRINT_TEXT_BOX2
+
   jal CONFIRM_DIALOG
+
+  lw t0, 4(sp)
+  lw ra, 0(sp)
+  addi sp, sp, 8
+  ret
+
+# PRINT_TEXT_BOX2
+# so printa 
+# -   > a0 = endereço da string
+# -   > a1 = frame
+  PRINT_TEXT_BOX2: 
+  addi sp, sp, -8
+  sw ra, 0(sp)
+  sw t0, 4(sp)
+
+  mv t0, a0
+  mv t1, a1
+
+  mv a0, t0
+  li a1, 30
+  li a2, 204
+  li a3, 0x0000FF00
+  mv a4, s0
+  jal PRINT_STRING_SAVE
 
   lw t0, 4(sp)
   lw ra, 0(sp)

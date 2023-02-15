@@ -119,7 +119,36 @@ CHECK_DIALOG:
     j CHECK_DIALOG.FIM
 
   ACTION:
-    jal GYM_BATTLE
+    lb t3, 7(t1)
+
+    li t2, 0
+    beq t2, t3, GO_CURANDEIRA
+
+    li t2, 1
+    beq t2, t3, GO_VENDEDORA
+
+    li t2, 2
+    beq t2, t3, GO_PROFESSOR
+
+    li t2, 3
+    beq t2, t3, GO_GYM_BATTLE
+
+    j CHECK_DIALOG.FIM
+
+    GO_CURANDEIRA:
+      jal NPC_CURANDEIRA
+      jal CHECK_DIALOG.FIM
+    
+    GO_VENDEDORA:
+      jal VENDEDORA
+      jal CHECK_DIALOG.FIM
+
+    GO_PROFESSOR:
+      jal PROFESSOR
+      jal CHECK_DIALOG.FIM
+
+    GO_GYM_BATTLE:
+      jal GYM_BATTLE
 
   CHECK_DIALOG.FIM:
     lw ra, 0(sp)
