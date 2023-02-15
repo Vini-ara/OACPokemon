@@ -16,7 +16,7 @@ lista_sprites: .word sarue, caramelo, larva, pombo, gato, sinuca
 # NOMES DOS POKÉMONS
 n_squirtle:  .string "Pedro Sarue"
 n_bulbasaur: .string "Caramelo"
-n_vulpix:    .string "Pombo do Bebedouro"
+n_vulpix:    .string "Pombo do ICC"
 n_pidgey:    .string "Gato"
 n_geodude:   .string "Larva do RU"
 n_sinuca:    .string "Sinuca Cacomp"
@@ -543,7 +543,8 @@ WILD_POKEMON_DECISION:
     sw t2, 12(sp)
 
     # Número aleatório
-    jal Random.DE1
+    jal RANDOM_SAVE
+    # csrr t0, 3073
     mv t0, a0           # t0 = número aleatório
 
     # Verificar quantos slots de ataque não estão vazios
@@ -554,7 +555,7 @@ WILD_POKEMON_DECISION:
     addi a0, a0, -1
 
     # Ajustar o número aleatório ao número de ataques disponíveis
-    and t0, t0, a0
+    rem t0, t0, a0
 
     # Extrair o index do ataque escolhido
     la t1, P_INIMIGO

@@ -14,8 +14,8 @@ RANDOM_SAVE:
     sw s2, 40(sp)
     sw s3, 44(sp)
 
+    # csrr a0, 3073
     jal Random
-
     # Load na pilha
     lw s3, 44(sp)
     lw s2, 40(sp)

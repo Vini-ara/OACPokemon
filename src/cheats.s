@@ -24,7 +24,7 @@ CHEAT_LEVEL_UP:
     sw ra, 0(sp)
 
     # Level up
-    jal LEVEl_UP
+    jal LEVEL_UP
 
     # Load na pilha
     lw ra, 0(sp)

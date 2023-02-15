@@ -27,7 +27,7 @@ MALL_OBJ: .word LOJA
           .byte 9, 12
 
 GYM_OBJ: .word GYM
-         .byte 10, 15
+         .byte 9, 12
 
 WILL_BATTLE: .byte 0
 
@@ -58,7 +58,7 @@ P_INIMIGO: .word 0, 0, 0
 P_PLAYER: .word 0, 0, 0
 
 # Dinheiro
-creditos: .byte 0
+creditos: .byte 200
 
 # Diálogo do líder de ginásio
 fala1:      .string "Calouro, chegou o momento de testar suas habilidades!"
@@ -89,7 +89,7 @@ SETUP:
     li s2,19 #coluna
     li s3, 0 #direçao (0 = cima, 1 = baixo, 2 = direita, 3 = esquerda)
   	
-  	jal INTRODUCTION
+  	#jal INTRODUCTION
 
 GAME_LOOP:
 	xori s0, s0, 1
@@ -188,6 +188,7 @@ GAME_LOOP.END:
 .include "battle/draw_enemy_pokemon.s"
 .include "battle/draw_player_pokemon.s"
 
+.include "midisave.s"
 .include "init_pokemon_inicial.s"
 .include "sleep.s"
 .include "print_save.s"

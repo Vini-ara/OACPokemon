@@ -433,6 +433,20 @@ GYM_BATTLE:
         
         jal GYM_BATTLE_DEFEAT
         jal BATTLE_DEFEAT
+
+        la t0, MAPA_OBJ
+        lw t0, 0(t0)
+
+        la t1, CURRENT_MAP
+        sw t0, 0(t1)
+
+        li s1, 24
+        li s2, 26
+        li s3, 0
+
+        la t0, estado_prof
+        li t1, 1
+        sb t1, 0(t0)
         mv a0, zero
         j End_Gym_Battle
 

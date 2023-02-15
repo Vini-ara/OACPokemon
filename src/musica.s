@@ -49,13 +49,11 @@ DIFERENTE:
 	lw a1,4(t3) #duracao
 	li a2,10 #instrumento
 	li a3,100 #volume
-	li a7,31 #comentar
-	ecall #comentar
+	#li a7,31 #comentar
+	#ecall #comentar
 	
 	#funcao para tocar musica na placa
-	#jal midiOutDE2 #nao funciona no rars
-	
-	
+	jal MIDI_SAVE #nao funciona no rars
 	
 	#recupera posicao nota
 	

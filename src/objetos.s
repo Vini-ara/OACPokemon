@@ -19,10 +19,9 @@ OBJETOS: .word BLACK,GRASS1,GRASS2,GRASS3,GRASS4,GRASS5,GRASS6,RIVER1,RIVER2,RIV
           MALL7,MALL8,MALL9,MALL10,MALL11,MALL12,MALL13,MALL14,MALL15,MALL16,IN_LAB1,IN_LAB2,IN_LAB3,
 #              6B,     6C,       6D,       6E,       6F,       70,       71,      72,      73,      74,  
           IN_LAB4,IN_LAB5,IN_PKCTR1,IN_PKCTR2,IN_PKCTR3,IN_PKCTR4,IN_PKCTR5,IN_MALL1,IN_MALL2,IN_MALL3,
-#               75,      76,     77,     78,     79,     7A,     7B,  7C, 7D,  7E,   7F,   80,   81,   82,   83,   84,   85,   86,   87,   88,   89,   8A,     8B,     8C,
-          IN_MALL4,IN_MALL5,IN_GYM1,IN_GYM2,IN_GYM3,IN_GYM4,
-#              8D,     8E,     8F,       90,       91,       92,       93,       94,      95,      96,      97,
-#               98,      99,     9A,     9B,     9C,     9D,     9E
+#               75,      76,     77,     78,     79,     7A,     7B,  
+          IN_MALL4,IN_MALL5,IN_GYM1,IN_GYM2,IN_GYM3,IN_GYM4,IN_GYM4
+
 
 BLACK:  .word black
         .byte 0
@@ -217,7 +216,7 @@ BUS12:  .word bus12 # endereco do sprite
 BUS13:  .word bus13 # endereco do sprite
         .byte 0     # andavel
         .byte 0   # espelhado
-        .byte 1   # interagivel
+        .byte 4   # interagivel
         .word GYM_OBJ
 
 BUS14:  .word bus14 # endereco do sprite
