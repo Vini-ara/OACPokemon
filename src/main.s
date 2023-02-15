@@ -155,7 +155,7 @@ GAME_LOOP.END:
 .include "menu.s"
 
 .include "npc/curandeira.s"
-.include "npc/vendedora.s"
+#.include "npc/vendedora.s"
 
 .include "./libs/SYSTEMv21.s"
 .include "print.s"

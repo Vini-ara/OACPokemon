@@ -3,9 +3,11 @@
 # -   > a1 = frame
 # -   > a2 = 0 ? nada : printa a string do endereco passado
 PRINT_TEXT_BOX: 
-  addi sp, sp, -8
+  addi sp, sp, -16
   sw ra, 0(sp)
   sw t0, 4(sp)
+  sw t1, 8(sp)
+  sw t2, 12(sp)
 
   mv t0, a0
   mv t1, a1
@@ -23,17 +25,22 @@ PRINT_TEXT_BOX:
 
   beqz t2, PRINT_BELLOW
 
+  j PRINT_TEXT_BOX2
+
   PRINT_BELLOW:
     mv a0, t2
     mv a1, t1
     jal PRINT_TEXT_BOX2
 
-  jal CONFIRM_DIALOG
+  PRINT_TEXT_BOX.FIM:
+    jal CONFIRM_DIALOG
 
-  lw t0, 4(sp)
-  lw ra, 0(sp)
-  addi sp, sp, 8
-  ret
+    lw t2, 12(sp)
+    lw t1, 8(sp)
+    lw t0, 4(sp)
+    lw ra, 0(sp)
+    addi sp, sp, 16
+    ret
 
 # PRINT_TEXT_BOX2
 # so printa 

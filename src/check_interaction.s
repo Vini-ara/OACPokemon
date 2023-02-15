@@ -140,11 +140,11 @@ CHECK_DIALOG:
       jal CHECK_DIALOG.FIM
     
     GO_VENDEDORA:
-      jal VENDEDORA
+      #jal VENDEDORA
       jal CHECK_DIALOG.FIM
 
     GO_PROFESSOR:
-      jal PROFESSOR
+      #jal PROFESSOR
       jal CHECK_DIALOG.FIM
 
     GO_GYM_BATTLE:
