@@ -140,7 +140,7 @@ GAME_LOOP.END:
   li t1, 0
   sb t1, 0(t0)
 
-	jal TOCA_MUSICA
+	#jal TOCA_MUSICA
 
 	li t0, 0xFF200604 # troca o frame exibido para o frame qeu acabou de ser pintado 
 	sb s0, 0(t0)
