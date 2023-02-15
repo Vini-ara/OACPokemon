@@ -23,14 +23,11 @@ PRINT_TEXT_BOX:
   mv a4, s0
   jal PRINT_STRING_SAVE
 
-  beqz t2, PRINT_BELLOW
+  beqz t2, PRINT_TEXT_BOX.FIM
 
-  j PRINT_TEXT_BOX2
-
-  PRINT_BELLOW:
-    mv a0, t2
-    mv a1, t1
-    jal PRINT_TEXT_BOX2
+  mv a0, t2
+  mv a1, t1
+  jal PRINT_TEXT_BOX2
 
   PRINT_TEXT_BOX.FIM:
     jal CONFIRM_DIALOG
