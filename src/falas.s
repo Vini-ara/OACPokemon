@@ -130,3 +130,5 @@
 
     LOJA0: .string "Eae campeao, vai uma marmita?"
     LOJA1: .string "Te vendo essa por 50. Aceito pix."
+    LOJA2: .string "Voce nao possui creditos suficientes!" 
+    LOJA3: .string "Volte sempre!" 
