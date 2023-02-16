@@ -58,7 +58,7 @@ P_INIMIGO: .word 0, 0, 0
 P_PLAYER: .word 0, 0, 0
 
 # Dinheiro
-creditos: .byte 0
+creditos: .byte 200
 
 # Diálogo do líder de ginásio
 fala1:      .string "Calouro, chegou o momento de testar suas habilidades!"
@@ -87,11 +87,14 @@ SETUP:
   	li s0, 0 # frame
     li s1,25 #linha
     li s2,19 #coluna
+
     li s3, 0 #direçao (0 = cima, 1 = baixo, 2 = direita, 3 = esquerda)
   	li t0, 0xFF200604 # troca o frame exibido para o frame qeu acabou de ser pintado 
-	sb s0, 0(t0)
+
+    sb s0, 0(t0)
   	jal INTRODUCTION
-	xori s0, s0, 1	
+    xori s0, s0, 1	
+    
 GAME_LOOP:
 	xori s0, s0, 1
 
@@ -144,10 +147,6 @@ INTERACTION:
 	mv a1, s2
 	mv a2, s3
 	jal CHECK_DIALOG
-
-
-
-
 
 GAME_LOOP.END:
 	jal CHECK_BATTLE
