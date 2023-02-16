@@ -7,8 +7,8 @@ CHEAT_ADD_MONEY:
     
     # Lotar a carteira
     la t0, creditos
-    li t1, 256
-    sb t1, (t0)
+    li t1, 255
+    sb t1, 0(t0)
     
     # Load na pilha
     lw t1, 4(sp)
@@ -24,7 +24,7 @@ CHEAT_LEVEL_UP:
     sw ra, 0(sp)
 
     # Level up
-    jal LEVEl_UP
+    jal LEVEL_UP
 
     # Load na pilha
     lw ra, 0(sp)

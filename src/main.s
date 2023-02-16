@@ -88,9 +88,10 @@ SETUP:
     li s1,25 #linha
     li s2,19 #coluna
     li s3, 0 #direçao (0 = cima, 1 = baixo, 2 = direita, 3 = esquerda)
-  	
+  	li t0, 0xFF200604 # troca o frame exibido para o frame qeu acabou de ser pintado 
+	sb s0, 0(t0)
   	jal INTRODUCTION
-
+	xori s0, s0, 1	
 GAME_LOOP:
 	xori s0, s0, 1
 
@@ -108,7 +109,7 @@ GAME_LOOP:
 	li t0, '2'
 	beq a0, t0, Use_Cheat2
 
-	li t0, 27
+	li t0, 'm'
 	beq a0, t0, PAUSE
 
 	mv a3,a0 #a3 = tecla
@@ -126,9 +127,9 @@ GAME_PRINT:
 	mv a1,s2
 	jal ra, CARREGA_MAPA
 
-  	jal PRINT_PLAYER
+  jal PRINT_PLAYER
 
-  	j GAME_LOOP.END
+  j GAME_LOOP.END
 
 Use_Cheat1:
 	jal CHEAT_ADD_MONEY
@@ -155,7 +156,7 @@ GAME_LOOP.END:
 	li t1, 0
 	sb t1, 0(t0)
 
-	#jal TOCA_MUSICA
+	jal TOCA_MUSICA
 
 	li t0, 0xFF200604 # troca o frame exibido para o frame qeu acabou de ser pintado 
 	sb s0, 0(t0)
@@ -188,6 +189,7 @@ GAME_LOOP.END:
 .include "battle/draw_enemy_pokemon.s"
 .include "battle/draw_player_pokemon.s"
 
+.include "midisave.s"
 .include "init_pokemon_inicial.s"
 .include "sleep.s"
 .include "print_save.s"

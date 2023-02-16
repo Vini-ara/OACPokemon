@@ -19,7 +19,7 @@ n_bulbasaur: .string "Caramelo"
 n_vulpix:    .string "Pombo do ICC"
 n_pidgey:    .string "Gato"
 n_geodude:   .string "Larva do RU"
-n_sinuca:    .string "Sinuca CACOMP"
+n_sinuca:    .string "Sinuca Cacomp"
 
 lista_nomes: .word n_squirtle, n_bulbasaur, n_geodude, n_vulpix, n_pidgey, n_sinuca
 
@@ -543,7 +543,8 @@ WILD_POKEMON_DECISION:
     sw t2, 12(sp)
 
     # Número aleatório
-    jal Random.DE1
+    jal RANDOM_SAVE
+    # csrr t0, 3073
     mv t0, a0           # t0 = número aleatório
 
     # Verificar quantos slots de ataque não estão vazios
@@ -554,7 +555,7 @@ WILD_POKEMON_DECISION:
     addi a0, a0, -1
 
     # Ajustar o número aleatório ao número de ataques disponíveis
-    and t0, t0, a0
+    remu t0, t0, a0
 
     # Extrair o index do ataque escolhido
     la t1, P_INIMIGO
@@ -564,7 +565,7 @@ WILD_POKEMON_DECISION:
     li t2, 28
     sub t0, t2, t0
     srl a0, t1, t0
-    andi a0, a0, 0xFF
+    andi a0, a0, 0x0F
 
     # Load na pilha
     lw t2, 12(sp)

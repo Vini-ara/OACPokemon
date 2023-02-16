@@ -515,6 +515,9 @@ RUN_ATTACK:
     mv t1, a1
     mv t2, a2
 
+    # Shift no a0
+    # srli t0, t0, 1
+
     # Verificar se o ataque é FIRE_BALL
     beqz a0, Run_Damage_Attack
     

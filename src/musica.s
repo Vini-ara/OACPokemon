@@ -53,9 +53,7 @@ DIFERENTE:
 	ecall #comentar
 	
 	#funcao para tocar musica na placa
-	#jal midiOutDE2 #nao funciona no rars
-	
-	
+#	jal MIDI_SAVE #nao funciona no rars
 	
 	#recupera posicao nota
 	
